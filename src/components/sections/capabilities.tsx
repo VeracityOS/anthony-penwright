@@ -108,12 +108,14 @@ export function Capabilities() {
         title={<>The full toolkit, grouped.</>}
       />
 
-      <div className="mt-2 grid gap-3 md:grid-cols-2 lg:grid-cols-6 md:auto-rows-auto md:gap-4">
-        {/* Four light cards — 3/3 top row, 3/3 second row */}
+      <div className="mt-2 grid gap-3 md:grid-cols-2 lg:grid-cols-12 md:auto-rows-auto md:gap-4">
+        {/* Seven light cards — row 1: 3 cards × col-span-4, row 2: 4 cards × col-span-3 */}
         {lightGroups.map((group, i) => {
           const t = lightTreatments[i];
           const Icon = t.icon;
           const plate = String(i + 1).padStart(2, "0");
+          // First 3 span 4 cols (3-up row); last 4 span 3 cols (4-up row) — fills both rows cleanly for 7 cards.
+          const spanClass = i < 3 ? "lg:col-span-4" : "lg:col-span-3";
           return (
             <motion.div
               key={group.heading}
@@ -122,7 +124,7 @@ export function Capabilities() {
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.55, delay: i * 0.06 }}
               style={{ backgroundImage: t.gradient }}
-              className="relative isolate overflow-hidden rounded-xl p-4 md:p-5 lg:col-span-2 ring-1 ring-ink/5 transition hover:-translate-y-0.5 hover:ring-ink/15 hover:shadow-[0_12px_28px_-16px_rgba(17,17,17,0.18)]"
+              className={`relative isolate overflow-hidden rounded-xl p-4 md:p-5 ${spanClass} ring-1 ring-ink/5 transition hover:-translate-y-0.5 hover:ring-ink/15 hover:shadow-[0_12px_28px_-16px_rgba(17,17,17,0.18)]`}
             >
               {/* Oversized ghost-icon watermark — subtle graphic motif */}
               <Icon
@@ -225,7 +227,7 @@ export function Capabilities() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.6, delay: 0.25 }}
-            className="relative isolate overflow-hidden rounded-2xl p-8 text-white md:col-span-2 lg:col-span-6 md:p-10 ring-1 ring-black/10 transition hover:ring-ink/20"
+            className="relative isolate overflow-hidden rounded-2xl p-8 text-white md:col-span-2 lg:col-span-12 md:p-10 ring-1 ring-black/10 transition hover:ring-ink/20"
           >
             <Image
               src="/images/fw-vro.jpg"

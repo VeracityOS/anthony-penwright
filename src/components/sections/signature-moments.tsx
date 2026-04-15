@@ -37,11 +37,12 @@ export function SignatureMoments() {
       <SectionHeader
         number="04"
         kicker="Signature Career Moments"
-        title={<>Six programmes that shaped the playbook.</>}
+        title={<>Seven programmes that shaped the playbook.</>}
       />
       <div className="grid gap-5 md:grid-cols-6 md:grid-rows-[auto_auto]">
         {signatureMoments.map((m, i) => {
-          // Asymmetric grid: first card spans 4, next 2, then 2,4, then 3,3
+          // Asymmetric grid climaxing with a full-width MoD card across the bottom.
+          // Row 1: 4+2 · Row 2: 2+4 · Row 3: 3+3 · Row 4: 6 (full bleed)
           const spans = [
             "md:col-span-4",
             "md:col-span-2",
@@ -49,6 +50,7 @@ export function SignatureMoments() {
             "md:col-span-4",
             "md:col-span-3",
             "md:col-span-3",
+            "md:col-span-6",
           ];
           const image = momentImages[m.org];
           const hasImage = Boolean(image);
