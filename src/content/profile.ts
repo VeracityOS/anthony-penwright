@@ -7,7 +7,7 @@ export const profile = {
   email: "ap@credible.uk.com",
   phone: "+966 533 15 8265",
   // TODO: update with real LinkedIn handle
-  linkedin: "https://linkedin.com/in/anthony-penwright",
+  linkedin: "https://www.linkedin.com/in/anthonypenwright/",
   cvUrl: "/anthony-penwright-cv.pdf",
   bio: [
     "A visionary executive with two decades steering complex digital, smart-city and national-infrastructure programmes across the UK, EU, GCC and LATAM.",
@@ -44,6 +44,14 @@ export const valuePillars: {
     title: "Innovation Ecosystem Building",
     body: "Growing businesses (Quantela $18M→$90M, 400%), building giga-project capability from zero (NEOM, Cisco Smart City practice).",
   },
+  {
+    title: "AI-Native Operator",
+    body: "Hands-on builder of multi-agent orchestration — 44+ agent skills, master-agent coordination, ReasoningBank learning and custom MCP tooling across commercial, ops and delivery workflows.",
+  },
+  {
+    title: "Venture Studio Operator",
+    body: "Founder & Principal of Verax Venture Studio — a live portfolio of 7+ ventures (23MD, VELA, Ha(ai)ven, Vairitas, TR4NSFORM, Singularis, Diamond Dolls) with shared tooling, CRM, KYC, brand and ops infrastructure.",
+  },
 ];
 
 export const signatureMoments: {
@@ -53,6 +61,13 @@ export const signatureMoments: {
   period: string;
   note: string;
 }[] = [
+  {
+    org: "Verax Venture Studio",
+    role: "Founder & Principal",
+    value: "7 ventures",
+    period: "2022 – Present",
+    note: "AI-native studio: 44+ agent skills, master-agent orchestration, shared CRM / KYC / brand / ops stack across the portfolio.",
+  },
   {
     org: "NEOM",
     role: "Director of Innovation",
@@ -120,6 +135,156 @@ export const credentials = {
   ],
   clearance: "UK SC / DV eligible (FCO & MoD history)",
 };
+
+export const profileSkills: {
+  heading: string;
+  tags: string[];
+}[] = [
+  {
+    heading: "Strategy & Leadership",
+    tags: [
+      "C-Suite Advisory",
+      "Business Transformation",
+      "Strategic Planning",
+      "Innovation Strategy",
+      "P&L Management",
+      "Board-Level Communication",
+      "Economic Development",
+      "Strategic Partnerships",
+      "M&A",
+      "Start-Up Growth",
+      "Investor Relations",
+      "Public-Private Partnership",
+    ],
+  },
+  {
+    heading: "Technology & Architecture",
+    tags: [
+      "Smart Cities",
+      "IoT / IIoT",
+      "Enterprise Architecture",
+      "AI / ML",
+      "Vision AI",
+      "Blockchain",
+      "Web3",
+      "Big Data & Analytics",
+      "Azure IoT",
+      "Cloud (PaaS / BaaS / DaaS)",
+      "Edge Compute",
+      "5G / NB-IoT",
+      "SCADA / OPC",
+      "OT / IT Convergence",
+      "Urban Digital Twin",
+      "V2X",
+      "Cybersecurity",
+    ],
+  },
+  {
+    heading: "Delivery & Governance",
+    tags: [
+      "Full Lifecycle Delivery",
+      "PRINCE2 Practitioner",
+      "MSP Certified",
+      "APM",
+      "Agile",
+      "ITIL v3",
+      "Risk Management",
+      "Change Management",
+      "GDPR",
+      "ISO 27001",
+      "Commercial & Contract Management",
+      "Stakeholder Engagement",
+      "Procurement & RFP Design",
+      "Target Operating Model",
+      "KPI & Performance Governance",
+    ],
+  },
+  {
+    heading: "Sectors Delivered",
+    tags: [
+      "Giga-Projects",
+      "Smart Cities (Greenfield)",
+      "Smart Cities (Brownfield)",
+      "Airports & Aviation",
+      "Ports & Maritime",
+      "Mining & Industrial OT",
+      "Campus & Education",
+      "Malls & Retail",
+      "Lifestyle Developments",
+      "Urban Operations",
+      "Central Government",
+      "Defence",
+      "Diplomatic & Foreign Affairs",
+    ],
+  },
+  {
+    heading: "AI & Agent Orchestration",
+    tags: [
+      "Multi-Agent Systems",
+      "Claude Code / Claude Flow",
+      "MCP (Model Context Protocol)",
+      "ReasoningBank Learning",
+      "Swarm Coordination (Hierarchical / Mesh)",
+      "Agent Skill Authoring (44+ agents)",
+      "Hooks & Automation",
+      "Neural Pattern Training",
+      "Prompt Engineering",
+      "RAG / Vector Search (HNSW)",
+      "AgentDB Memory Systems",
+      "LLM Routing (Haiku / Sonnet / Opus)",
+      "n8n Workflow Automation",
+      "Voice & Vision AI Pipelines",
+    ],
+  },
+  {
+    heading: "Venture Studio & Building",
+    tags: [
+      "Founder & Principal — Verax Venture Studio",
+      "Active Portfolio: 23MD · VELA · Ha(ai)ven · Vairitas · TR4NSFORM · Singularis · Diamond Dolls",
+      "Venture Scoring & Diligence",
+      "Pre-Incorporation Strategy",
+      "GTM & Commercial Model Design",
+      "Investor Pipeline & Deal Sourcing",
+      "Brand Identity Systems (v2.0)",
+      "Founder Coaching",
+      "Portfolio Operations",
+      "Cap Table & Equity Structuring",
+    ],
+  },
+  {
+    heading: "Full-Stack Build & Deploy",
+    tags: [
+      "Next.js / React / TypeScript",
+      "Tailwind CSS / shadcn/ui",
+      "Supabase (Postgres / Auth / RLS)",
+      "Vercel (Deploy / Domains / Analytics)",
+      "GitHub Actions / Branch Protection",
+      "Microsoft Graph API",
+      "Azure Management API",
+      "Attio CRM / Linear / Documenso",
+      "Sumsub KYC / AML",
+      "Storyblok / WordPress CMS",
+      "v0 Component Generation",
+      "Knowledge Base Engineering",
+      "Cost Monitoring (Azure Cost Mgmt)",
+    ],
+  },
+  {
+    heading: "Frameworks & Standards",
+    tags: [
+      "Smart Services Advisory (Author)",
+      "Innovation Ecosystem Advisory (Author)",
+      "Operations Advisory (Author)",
+      "Value Realisation Office (Author)",
+      "ISO 37120:2018",
+      "ISO 37122:2019",
+      "BSI PAS 181:2014",
+      "ITU-T L.1600 / FG-SSC",
+      "IEC 62443",
+      "TOGAF ADM",
+    ],
+  },
+];
 
 export const competencies: {
   heading: string;

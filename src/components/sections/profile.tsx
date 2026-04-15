@@ -2,17 +2,20 @@
 
 import { motion } from "framer-motion";
 import { SectionHeader } from "@/components/ui/section-header";
+import { SectionBackground } from "@/components/ui/section-background";
 import { profile } from "@/content/profile";
 
 export function Profile() {
   return (
-    <section className="mx-auto max-w-container px-6 py-24 md:py-32">
+    <section className="relative isolate overflow-hidden py-24 md:py-32">
+      <SectionBackground src="/images/profile-bg.jpg" opacity={0.4} />
+      <div className="mx-auto max-w-container px-6">
       <SectionHeader
         number="01"
         kicker="Profile"
         title={<>A visionary leader in technology, business and transformation.</>}
       />
-      <div className="grid gap-10 md:grid-cols-2">
+      <div className="max-w-3xl space-y-6">
         {profile.bio.map((p, i) => (
           <motion.p
             key={i}
@@ -25,6 +28,7 @@ export function Profile() {
             {p}
           </motion.p>
         ))}
+      </div>
       </div>
     </section>
   );

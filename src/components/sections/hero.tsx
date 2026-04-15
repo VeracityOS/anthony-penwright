@@ -1,13 +1,40 @@
 "use client";
 
-import { motion } from "framer-motion";
+import Image from "next/image";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowDownToLine, Mail, MapPin } from "lucide-react";
 import { AuroraBlob } from "@/components/ui/aurora-blob";
+import { GrainOverlay } from "@/components/ui/grain-overlay";
 import { profile } from "@/content/profile";
 
 export function Hero() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  // Gentle parallax: aurora drifts down ~80px and scales marginally as page scrolls past hero
+  const auroraY = useTransform(scrollYProgress, [0, 1], [0, 80]);
+  const auroraScale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
+
   return (
-    <section className="relative isolate">
+    <section ref={sectionRef} className="relative isolate overflow-hidden">
+      <motion.div
+        aria-hidden
+        style={{ y: auroraY, scale: auroraScale, willChange: "transform" }}
+        className="pointer-events-none absolute inset-0 -z-10"
+      >
+        <Image
+          src="/images/hero-aurora.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover opacity-[0.15]"
+        />
+        <GrainOverlay opacity={0.04} blendMode="overlay" />
+      </motion.div>
       <AuroraBlob
         className="-top-40 left-1/2 h-[900px] w-[1400px] -translate-x-1/2"
         opacity={0.5}
@@ -23,7 +50,7 @@ export function Hero() {
           <span className="label-caps">Profile · 2026</span>
         </motion.div>
 
-        <div className="mt-10 grid gap-12 md:grid-cols-[1.6fr_1fr] md:items-end">
+        <div className="mt-10 grid gap-12 md:grid-cols-[1.4fr_1fr] md:items-center">
           <div>
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
@@ -83,7 +110,7 @@ export function Hero() {
           >
             {/* TODO: drop hero photo into /public/anthony.jpg — it will render here automatically */}
             <div
-              className="relative aspect-square w-56 overflow-hidden rounded-full ring-1 ring-black/10 md:w-72"
+              className="relative aspect-square w-64 overflow-hidden rounded-full ring-1 ring-black/10 md:w-[22rem]"
               style={{
                 backgroundImage:
                   "radial-gradient(circle at 30% 25%, #FFE8E0, #EDE7F6 50%, #E4F1EA)",

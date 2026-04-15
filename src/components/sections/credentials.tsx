@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { SectionHeader } from "@/components/ui/section-header";
+import { SectionBackground } from "@/components/ui/section-background";
 import { credentials } from "@/content/profile";
 
 function List({ heading, items }: { heading: string; items: string[] }) {
@@ -22,7 +23,9 @@ function List({ heading, items }: { heading: string; items: string[] }) {
 
 export function Credentials() {
   return (
-    <section className="mx-auto max-w-container px-6 py-24 md:py-32">
+    <section className="relative isolate overflow-hidden py-24 md:py-32">
+      <SectionBackground src="/images/credentials-bg.jpg" opacity={0.4} />
+      <div className="mx-auto max-w-container px-6">
       <SectionHeader
         number="06"
         kicker="Standards & Credentials"
@@ -43,6 +46,7 @@ export function Credentials() {
           <p className="font-display mt-4 text-xl text-ink">{credentials.clearance}</p>
         </div>
       </motion.div>
+      </div>
     </section>
   );
 }

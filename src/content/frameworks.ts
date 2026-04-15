@@ -6,6 +6,8 @@ export type Framework = {
   constructs: string[];
   deployment: string;
   stat?: { value: string; label: string };
+  image?: string;
+  imageAlt?: string;
 };
 
 export const frameworks: Framework[] = [
@@ -15,15 +17,16 @@ export const frameworks: Framework[] = [
     subtitle: "The HOW — designing citizen & tenant services that deliver.",
     accent: "#C8532C",
     constructs: [
-      "3-Layer service definition: Sense → Analyse → Act",
-      "6-stage pathway: Discovery → Identification → Prioritisation → Design → Procure → Execute",
-      "7-domain taxonomy: People & Welcome, Smart Energy, Smart Water, Smart Environment, Robotics, Vision AI & Safety, Smart Facilities",
-      "21-measure scoring → Impact-vs-Feasibility quadrant",
-      "8 delivered outputs: Service Catalogue, Architecture Blueprint, Living Lab Plan, Test Framework, TOM, Business Model, RFP Pack, Governance + KPIs",
+      "3-Layer model: Sense → Analyse → Act",
+      "6-stage pathway: Discovery → Execute",
+      "7-domain taxonomy across the city stack",
+      "21-measure Impact-vs-Feasibility scoring",
     ],
     deployment:
-      "DMCC Uptown Dubai — 40+ services scored, procurement-ready portfolio. Also applied at NEOM & Red Sea Global across 40+ deployments.",
+      "DMCC Uptown Dubai — 40+ services scored. Applied at NEOM & Red Sea Global.",
     stat: { value: "40+", label: "services scored at DMCC" },
+    image: "/images/fw-smart-services.jpg",
+    imageAlt: "Smart Services Advisory framework topper",
   },
   {
     number: "02",
@@ -31,15 +34,16 @@ export const frameworks: Framework[] = [
     subtitle: "The WHAT — a pipeline from idea to procurement-ready demand.",
     accent: "#0A2540",
     constructs: [
-      "8-Pillar model: Vision & Strategic Alignment, R&A, Investment & Funding, Demand Side, Supply Side, Government Programmes, Talent & Skills, Enablers",
-      "7-stage Innovation Funnel: Submission → Screening → Demand Scoring → Supply-Demand Match → Governance → Procurement → ROI Tracking",
-      "Dual scoring — Demand (5 categories × 26 measures) and Supply (5 categories)",
-      "Fit ≥80% = Fast-track to procurement",
-      "Benchmarks: ~85% implementation success; 100%+ ROI over 3 years; ~14-month payback",
+      "8-Pillar ecosystem model",
+      "7-stage Innovation Funnel: idea → ROI",
+      "Dual demand & supply scoring",
+      "85% implementation · 14-mo payback",
     ],
     deployment:
-      "Strive Services Group KSA — smart-FM demand pipeline. Governance framework mirrors NEOM's innovation board.",
+      "Strive Services Group KSA — smart-FM demand pipeline mirrors NEOM's board.",
     stat: { value: "3–4%", label: "pipeline-to-procurement conversion" },
+    image: "/images/fw-innovation-ecosystem.jpg",
+    imageAlt: "Innovation Ecosystem Advisory framework topper",
   },
   {
     number: "03",
@@ -47,14 +51,16 @@ export const frameworks: Framework[] = [
     subtitle: "The RUN — the engine that keeps services live at giga-scale.",
     accent: "#4A7C59",
     constructs: [
-      "Operations Design & Restructure — Target Operating Model, NOC/SOC, 24/7 ops",
-      "Standard Operating Procedures — ITIL v3 aligned (60+ SOPs delivered at NEOM)",
-      "Automation & AI-Augmented Ops — 40% manual effort reduction",
-      "Northbound App DevOps — Command & Control Centres, citizen apps, executive dashboards",
+      "TOM, NOC/SOC & 24/7 ops design",
+      "60+ SOP library (ITIL v3 aligned)",
+      "AI-augmented ops — 40% manual reduction",
+      "Northbound apps: CCC, citizen, dashboards",
     ],
     deployment:
-      "NEOM: 99.9% uptime across critical services. FCO: 99.8% SLA across 242 sites and 150+ countries.",
+      "NEOM: 99.9% uptime. FCO: 99.8% SLA across 242 sites, 150+ countries.",
     stat: { value: "99.9%", label: "uptime at NEOM" },
+    image: "/images/fw-operations.jpg",
+    imageAlt: "Smart City Operations Advisory framework topper",
   },
   {
     number: "04",
@@ -62,14 +68,15 @@ export const frameworks: Framework[] = [
     subtitle: "The KEEP DELIVERING — outcomes governance, not delivery governance.",
     accent: "#8B5A3C",
     constructs: [
-      "VRO ≠ PMO — PMO governs delivery; VRO governs outcomes & ROI",
-      "3 Parallel Operating Modes: Value Realisation, Operational Excellence, Adaptive/Evolving",
-      "3 Permanent Workstreams: Service Portfolio & Business Model, Technology Blueprint, Operating Model",
-      "3 Strategic Imperatives: Stakeholder Requirements, Alignment, CEO-level Goals",
-      "5 Standing Outputs: Innovation Stimulus, 12-month Roadmap, Risk Register, 3-year Investments Forecast, PoC Pipeline",
+      "VRO ≠ PMO — governs outcomes, not delivery",
+      "3 Operating Modes · 3 Workstreams · 5 Outputs",
+      "Buyer-owned, anchored to the Command Centre",
+      "Closes the Phase-2 ROI gap permanently",
     ],
     deployment:
-      "Deployed at NEOM's innovation governance board, Quantela's outcome-based commercial model, and Cisco's global Smart City practice.",
+      "NEOM innovation board, Quantela commercial model, Cisco global practice.",
+    image: "/images/fw-vro.jpg",
+    imageAlt: "Value Realisation Office framework topper",
   },
 ];
 
