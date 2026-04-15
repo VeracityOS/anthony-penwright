@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowDownToLine, Mail, MapPin } from "lucide-react";
 import { AuroraBlob } from "@/components/ui/aurora-blob";
@@ -108,27 +108,7 @@ export function Hero() {
             transition={{ duration: 0.9, delay: 0.3, ease: "easeOut" }}
             className="justify-self-start md:justify-self-end"
           >
-            {/* TODO: drop hero photo into /public/anthony.jpg — it will render here automatically */}
-            <div
-              className="relative aspect-square w-64 overflow-hidden rounded-full ring-1 ring-black/10 md:w-[22rem]"
-              style={{
-                backgroundImage:
-                  "radial-gradient(circle at 30% 25%, #FFE8E0, #EDE7F6 50%, #E4F1EA)",
-              }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/anthony.jpg"
-                alt="Anthony Penwright"
-                className="absolute inset-0 h-full w-full object-cover"
-                onError={(e) => {
-                  (e.currentTarget as HTMLImageElement).style.display = "none";
-                }}
-              />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="font-display text-6xl text-ink/20">AP</span>
-              </div>
-            </div>
+            <PhotoWithFallback />
           </motion.div>
         </div>
       </div>
@@ -136,5 +116,32 @@ export function Hero() {
         <div className="h-px w-full bg-hairline" />
       </div>
     </section>
+  );
+}
+
+function PhotoWithFallback() {
+  const [hasError, setHasError] = useState(false);
+  return (
+    <div
+      className="relative aspect-square w-64 overflow-hidden rounded-full ring-1 ring-black/10 md:w-[22rem]"
+      style={{
+        backgroundImage:
+          "radial-gradient(circle at 30% 25%, #FFE8E0, #EDE7F6 50%, #E4F1EA)",
+      }}
+    >
+      {!hasError ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src="/anthony.jpg"
+          alt="Anthony Penwright"
+          className="absolute inset-0 h-full w-full object-cover"
+          onError={() => setHasError(true)}
+        />
+      ) : (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <span className="font-display text-6xl text-ink/25">AP</span>
+        </div>
+      )}
+    </div>
   );
 }

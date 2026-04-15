@@ -11,13 +11,13 @@ export const profile = {
   cvUrl: "/anthony-penwright-cv.pdf",
   bio: [
     "A visionary executive with two decades steering complex digital, smart-city and national-infrastructure programmes across the UK, EU, GCC and LATAM.",
-    "I translate technology into C-suite outcomes — having delivered over £1 billion in programme value for MoD, FCO, Cisco, Quantela, and NEOM, and built two global advisory practices from zero.",
+    "I translate technology into C-suite outcomes — having delivered over $1.3 billion in programme value for MoD, FCO, Cisco, Quantela, and NEOM, and built two global advisory practices from zero.",
     "My work today focuses on codifying what I've learned into four proprietary frameworks that help governments, giga-projects and ventures move from ambition to measurable value.",
   ],
 };
 
 export const stats: { value: string; label: string }[] = [
-  { value: "£1BN+", label: "Programme Value Delivered" },
+  { value: "$1.3BN+", label: "Programme Value Delivered" },
   { value: "40+", label: "Smart City Projects Led" },
   { value: "20+", label: "Years Executive Leadership" },
   { value: "450+", label: "Team Resources Directed" },
@@ -34,7 +34,7 @@ export const valuePillars: {
   },
   {
     title: "Programme Delivery at Scale",
-    body: "£1BN+ portfolio track record — from £4BN MoD DII(F) to £250M Cisco Smart Cities and £230M NEOM Digital.",
+    body: "$1.3BN+ portfolio track record — from $5BN MoD DII(F) to $315M Cisco Smart Cities and $290M NEOM Digital.",
   },
   {
     title: "Framework-Led Advisory",
@@ -71,14 +71,14 @@ export const signatureMoments: {
   {
     org: "NEOM",
     role: "Director of Innovation",
-    value: "£93M",
+    value: "$120M",
     period: "Nov 2024 – Present",
     note: "Best Performing Employee, across a 600+ sector.",
   },
   {
     org: "NEOM",
     role: "Director of Tech & Digital",
-    value: "£230M",
+    value: "$290M",
     period: "2023 – 2024",
     note: "90+ team. Digital master plan. 99.9% uptime delivered.",
   },
@@ -92,21 +92,21 @@ export const signatureMoments: {
   {
     org: "Cisco",
     role: "Smart City Global Advisory Lead",
-    value: "£250M",
+    value: "$315M",
     period: "5 years",
     note: "Established Cisco's Smart City consulting practice from zero.",
   },
   {
     org: "FCO",
     role: "Director — Strategic Operations",
-    value: "£768M",
+    value: "$975M",
     period: "242 sites · 150+ countries",
     note: "450+ reports. 99.8% SLA across global estate.",
   },
   {
     org: "MoD",
     role: "Overseas Programme Director — DII(F)",
-    value: "£1BN+",
+    value: "$1.3BN+",
     period: "150,000 workstations · 2,000 sites",
     note: "300,000 users across the MoD global footprint.",
   },

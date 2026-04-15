@@ -181,7 +181,7 @@ export function Capabilities() {
               {/* Display headline — mirrors feature card anatomy */}
               <h3
                 className="font-display relative z-10 mb-2.5 text-[0.95rem] leading-[1.2] md:text-[1.05rem]"
-                style={{ color: t.accent }}
+                style={{ color: t.pillText }}
               >
                 {t.headline}
               </h3>
