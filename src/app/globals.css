@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --canvas: #FAF8F4;
+  --ink: #111111;
+  --muted: #5A5A55;
+  --hairline: #E8E4DB;
+  --accent: #C8532C;
+  --oxford: #0A2540;
+}
+
+html, body {
+  background-color: var(--canvas);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-feature-settings: "ss01", "cv11";
+}
+
+.font-display {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-optical-sizing: auto;
+}
+
+.font-mono {
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+}
+
+.hairline {
+  border-color: var(--hairline);
+}
+
+.label-caps {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.pullquote {
+  border-left: 3px solid var(--accent);
+  padding-left: 1.25rem;
+}
+
+::selection {
+  background: #C8532C;
+  color: #FAF8F4;
+}
