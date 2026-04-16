@@ -9,8 +9,11 @@ export const profile = {
   // TODO: update with real LinkedIn handle
   linkedin: "https://www.linkedin.com/in/anthonypenwright/",
   cvUrl: "/anthony-penwright-cv.pdf",
-  executiveSummary:
-    "C-Suite advisor codifying 20+ years of global smart-city and digital-infrastructure delivery into frameworks that work. $1.3BN+ of programme value delivered across 40+ major initiatives and 13 sectors — MoD DII(F) (150,000 workstations · 242 sites · 150+ countries), NEOM ($290M digital master plan · $120M innovation portfolio), FCO (99.8% SLA across the diplomatic estate), Cisco's global Smart City practice (built from zero to $315M), and Quantela ($18M → $90M in eighteen months). Author of four proprietary methodologies — Smart Services Advisory, Innovation Ecosystem Advisory, Operations Advisory and the Value Realisation Office — live across DMCC Uptown Dubai, NEOM Sindalah, Red Sea Global and Strive Services Group KSA. Founder & Principal of Verax Venture Studio: AI-native, 7 active portfolio ventures, 44+ agent skills with master-agent orchestration across CRM, KYC, brand and operations. UK SC / DV eligible. Riyadh-based, globally mobile.",
+  executiveSummary: [
+    "For two decades I've built and operated the systems that make giga-projects, government estates and smart cities actually work. Today I codify that experience into frameworks — clean, deployable, measurable — so the next wave of leaders can skip the expensive lessons.",
+    "$1.3BN+ of programme value delivered across 40+ major initiatives and 13 sectors. MoD DII(F): 150,000 workstations across 242 sites in 150+ countries. NEOM: $290M digital master plan and a $120M innovation portfolio. FCO: 99.8% SLA across the diplomatic estate. Cisco's global Smart City practice — built from zero to $315M. Quantela — grown from $18M to $90M in eighteen months.",
+    "Founder & Principal of Verax Venture Studio: AI-native, seven active portfolio ventures, 44+ agent skills with master-agent orchestration across CRM, KYC, brand and operations. The four Verax frameworks — Smart Services Advisory, Innovation Ecosystem Advisory, Operations Advisory and the Value Realisation Office — are live across DMCC Uptown Dubai, NEOM Sindalah, Red Sea Global and Strive Services Group KSA. UK SC / DV eligible. Riyadh-based, globally mobile.",
+  ],
   bio: [
     "A visionary executive with two decades steering complex digital, smart-city and national-infrastructure programmes across the UK, EU, GCC and LATAM.",
     "I translate technology into C-suite outcomes — having delivered over $1.3 billion in programme value for MoD, FCO, Cisco, Quantela, and NEOM, and built two global advisory practices from zero.",

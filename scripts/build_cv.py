@@ -154,18 +154,22 @@ def build():
 
     section_label(doc, "Executive Summary")
     body(doc,
-         "C-Suite advisor codifying 20+ years of global smart-city and digital-infrastructure delivery into "
-         "frameworks that work. $1.3BN+ of programme value delivered across 40+ major initiatives and 13 sectors "
-         "— MoD DII(F) (150,000 workstations · 242 sites · 150+ countries), NEOM ($290M digital master plan · "
-         "$120M innovation portfolio), FCO (99.8% SLA across the diplomatic estate), Cisco's global Smart City "
-         "practice (built from zero to $315M), and Quantela ($18M → $90M in eighteen months).",
+         "For two decades I've built and operated the systems that make giga-projects, government estates and "
+         "smart cities actually work. Today I codify that experience into frameworks — clean, deployable, "
+         "measurable — so the next wave of leaders can skip the expensive lessons.",
          space_after=5)
     body(doc,
-         "Author of four proprietary methodologies — Smart Services Advisory, Innovation Ecosystem Advisory, "
-         "Operations Advisory and the Value Realisation Office — live across DMCC Uptown Dubai, NEOM Sindalah, "
-         "Red Sea Global and Strive Services Group KSA. Founder & Principal of Verax Venture Studio: AI-native, "
-         "7 active portfolio ventures, 44+ agent skills with master-agent orchestration across CRM, KYC, brand "
-         "and operations.",
+         "$1.3BN+ of programme value delivered across 40+ major initiatives and 13 sectors. MoD DII(F): "
+         "150,000 workstations across 242 sites in 150+ countries. NEOM: $290M digital master plan and a "
+         "$120M innovation portfolio. FCO: 99.8% SLA across the diplomatic estate. Cisco's global Smart City "
+         "practice — built from zero to $315M. Quantela — grown from $18M to $90M in eighteen months.",
+         space_after=5)
+    body(doc,
+         "Founder & Principal of Verax Venture Studio: AI-native, seven active portfolio ventures, 44+ agent "
+         "skills with master-agent orchestration across CRM, KYC, brand and operations. The four Verax "
+         "frameworks — Smart Services Advisory, Innovation Ecosystem Advisory, Operations Advisory and the "
+         "Value Realisation Office — are live across DMCC Uptown Dubai, NEOM Sindalah, Red Sea Global and "
+         "Strive Services Group KSA. UK SC / DV eligible. Riyadh-based, globally mobile.",
          space_after=5)
     body(doc,
          "Proven architect of high-performance cross-functional teams (450+ resources), C-suite adviser on "

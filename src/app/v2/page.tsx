@@ -331,9 +331,24 @@ function ExecutiveSummary() {
               spotlightColor="rgba(52,211,153,0.16)"
             >
               <TilePattern kind="constellation" accent={TOKENS.emerald} opacity={0.12} />
-              <p className="relative max-w-4xl text-[15.5px] leading-[1.7] text-white/85 md:text-[16.5px]">
-                {profile.executiveSummary}
-              </p>
+              <div className="relative space-y-5 text-[15.5px] leading-[1.7] text-white/85 md:text-[16.5px]">
+                {profile.executiveSummary.map((para, i) => (
+                  <p key={i}>
+                    {i === 0 && (
+                      <span
+                        className="float-left mr-2 font-[700] leading-[0.9]"
+                        style={{
+                          color: TOKENS.emerald,
+                          fontSize: "clamp(42px, 3.6vw, 56px)",
+                        }}
+                      >
+                        {para.charAt(0)}
+                      </span>
+                    )}
+                    {i === 0 ? para.slice(1) : para}
+                  </p>
+                ))}
+              </div>
               <div className="relative mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-6 md:gap-4">
                 {highlights.map((h, i) => {
                   const accents = [
