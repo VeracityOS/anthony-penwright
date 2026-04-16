@@ -10,9 +10,9 @@ export const profile = {
   linkedin: "https://www.linkedin.com/in/anthonypenwright/",
   cvUrl: "/anthony-penwright-cv.pdf",
   executiveSummary: [
-    "For two decades I've built and operated the systems that make giga-projects, government estates and smart cities actually work. Today I codify that experience into frameworks — clean, deployable, measurable — so the next wave of leaders can skip the expensive lessons.",
-    "$1.3BN+ of programme value delivered across 40+ major initiatives and 13 sectors. MoD DII(F): 150,000 workstations across 242 sites in 150+ countries. NEOM: $290M digital master plan and a $120M innovation portfolio. FCO: 99.8% SLA across the diplomatic estate. Cisco's global Smart City practice — built from zero to $315M. Quantela — grown from $18M to $90M in eighteen months.",
-    "Founder & Principal of Verax Venture Studio: AI-native, seven active portfolio ventures, 44+ agent skills with master-agent orchestration across CRM, KYC, brand and operations. The four Verax frameworks — Smart Services Advisory, Innovation Ecosystem Advisory, Operations Advisory and the Value Realisation Office — are live across DMCC Uptown Dubai, NEOM Sindalah, Red Sea Global and Strive Services Group KSA. UK SC / DV eligible. Riyadh-based, globally mobile.",
+    "I'm drawn to the hard problems at the edge of technology and human institutions — the places where ambitious ideas meet the messy reality of how governments, communities and industries actually operate. For two decades, that's been my work: sitting between the boardroom and the delivery room, translating intent into systems that hold.",
+    "What I do is make complexity legible. I listen first, map the terrain — politics, technology, money, people — and shape interventions that can actually move through all of them. When things work, it's rarely because of one brilliant idea; it's because every layer below the decision was designed to carry it.",
+    "Lately I've been codifying what I've learned into four practitioner frameworks so the next generation of leaders don't have to repeat the same expensive mistakes. I build ventures inside my own studio to keep the craft sharp. If you're standing at the start of something ambitious and need a partner who can see the whole board and stay in it with you — that's what I'm here for.",
   ],
   bio: [
     "A visionary executive with two decades steering complex digital, smart-city and national-infrastructure programmes across the UK, EU, GCC and LATAM.",
