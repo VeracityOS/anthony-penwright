@@ -23,21 +23,25 @@ import {
   Linkedin,
   Compass,
 } from "lucide-react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   AuroraBackground,
   Counter,
   DisplayHeading,
   FadeUp,
+  FloatingBubbles,
   GlassCard,
-  GradientBorder,
+  OrbitBorder,
   Kbd,
   MagneticButton,
   Mono,
   NoiseOverlay,
+  SectionDivider,
   SectionKicker,
   SpotlightCard,
   StatusDot,
+  TilePattern,
   TOKENS,
   usePageScroll,
 } from "@/components/v2/v2-primitives";
@@ -138,73 +142,56 @@ function TopBar() {
 // ---------------- HERO ----------------
 function Hero() {
   return (
-    <section className="relative px-5 pb-20 pt-32 md:px-10 md:pb-28 md:pt-36">
-      <div className="mx-auto grid max-w-[1340px] grid-cols-12 gap-5 md:gap-6">
-        {/* Status row */}
-        <div className="col-span-12 flex flex-wrap items-center gap-3">
-          <motion.span
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 backdrop-blur-md"
-          >
-            <StatusDot />
-            <Mono style={{ color: TOKENS.ink }}>
-              Available · Riyadh · 2026
-            </Mono>
-          </motion.span>
-          <motion.span
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.18 }}
-            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 backdrop-blur-md"
-          >
-            <Mono style={{ color: TOKENS.inkFaint }}>MD · Smart-City · AI-native</Mono>
-          </motion.span>
-        </div>
+    <section className="relative px-5 pb-8 pt-24 sm:px-8 md:pb-10 md:pt-28 lg:px-[5vw] xl:px-[6vw]">
+      <div className="mx-auto grid w-full max-w-[1600px] grid-cols-12 items-center gap-6 md:gap-10">
+        {/* Left: status + name + pitch + CTAs */}
+        <div className="col-span-12 md:col-span-8">
+          {/* Status row */}
+          <div className="flex flex-wrap items-center gap-3">
+            <motion.span
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 backdrop-blur-md"
+            >
+              <StatusDot />
+              <Mono style={{ color: TOKENS.ink }}>
+                Available · Riyadh · 2026
+              </Mono>
+            </motion.span>
+            <motion.span
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.18 }}
+              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 backdrop-blur-md"
+            >
+              <Mono style={{ color: TOKENS.inkFaint }}>MD · Smart-City · AI-native</Mono>
+            </motion.span>
+          </div>
 
-        {/* Massive wordmark — gradient fill */}
-        <div className="col-span-12">
+          {/* Wordmark — restrained Linear/Vercel scale, single Poppins face */}
           <motion.h1
-            initial={{ opacity: 0, y: 28 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-            className="font-[700] leading-[0.84] tracking-[-0.05em]"
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+            className="mt-7 text-6xl font-semibold leading-[0.98] tracking-[-0.035em] md:text-7xl"
             style={{
-              fontSize: "clamp(64px, 13.5vw, 220px)",
               color: "transparent",
               backgroundImage:
-                "linear-gradient(180deg, #ffffff 0%, #e9e6f3 48%, #b7b3cc 100%)",
+                "linear-gradient(180deg, #ffffff 0%, #e9e6f3 55%, #b7b3cc 100%)",
               WebkitBackgroundClip: "text",
               backgroundClip: "text",
-              textShadow: "0 0 80px rgba(167,139,250,0.16)",
+              textShadow: "0 0 60px rgba(167,139,250,0.14)",
             }}
           >
-            <span>Anthony</span>
-            <br />
-            <span
-              className="font-[400] italic"
-              style={{
-                fontFamily: "var(--font-fraunces), 'Fraunces', Georgia, serif",
-                backgroundImage:
-                  "linear-gradient(135deg, #34d399 0%, #a78bfa 55%, #22d3ee 100%)",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                color: "transparent",
-              }}
-            >
-              Penwright.
-            </span>
+            Anthony Penwright.
           </motion.h1>
-        </div>
 
-        {/* Pitch + CTAs (left) + meta card (right) */}
-        <div className="col-span-12 md:col-span-7 lg:col-span-8">
           <FadeUp delay={0.3}>
-            <p className="max-w-2xl text-[18px] leading-[1.5] text-white/80 md:text-[22px]">
+            <p className="mt-6 max-w-xl text-base leading-[1.55] text-white/80 md:text-lg">
               {profile.pitch}
             </p>
-            <div className="mt-8 flex flex-wrap items-center gap-3">
+            <div className="mt-7 flex flex-wrap items-center gap-3">
               <MagneticButton href={`mailto:${profile.email}`} variant="primary">
                 Start a conversation
                 <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -217,38 +204,53 @@ function Hero() {
           </FadeUp>
         </div>
 
-        <div className="col-span-12 md:col-span-5 lg:col-span-4">
-          <FadeUp delay={0.35}>
-            <GlassCard className="p-5">
-              <Mono style={{ color: TOKENS.inkFaint }}>Primary pillars</Mono>
-              <div className="mt-3 text-[14px] leading-[1.55] text-white/85">
-                People · Business · Technology
-                <br />
-                Innovation · Leadership
-              </div>
+        {/* Right: headshot with aurora halo */}
+        <div className="col-span-12 md:col-span-4">
+          <FadeUp delay={0.25}>
+            <div className="relative mx-auto flex w-full items-center justify-center md:mx-0 md:ml-auto">
+              {/* Aurora halo */}
               <div
-                className="mt-4 h-px w-full"
+                aria-hidden
+                className="absolute inset-0 -z-10"
                 style={{
                   background:
-                    "linear-gradient(90deg, transparent, rgba(255,255,255,0.14), transparent)",
+                    "radial-gradient(circle at 30% 30%, rgba(52,211,153,0.35), transparent 55%), radial-gradient(circle at 70% 70%, rgba(167,139,250,0.32), transparent 55%), radial-gradient(circle at 50% 50%, rgba(34,211,238,0.22), transparent 60%)",
+                  filter: "blur(42px)",
+                  transform: "scale(1.08)",
                 }}
               />
-              <div className="mt-4 grid grid-cols-2 gap-3 text-[12px] text-white/65">
-                <div>
-                  <Mono style={{ color: TOKENS.inkFaint }}>Location</Mono>
-                  <div className="mt-1">Riyadh, KSA</div>
-                </div>
-                <div>
-                  <Mono style={{ color: TOKENS.inkFaint }}>Clearance</Mono>
-                  <div className="mt-1">UK SC / DV</div>
-                </div>
+              <div
+                className="relative aspect-square w-full overflow-hidden rounded-[28px]"
+                style={{
+                  border: "1px solid rgba(255,255,255,0.12)",
+                  boxShadow:
+                    "inset 0 1px 0 rgba(255,255,255,0.12), 0 30px 80px -24px rgba(0,0,0,0.65), 0 0 60px -10px rgba(52,211,153,0.25)",
+                }}
+              >
+                <Image
+                  src="/anthony.jpg"
+                  alt="Anthony Penwright"
+                  width={400}
+                  height={400}
+                  priority
+                  className="h-full w-full object-cover"
+                />
+                {/* Subtle inner tint for canvas continuity */}
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0"
+                  style={{
+                    background:
+                      "linear-gradient(180deg, transparent 60%, rgba(10,10,10,0.35) 100%)",
+                  }}
+                />
               </div>
-            </GlassCard>
+            </div>
           </FadeUp>
         </div>
 
         {/* Hero stats strip — animated counters */}
-        <div className="col-span-12 mt-10 md:mt-16">
+        <div className="col-span-12 mt-6 md:mt-8">
           <FadeUp delay={0.4}>
             <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
               {heroStats.map((s, i) => {
@@ -325,14 +327,18 @@ function SignatureMoments() {
       big?: boolean;
       badge?: string;
       icon: React.ComponentType<{ className?: string }>;
+      pattern?: React.ComponentProps<typeof TilePattern>["kind"];
     }
   ) => {
     const Icon = opts.icon;
     return (
       <SpotlightCard
-        className={`${opts.span} flex flex-col justify-between p-6 md:p-7`}
+        className={`${opts.span} relative flex flex-col gap-5 overflow-hidden p-5 md:p-6`}
         spotlightColor={opts.spotlight}
       >
+        {opts.pattern && (
+          <TilePattern kind={opts.pattern} accent={opts.accent} opacity={0.15} />
+        )}
         <div className="flex items-start justify-between gap-4">
           <div className="flex items-center gap-3">
             <div
@@ -363,8 +369,8 @@ function SignatureMoments() {
               className="font-[700] leading-none tracking-[-0.03em]"
               style={{
                 fontSize: opts.big
-                  ? "clamp(48px, 6vw, 96px)"
-                  : "clamp(26px, 2.6vw, 40px)",
+                  ? "clamp(36px, 3.8vw, 60px)"
+                  : "clamp(22px, 2vw, 32px)",
                 color: "transparent",
                 backgroundImage: `linear-gradient(135deg, ${opts.accent} 0%, #ffffff 100%)`,
                 WebkitBackgroundClip: "text",
@@ -376,21 +382,21 @@ function SignatureMoments() {
           </div>
         </div>
 
-        <div className={opts.big ? "mt-8" : "mt-6"}>
-          <div className="text-[11px] uppercase tracking-[0.16em] text-white/55">
+        <div>
+          <div className="text-[10px] uppercase tracking-[0.16em] text-white/55">
             {m.period}
           </div>
           <h3
-            className={`mt-2 font-[600] leading-tight tracking-[-0.015em] text-white ${
-              opts.big ? "text-[28px] md:text-[36px]" : "text-[20px] md:text-[22px]"
+            className={`mt-1.5 font-[600] leading-tight tracking-[-0.015em] text-white ${
+              opts.big ? "text-[22px] md:text-[26px]" : "text-[17px] md:text-[19px]"
             }`}
           >
             {m.org}
           </h3>
-          <div className="mt-1 text-[12.5px] text-white/60">{m.role}</div>
+          <div className="mt-0.5 text-[12px] text-white/60">{m.role}</div>
           <p
-            className={`mt-4 leading-[1.55] text-white/75 ${
-              opts.big ? "text-[15px] md:text-[17px]" : "text-[13px]"
+            className={`mt-3 leading-[1.5] text-white/75 ${
+              opts.big ? "text-[13.5px] md:text-[15px]" : "text-[12.5px]"
             }`}
           >
             {m.note}
@@ -401,8 +407,8 @@ function SignatureMoments() {
   };
 
   return (
-    <section id="moments" className="relative px-5 py-24 md:px-10 md:py-32">
-      <div className="mx-auto max-w-[1340px]">
+    <section id="moments" className="relative px-5 py-12 sm:px-8 md:py-16 lg:px-[5vw] xl:px-[6vw]">
+      <div className="mx-auto max-w-[1600px]">
         <SectionKicker index="02" label="Signature Work" keys={["⌘", "2"]} />
         <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <DisplayHeading gradient>
@@ -427,7 +433,7 @@ function SignatureMoments() {
         </div>
 
         {/* Bento grid — mobile 1-col, desktop 12-col w/ explicit row spans */}
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-12 md:auto-rows-[minmax(0,1fr)] md:gap-5">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-12 md:auto-rows-[minmax(140px,auto)] md:gap-5">
           {tile(mod, {
             span: "md:col-span-8 md:row-span-2",
             accent: TOKENS.emerald,
@@ -435,6 +441,7 @@ function SignatureMoments() {
             big: true,
             badge: "Programme of record",
             icon: Shield,
+            pattern: "shield",
           })}
           {tile(neomIn, {
             span: "md:col-span-4 md:row-span-2",
@@ -442,30 +449,35 @@ function SignatureMoments() {
             spotlight: "rgba(167,139,250,0.24)",
             badge: "Best performer",
             icon: Sparkles,
+            pattern: "hex",
           })}
           {tile(neomTD, {
             span: "md:col-span-5",
             accent: TOKENS.cyan,
             spotlight: "rgba(34,211,238,0.22)",
             icon: Cpu,
+            pattern: "circuit",
           })}
           {tile(quantela, {
             span: "md:col-span-3",
             accent: TOKENS.amber,
             spotlight: "rgba(251,191,36,0.22)",
             icon: LineChart,
+            pattern: "chart",
           })}
           {tile(cisco, {
             span: "md:col-span-4",
             accent: TOKENS.violet,
             spotlight: "rgba(167,139,250,0.22)",
             icon: Globe2,
+            pattern: "network",
           })}
           {tile(fco, {
             span: "md:col-span-7",
             accent: TOKENS.emerald,
             spotlight: "rgba(52,211,153,0.20)",
             icon: Briefcase,
+            pattern: "globe",
           })}
           {tile(verax, {
             span: "md:col-span-5",
@@ -473,6 +485,7 @@ function SignatureMoments() {
             spotlight: "rgba(34,211,238,0.22)",
             badge: "Active",
             icon: Rocket,
+            pattern: "constellation",
           })}
         </div>
       </div>
@@ -510,8 +523,8 @@ function Capabilities() {
   ];
 
   return (
-    <section id="capabilities" className="relative px-5 py-24 md:px-10 md:py-32">
-      <div className="mx-auto max-w-[1340px]">
+    <section id="capabilities" className="relative px-5 py-12 sm:px-8 md:py-16 lg:px-[5vw] xl:px-[6vw]">
+      <div className="mx-auto max-w-[1600px]">
         <SectionKicker index="03" label="Capabilities" keys={["⌘", "3"]} />
         <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <DisplayHeading gradient>Full-stack operator.</DisplayHeading>
@@ -524,12 +537,37 @@ function Capabilities() {
         <div className="grid grid-cols-1 gap-4 md:grid-cols-12 md:gap-5">
           {profileSkills.map((g, i) => {
             const Icon = capabilityIcons[i % capabilityIcons.length];
+            const capabilityPatterns: Array<React.ComponentProps<typeof TilePattern>["kind"]> = [
+              "hex",
+              "circuit",
+              "network",
+              "globe",
+              "chart",
+              "constellation",
+              "grid",
+              "shield",
+            ];
+            const capabilityAccents = [
+              TOKENS.emerald,
+              TOKENS.violet,
+              TOKENS.cyan,
+              TOKENS.amber,
+              TOKENS.emerald,
+              TOKENS.violet,
+              TOKENS.cyan,
+              TOKENS.pink,
+            ];
             return (
               <FadeUp key={i} delay={Math.min(i * 0.04, 0.2)} className={spans[i] ?? "md:col-span-4"}>
                 <SpotlightCard
                   className="flex h-full flex-col p-6 md:p-7"
                   spotlightColor={spotlights[i] ?? "rgba(52,211,153,0.18)"}
                 >
+                  <TilePattern
+                    kind={capabilityPatterns[i % capabilityPatterns.length]}
+                    accent={capabilityAccents[i % capabilityAccents.length]}
+                    opacity={0.13}
+                  />
                   <div className="flex items-center justify-between">
                     <div
                       className="flex h-10 w-10 items-center justify-center rounded-xl"
@@ -579,8 +617,8 @@ function Frameworks() {
   ];
 
   return (
-    <section id="frameworks" className="relative px-5 py-24 md:px-10 md:py-32">
-      <div className="mx-auto max-w-[1340px]">
+    <section id="frameworks" className="relative px-5 py-12 sm:px-8 md:py-16 lg:px-[5vw] xl:px-[6vw]">
+      <div className="mx-auto max-w-[1600px]">
         <SectionKicker index="04" label="Proprietary Frameworks" keys={["⌘", "4"]} />
         <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <DisplayHeading gradient>Four frameworks.</DisplayHeading>
@@ -593,8 +631,19 @@ function Frameworks() {
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
           {frameworks.map((f, i) => {
             const a = accents[i % accents.length];
+            const frameworkPatterns: Array<React.ComponentProps<typeof TilePattern>["kind"]> = [
+              "hex",
+              "chart",
+              "network",
+              "grid",
+            ];
             const body = (
-              <div className="flex h-full flex-col p-7 md:p-9">
+              <div className="relative flex h-full flex-col overflow-hidden p-7 md:p-9">
+                <TilePattern
+                  kind={frameworkPatterns[i % frameworkPatterns.length]}
+                  accent={a.c}
+                  opacity={0.14}
+                />
                 <div className="flex items-start justify-between gap-6">
                   <div
                     className="font-[700] leading-none tracking-[-0.04em]"
@@ -654,22 +703,16 @@ function Frameworks() {
               </div>
             );
 
-            if (i === 0) {
-              // Hero framework — animated conic gradient border
-              return (
-                <FadeUp key={i} delay={i * 0.05}>
-                  <GradientBorder radius={26} duration={9}>
-                    {body}
-                  </GradientBorder>
-                </FadeUp>
-              );
-            }
-
+            // Discreet perimeter-orbit light on every framework — each with its
+            // own accent colour and a different orbit duration so they never
+            // pulse in sync.
             return (
               <FadeUp key={i} delay={i * 0.05}>
-                <SpotlightCard className="h-full" spotlightColor={a.s}>
-                  {body}
-                </SpotlightCard>
+                <OrbitBorder accent={a.c} radius={20} duration={14 + i * 3}>
+                  <SpotlightCard className="h-full" spotlightColor={a.s}>
+                    {body}
+                  </SpotlightCard>
+                </OrbitBorder>
               </FadeUp>
             );
           })}
@@ -682,8 +725,8 @@ function Frameworks() {
 // ---------------- TIMELINE ----------------
 function Timeline() {
   return (
-    <section id="timeline" className="relative px-5 py-24 md:px-10 md:py-32">
-      <div className="mx-auto max-w-[1340px]">
+    <section id="timeline" className="relative px-5 py-12 sm:px-8 md:py-16 lg:px-[5vw] xl:px-[6vw]">
+      <div className="mx-auto max-w-[1600px]">
         <SectionKicker index="05" label="Career Timeline" keys={["⌘", "5"]} />
         <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <DisplayHeading gradient>Twenty years.</DisplayHeading>
@@ -693,76 +736,176 @@ function Timeline() {
           </p>
         </div>
 
-        <div className="relative">
-          {/* Glowing connective line (desktop) */}
-          <div
-            aria-hidden
-            className="absolute left-[22px] top-0 hidden h-full w-px md:block"
-            style={{
-              background:
-                "linear-gradient(180deg, transparent 0%, rgba(52,211,153,0.5) 8%, rgba(167,139,250,0.5) 50%, rgba(34,211,238,0.5) 92%, transparent 100%)",
-              boxShadow: "0 0 12px rgba(167,139,250,0.25)",
-            }}
-          />
+        {(() => {
+          const perRow = 4;
+          const rows = Math.ceil(timeline.length / perRow);
+          // Serpentine path through a 1000×1000 viewBox, 4 rows × 4 cols,
+          // stretched to fit the grid container via preserveAspectRatio="none".
+          // Row centres: 125/375/625/875. Col centres: 125/375/625/875.
+          const d =
+            "M 125 125 L 875 125 " +
+            "C 980 125, 980 375, 875 375 " +
+            "L 125 375 " +
+            "C 20 375, 20 625, 125 625 " +
+            "L 875 625 " +
+            "C 980 625, 980 875, 875 875 " +
+            "L 800 875";
+          return (
+            <div className="relative">
+              {/* Serpentine roadmap — SVG rail with traveling glow, stretched
+                  to match the grid. Cards sit on each station. */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 hidden md:block"
+              >
+                <svg
+                  viewBox="0 0 1000 1000"
+                  preserveAspectRatio="none"
+                  className="h-full w-full overflow-visible"
+                >
+                  <defs>
+                    <linearGradient id="roadmap-rail" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor={TOKENS.emerald} stopOpacity="0.4" />
+                      <stop offset="50%" stopColor={TOKENS.violet} stopOpacity="0.4" />
+                      <stop offset="100%" stopColor={TOKENS.cyan} stopOpacity="0.4" />
+                    </linearGradient>
+                    <linearGradient id="roadmap-light" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stopColor={TOKENS.emerald} stopOpacity="0" />
+                      <stop offset="50%" stopColor="#ffffff" stopOpacity="1" />
+                      <stop offset="100%" stopColor={TOKENS.cyan} stopOpacity="0" />
+                    </linearGradient>
+                  </defs>
+                  {/* Dashed ghost rail */}
+                  <path
+                    d={d}
+                    stroke="url(#roadmap-rail)"
+                    strokeWidth="1.6"
+                    strokeDasharray="6 7"
+                    fill="none"
+                    vectorEffect="non-scaling-stroke"
+                  />
+                  {/* Traveling glow — 120-unit bright dash flows along the road */}
+                  <motion.path
+                    d={d}
+                    stroke="url(#roadmap-light)"
+                    strokeWidth="2.6"
+                    fill="none"
+                    strokeLinecap="round"
+                    vectorEffect="non-scaling-stroke"
+                    strokeDasharray="120 4400"
+                    animate={{ strokeDashoffset: [0, -4520] }}
+                    transition={{ duration: 10, ease: "linear", repeat: Infinity }}
+                    style={{
+                      filter: `drop-shadow(0 0 4px ${TOKENS.emerald}) drop-shadow(0 0 10px ${TOKENS.violet}aa) drop-shadow(0 0 18px ${TOKENS.cyan}66)`,
+                    }}
+                  />
+                  {/* Station markers — small glowing pins on each station */}
+                  {timeline.map((_, i) => {
+                    const row = Math.floor(i / perRow);
+                    const colInRow = i % perRow;
+                    const col =
+                      row % 2 === 0 ? colInRow : perRow - 1 - colInRow;
+                    const cx = 125 + col * 250;
+                    const cy = 125 + row * 250;
+                    const accent =
+                      i < 4
+                        ? TOKENS.emerald
+                        : i < 8
+                        ? TOKENS.violet
+                        : i < 12
+                        ? TOKENS.cyan
+                        : TOKENS.amber;
+                    return (
+                      <g key={i}>
+                        <circle
+                          cx={cx}
+                          cy={cy}
+                          r="14"
+                          fill={accent}
+                          fillOpacity="0.15"
+                          stroke={accent}
+                          strokeOpacity="0.5"
+                          strokeWidth="1.2"
+                          vectorEffect="non-scaling-stroke"
+                        />
+                        <circle cx={cx} cy={cy} r="4" fill={accent} />
+                      </g>
+                    );
+                  })}
+                </svg>
+              </div>
 
-          <ul className="space-y-3">
-            {timeline.map((t, i) => {
-              const dotColor =
-                i < 3 ? TOKENS.emerald : i < 7 ? TOKENS.violet : TOKENS.cyan;
-              const glow =
-                i < 3
-                  ? "rgba(52,211,153,0.6)"
-                  : i < 7
-                  ? "rgba(167,139,250,0.6)"
-                  : "rgba(34,211,238,0.6)";
-              return (
-                <FadeUp key={i} delay={Math.min(i * 0.02, 0.2)}>
-                  <li className="relative md:pl-14">
-                    {/* Pin */}
-                    <span
-                      aria-hidden
-                      className="absolute left-[15px] top-[22px] hidden h-3.5 w-3.5 rounded-full md:block"
+              {/* Grid — 4 cols × 4 rows on desktop, single column on mobile */}
+              <div
+                className="relative grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-x-6 md:gap-y-20"
+                style={{
+                  gridAutoRows: "minmax(0, auto)",
+                }}
+              >
+                {timeline.map((t, i) => {
+                  const row = Math.floor(i / perRow);
+                  const colInRow = i % perRow;
+                  const col =
+                    row % 2 === 0 ? colInRow : perRow - 1 - colInRow;
+                  const accent =
+                    i < 4
+                      ? TOKENS.emerald
+                      : i < 8
+                      ? TOKENS.violet
+                      : i < 12
+                      ? TOKENS.cyan
+                      : TOKENS.amber;
+                  return (
+                    <div
+                      key={i}
                       style={{
-                        background: TOKENS.canvas,
-                        border: `2px solid ${dotColor}`,
-                        boxShadow: `0 0 12px ${glow}`,
+                        gridColumnStart: col + 1,
+                        gridRowStart: row + 1,
                       }}
-                    />
-                    <GlassCard
-                      className="grid grid-cols-12 items-center gap-3 px-5 py-4 md:gap-5 md:px-6 md:py-5"
-                      interactive={false}
                     >
-                      <div className="col-span-12 md:col-span-1">
-                        <Mono style={{ color: TOKENS.inkFaint }}>
-                          {String(i + 1).padStart(2, "0")}
-                        </Mono>
-                      </div>
-                      <div className="col-span-12 text-[18px] font-[600] leading-tight tracking-[-0.01em] text-white md:col-span-4 md:text-[20px]">
-                        {t.org}
-                      </div>
-                      <div className="col-span-7 text-[13px] leading-tight text-white/65 md:col-span-4 md:text-[13.5px]">
-                        {t.role}
-                      </div>
-                      <div className="col-span-5 text-right md:col-span-2">
+                      <FadeUp delay={Math.min(i * 0.02, 0.2)}>
                         <div
-                          className="text-[15px] font-[700] tracking-[-0.01em]"
-                          style={{ color: dotColor }}
+                          className="relative rounded-xl px-3 py-2.5 backdrop-blur-md"
+                          style={{
+                            background: "rgba(255,255,255,0.04)",
+                            border: `1px solid ${accent}2e`,
+                            boxShadow: `0 0 0 1px ${accent}14, 0 6px 24px -8px ${accent}55`,
+                          }}
                         >
-                          {t.value}
+                          <div className="flex items-baseline justify-between gap-2">
+                            <Mono
+                              style={{
+                                color: TOKENS.inkGhost,
+                                fontSize: "9.5px",
+                              }}
+                            >
+                              {String(i + 1).padStart(2, "0")}
+                            </Mono>
+                            <span
+                              className="font-[700] tracking-[-0.01em]"
+                              style={{ color: accent, fontSize: "12.5px" }}
+                            >
+                              {t.value}
+                            </span>
+                          </div>
+                          <div className="mt-1 text-[13px] font-[600] leading-tight tracking-[-0.01em] text-white">
+                            {t.org}
+                          </div>
+                          <div className="mt-0.5 truncate text-[10.5px] leading-tight text-white/60">
+                            {t.role}
+                          </div>
+                          <div className="mt-1 text-[9.5px] tracking-[0.08em] text-white/45">
+                            {t.period}
+                          </div>
                         </div>
-                      </div>
-                      <div className="col-span-12 md:col-span-1 md:text-right">
-                        <Mono style={{ color: TOKENS.inkFaint }}>
-                          {t.period}
-                        </Mono>
-                      </div>
-                    </GlassCard>
-                  </li>
-                </FadeUp>
-              );
-            })}
-          </ul>
-        </div>
+                      </FadeUp>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })()}
       </div>
     </section>
   );
@@ -807,21 +950,32 @@ function Credentials() {
     },
   ];
   return (
-    <section id="credentials" className="relative px-5 py-24 md:px-10 md:py-32">
-      <div className="mx-auto max-w-[1340px]">
+    <section id="credentials" className="relative px-5 py-12 sm:px-8 md:py-16 lg:px-[5vw] xl:px-[6vw]">
+      <div className="mx-auto max-w-[1600px]">
         <SectionKicker index="06" label="Credentials" keys={["⌘", "6"]} />
         <div className="mb-12">
-          <DisplayHeading gradient>Receipts.</DisplayHeading>
+          <DisplayHeading gradient>Credentials.</DisplayHeading>
         </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5 lg:grid-cols-4">
           {blocks.map((b, i) => {
             const Icon = b.icon;
+            const credentialPatterns: Array<React.ComponentProps<typeof TilePattern>["kind"]> = [
+              "grid",
+              "shield",
+              "constellation",
+              "globe",
+            ];
             return (
               <FadeUp key={i} delay={i * 0.04}>
                 <SpotlightCard
                   className="flex h-full flex-col p-6 md:p-7"
                   spotlightColor={b.spotlight}
                 >
+                  <TilePattern
+                    kind={credentialPatterns[i % credentialPatterns.length]}
+                    accent={b.accent}
+                    opacity={0.13}
+                  />
                   <div className="flex items-center justify-between">
                     <div
                       className="flex h-10 w-10 items-center justify-center rounded-xl"
@@ -864,14 +1018,14 @@ function Credentials() {
 // ---------------- CONTACT ----------------
 function Contact() {
   return (
-    <section id="contact" className="relative px-5 py-24 md:px-10 md:py-32">
-      <div className="mx-auto max-w-[1340px]">
+    <section id="contact" className="relative px-5 py-12 sm:px-8 md:py-16 lg:px-[5vw] xl:px-[6vw]">
+      <div className="mx-auto max-w-[1600px]">
         <SectionKicker index="07" label="Contact" keys={["⌘", "7"]} />
         <FadeUp>
           <h2
             className="font-[700] leading-[0.88] tracking-[-0.045em]"
             style={{
-              fontSize: "clamp(56px, 10.5vw, 180px)",
+              fontSize: "clamp(40px, 5vw, 88px)",
               color: "transparent",
               backgroundImage:
                 "linear-gradient(135deg, #ffffff 0%, #a78bfa 55%, #34d399 100%)",
@@ -965,16 +1119,15 @@ export default function V2Page() {
         fontFamily: "var(--font-poppins), ui-sans-serif, system-ui, sans-serif",
       }}
     >
-      {/* Fraunces (serif italic accent) — loaded via Google Fonts CSS import */}
+      {/* Global tweaks — single Poppins face everywhere */}
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,300..500&display=swap');
         ::selection { background: rgba(52,211,153,0.4); color: #fff; }
         html { scroll-behavior: smooth; background: ${TOKENS.canvas}; }
         body { background: ${TOKENS.canvas}; }
-        :root { --font-fraunces: 'Fraunces'; }
       `}</style>
 
       <AuroraBackground scrollY={scrollY} />
+      <FloatingBubbles />
       <NoiseOverlay opacity={0.03} />
 
       {/* Faint 12-col grid overlay — editorial touch, fades at top/bottom */}
@@ -997,15 +1150,21 @@ export default function V2Page() {
 
       <div className="relative z-10">
         <Hero />
+        <SectionDivider from="01 · INTRO" to="02 · SIGNATURE WORK" tag="TRANSITION" accent={TOKENS.emerald} />
         <SignatureMoments />
+        <SectionDivider from="02 · SIGNATURE WORK" to="03 · CAPABILITIES" tag="TRANSITION" accent={TOKENS.violet} />
         <Capabilities />
+        <SectionDivider from="03 · CAPABILITIES" to="04 · FRAMEWORKS" tag="TRANSITION" accent={TOKENS.cyan} />
         <Frameworks />
+        <SectionDivider from="04 · FRAMEWORKS" to="05 · TIMELINE" tag="TRANSITION" accent={TOKENS.amber} />
         <Timeline />
+        <SectionDivider from="05 · TIMELINE" to="06 · CREDENTIALS" tag="TRANSITION" accent={TOKENS.emerald} />
         <Credentials />
+        <SectionDivider from="06 · CREDENTIALS" to="07 · CONTACT" tag="TRANSITION" accent={TOKENS.violet} />
         <Contact />
 
-        <footer className="relative border-t border-white/[0.06] px-5 py-10 md:px-10">
-          <div className="mx-auto flex max-w-[1340px] flex-wrap items-center justify-between gap-4">
+        <footer className="relative border-t border-white/[0.06] px-5 py-10 sm:px-8 lg:px-[5vw] xl:px-[6vw]">
+          <div className="mx-auto flex max-w-[1600px] flex-wrap items-center justify-between gap-4">
             <Mono style={{ color: TOKENS.inkFaint }}>
               © 2026 Anthony Penwright · v2 / Ultra-modern edition
             </Mono>

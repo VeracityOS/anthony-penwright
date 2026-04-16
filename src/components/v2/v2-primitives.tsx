@@ -13,6 +13,7 @@ import {
 import {
   useCallback,
   useEffect,
+  useId,
   useRef,
   useState,
   type CSSProperties,
@@ -55,11 +56,8 @@ export function Mono({
 }) {
   return (
     <span
-      className={`uppercase tracking-[0.22em] text-[10.5px] ${className}`}
-      style={{
-        fontFamily: "ui-monospace, 'SF Mono', Menlo, monospace",
-        ...style,
-      }}
+      className={`uppercase tracking-[0.24em] text-[10.5px] font-medium ${className}`}
+      style={style}
     >
       {children}
     </span>
@@ -70,8 +68,7 @@ export function Mono({
 export function Kbd({ children }: { children: ReactNode }) {
   return (
     <span
-      className="inline-flex h-5 min-w-[20px] items-center justify-center rounded-[5px] border border-white/15 bg-white/[0.05] px-1.5 text-[10px] font-medium text-white/75 shadow-[inset_0_-1px_0_rgba(255,255,255,0.06),inset_0_1px_0_rgba(255,255,255,0.1)]"
-      style={{ fontFamily: "ui-monospace, 'SF Mono', Menlo, monospace" }}
+      className="inline-flex h-5 min-w-[20px] items-center justify-center rounded-[5px] border border-white/15 bg-white/[0.05] px-1.5 text-[10px] font-medium tracking-[0.04em] text-white/75 shadow-[inset_0_-1px_0_rgba(255,255,255,0.06),inset_0_1px_0_rgba(255,255,255,0.1)]"
     >
       {children}
     </span>
@@ -465,7 +462,7 @@ export function DisplayHeading({
   children,
   className = "",
   gradient = false,
-  size = "clamp(44px, 7.5vw, 128px)",
+  size = "clamp(32px, 4vw, 64px)",
   style,
 }: {
   children: ReactNode;
@@ -611,6 +608,448 @@ export function MagneticButton({
     >
       {inner}
     </button>
+  );
+}
+
+// ---------------- Orbit border — discreet perimeter light ----------------
+// Two tiny light dots trace the card's perimeter on an `offset-path`. Slow,
+// continuous, non-intrusive. Replacement for the louder conic-gradient border.
+// Uses CSS-only animation (GPU offset-path) so it's cheap on every card.
+export function OrbitBorder({
+  children,
+  accent = TOKENS.emerald,
+  radius = 20,
+  duration = 16,
+  className = "",
+}: {
+  children: ReactNode;
+  accent?: string;
+  radius?: number;
+  duration?: number;
+  className?: string;
+}) {
+  // Stable SSR-safe ID — useId() is deterministic across server/client renders
+  // (Math.random() caused a hydration mismatch).
+  const rawId = useId();
+  const id = `orbit${rawId.replace(/[^a-z0-9]/gi, "")}`;
+
+  return (
+    <div
+      className={`relative ${className}`}
+      style={{ borderRadius: radius }}
+    >
+      {/* Content sits on top */}
+      <div className="relative z-10" style={{ borderRadius: radius }}>
+        {children}
+      </div>
+
+      {/* Thin hairline frame at rest */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          borderRadius: radius,
+          border: `1px solid ${accent}1f`,
+        }}
+      />
+
+      {/* Two traveling light dots at 180° phase offset — perimeter orbit */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 overflow-visible"
+        style={{ borderRadius: radius }}
+      >
+        <style>{`
+          @keyframes ${id}-a { to { offset-distance: 100%; } }
+          @keyframes ${id}-b { from { offset-distance: 50%; } to { offset-distance: 150%; } }
+          .${id}-dot {
+            position: absolute;
+            inset: 0;
+            width: 6px;
+            height: 6px;
+            border-radius: 9999px;
+            background: radial-gradient(circle at 35% 35%, #ffffff 0%, ${accent} 50%, transparent 75%);
+            box-shadow: 0 0 10px ${accent}, 0 0 24px ${accent}88, 0 0 40px ${accent}44;
+            offset-path: inset(0 round ${radius}px);
+            offset-rotate: 0deg;
+            offset-anchor: center;
+          }
+          .${id}-a { animation: ${id}-a ${duration}s linear infinite; }
+          .${id}-b { animation: ${id}-b ${duration * 1.15}s linear infinite; opacity: 0.6; }
+          @media (prefers-reduced-motion: reduce) {
+            .${id}-a, .${id}-b { animation: none; display: none; }
+          }
+        `}</style>
+        <span className={`${id}-dot ${id}-a`} />
+        <span className={`${id}-dot ${id}-b`} />
+      </div>
+    </div>
+  );
+}
+
+// ---------------- Tile line-art pattern — subtle contextual watermark ----------------
+// Thin-line SVG motifs themed per card context, rendered in the card's accent
+// colour at low opacity. Sit as a top-right or bottom-right watermark — never
+// compete with copy.
+export function TilePattern({
+  kind,
+  accent,
+  opacity = 0.18,
+}: {
+  kind:
+    | "network"
+    | "hex"
+    | "circuit"
+    | "globe"
+    | "chart"
+    | "constellation"
+    | "shield"
+    | "grid";
+  accent: string;
+  opacity?: number;
+}) {
+  const common = {
+    stroke: accent,
+    fill: "none",
+    strokeWidth: 1,
+    vectorEffect: "non-scaling-stroke" as const,
+  };
+  const dotFill = { fill: accent, stroke: "none" };
+
+  return (
+    <svg
+      aria-hidden
+      viewBox="0 0 200 200"
+      className="pointer-events-none absolute right-0 top-0 h-[220px] w-[220px] md:h-[280px] md:w-[280px]"
+      style={{ opacity, transform: "translate(12%, -12%)" }}
+    >
+      {kind === "network" && (
+        <g {...common}>
+          {/* Connected nodes — Cisco/city network style */}
+          <line x1="40" y1="40" x2="110" y2="70" />
+          <line x1="110" y1="70" x2="170" y2="45" />
+          <line x1="110" y1="70" x2="60" y2="140" />
+          <line x1="110" y1="70" x2="160" y2="130" />
+          <line x1="60" y1="140" x2="130" y2="170" />
+          <line x1="160" y1="130" x2="130" y2="170" />
+          <circle cx="40" cy="40" r="8" />
+          <circle cx="110" cy="70" r="12" />
+          <circle cx="170" cy="45" r="7" />
+          <circle cx="60" cy="140" r="9" />
+          <circle cx="160" cy="130" r="8" />
+          <circle cx="130" cy="170" r="10" />
+          <circle cx="40" cy="40" r="2.5" {...dotFill} />
+          <circle cx="110" cy="70" r="3" {...dotFill} />
+          <circle cx="170" cy="45" r="2" {...dotFill} />
+        </g>
+      )}
+      {kind === "hex" && (
+        <g {...common}>
+          {/* Hex lattice — NEOM / innovation */}
+          {[0, 1, 2].map((row) =>
+            [0, 1, 2, 3].map((col) => {
+              const cx = 30 + col * 50 + (row % 2) * 25;
+              const cy = 40 + row * 50;
+              const r = 22;
+              const pts = Array.from({ length: 6 })
+                .map((_, k) => {
+                  const a = (Math.PI / 3) * k - Math.PI / 2;
+                  return `${(cx + r * Math.cos(a)).toFixed(1)},${(cy + r * Math.sin(a)).toFixed(1)}`;
+                })
+                .join(" ");
+              return <polygon key={`${row}-${col}`} points={pts} />;
+            })
+          )}
+        </g>
+      )}
+      {kind === "circuit" && (
+        <g {...common}>
+          {/* PCB traces — Tech & Digital */}
+          <path d="M20 60 H 80 L 100 80 H 160 L 180 60" />
+          <path d="M20 110 H 60 L 80 130 H 140" />
+          <path d="M30 150 H 70 L 90 170 H 170" />
+          <path d="M120 30 V 60" />
+          <path d="M50 80 V 110" />
+          <path d="M160 90 V 140" />
+          <circle cx="20" cy="60" r="3" {...dotFill} />
+          <circle cx="100" cy="80" r="3" {...dotFill} />
+          <circle cx="180" cy="60" r="3" {...dotFill} />
+          <circle cx="140" cy="130" r="3" {...dotFill} />
+          <circle cx="90" cy="170" r="3" {...dotFill} />
+          <rect x="105" y="75" width="20" height="10" />
+          <rect x="55" y="125" width="16" height="8" />
+        </g>
+      )}
+      {kind === "globe" && (
+        <g {...common}>
+          {/* Globe meridians — FCO / diplomatic */}
+          <circle cx="100" cy="100" r="75" />
+          <ellipse cx="100" cy="100" rx="75" ry="30" />
+          <ellipse cx="100" cy="100" rx="75" ry="55" />
+          <ellipse cx="100" cy="100" rx="30" ry="75" />
+          <ellipse cx="100" cy="100" rx="55" ry="75" />
+          <line x1="25" y1="100" x2="175" y2="100" />
+          <line x1="100" y1="25" x2="100" y2="175" />
+        </g>
+      )}
+      {kind === "chart" && (
+        <g {...common}>
+          {/* Ascending chart — Quantela / growth */}
+          <line x1="25" y1="170" x2="180" y2="170" />
+          <line x1="25" y1="30" x2="25" y2="170" />
+          <polyline points="30,150 55,130 80,135 105,95 130,85 160,45" />
+          <circle cx="30" cy="150" r="3" {...dotFill} />
+          <circle cx="55" cy="130" r="3" {...dotFill} />
+          <circle cx="80" cy="135" r="3" {...dotFill} />
+          <circle cx="105" cy="95" r="3" {...dotFill} />
+          <circle cx="130" cy="85" r="3" {...dotFill} />
+          <circle cx="160" cy="45" r="4" {...dotFill} />
+          {/* dashed trendline */}
+          <line x1="30" y1="155" x2="175" y2="40" strokeDasharray="4 4" opacity={0.6} />
+        </g>
+      )}
+      {kind === "constellation" && (
+        <g {...common}>
+          {/* Scattered nodes with links — Verax ventures */}
+          <line x1="40" y1="50" x2="90" y2="90" />
+          <line x1="90" y1="90" x2="150" y2="60" />
+          <line x1="90" y1="90" x2="60" y2="150" />
+          <line x1="90" y1="90" x2="160" y2="140" />
+          <line x1="150" y1="60" x2="160" y2="140" />
+          <line x1="60" y1="150" x2="120" y2="170" />
+          <line x1="160" y1="140" x2="120" y2="170" />
+          {[[40, 50, 3], [90, 90, 5], [150, 60, 3], [60, 150, 3], [160, 140, 4], [120, 170, 3], [180, 30, 2]].map(
+            ([x, y, r], i) => (
+              <g key={i}>
+                <circle cx={x} cy={y} r={r + 4} opacity={0.4} />
+                <circle cx={x} cy={y} r={r} {...dotFill} />
+              </g>
+            )
+          )}
+        </g>
+      )}
+      {kind === "shield" && (
+        <g {...common}>
+          {/* Crosshair grid — MoD / defence */}
+          <circle cx="100" cy="100" r="80" />
+          <circle cx="100" cy="100" r="60" />
+          <circle cx="100" cy="100" r="40" />
+          <circle cx="100" cy="100" r="20" />
+          <line x1="100" y1="10" x2="100" y2="190" />
+          <line x1="10" y1="100" x2="190" y2="100" />
+          <line x1="36" y1="36" x2="164" y2="164" strokeDasharray="3 5" opacity={0.6} />
+          <line x1="164" y1="36" x2="36" y2="164" strokeDasharray="3 5" opacity={0.6} />
+          <circle cx="100" cy="100" r="3" {...dotFill} />
+        </g>
+      )}
+      {kind === "grid" && (
+        <g {...common}>
+          {/* Plot grid with tick marks — generic data */}
+          {Array.from({ length: 9 }).map((_, i) => (
+            <line key={`v${i}`} x1={20 + i * 20} y1="20" x2={20 + i * 20} y2="180" opacity={i % 2 === 0 ? 0.7 : 0.3} />
+          ))}
+          {Array.from({ length: 9 }).map((_, i) => (
+            <line key={`h${i}`} x1="20" y1={20 + i * 20} x2="180" y2={20 + i * 20} opacity={i % 2 === 0 ? 0.7 : 0.3} />
+          ))}
+        </g>
+      )}
+    </svg>
+  );
+}
+
+// ---------------- Floating bubbles — page-wide ambient motion layer ----------------
+// Fixed-position translucent orbs drifting across the whole viewport. Positioned
+// behind content (z-index handled by parent) but above the aurora. Respects
+// prefers-reduced-motion.
+export function FloatingBubbles() {
+  const reduce = useReducedMotion();
+  // 12 bubbles across emerald/violet/cyan palette, varied sizes and drift speeds.
+  const bubbles = [
+    { size: 420, top: "8%", left: "6%", color: TOKENS.emerald, dur: 28, delay: 0, dx: 80, dy: 60 },
+    { size: 320, top: "22%", left: "78%", color: TOKENS.violet, dur: 32, delay: 2, dx: -90, dy: 70 },
+    { size: 260, top: "42%", left: "22%", color: TOKENS.cyan, dur: 26, delay: 4, dx: 100, dy: -50 },
+    { size: 380, top: "56%", left: "68%", color: TOKENS.emerald, dur: 34, delay: 1, dx: -70, dy: -80 },
+    { size: 220, top: "72%", left: "12%", color: TOKENS.violet, dur: 30, delay: 3, dx: 110, dy: 40 },
+    { size: 340, top: "84%", left: "74%", color: TOKENS.cyan, dur: 36, delay: 5, dx: -80, dy: -60 },
+    { size: 180, top: "14%", left: "48%", color: TOKENS.amber, dur: 24, delay: 2.5, dx: 60, dy: 90 },
+    { size: 280, top: "36%", left: "88%", color: TOKENS.emerald, dur: 30, delay: 0.5, dx: -120, dy: 50 },
+    { size: 200, top: "62%", left: "42%", color: TOKENS.cyan, dur: 28, delay: 6, dx: 90, dy: -70 },
+    { size: 300, top: "90%", left: "32%", color: TOKENS.violet, dur: 32, delay: 4.5, dx: -60, dy: -90 },
+    { size: 160, top: "4%", left: "86%", color: TOKENS.emerald, dur: 22, delay: 1.5, dx: -100, dy: 80 },
+    { size: 240, top: "48%", left: "54%", color: TOKENS.violet, dur: 34, delay: 3.5, dx: 70, dy: -40 },
+  ];
+
+  return (
+    <div
+      aria-hidden
+      className="pointer-events-none fixed inset-0 overflow-hidden"
+      style={{ mixBlendMode: "screen" }}
+    >
+      {bubbles.map((b, i) => (
+        <motion.span
+          key={i}
+          className="absolute rounded-full"
+          style={{
+            width: b.size,
+            height: b.size,
+            top: b.top,
+            left: b.left,
+            background: `radial-gradient(circle at 40% 40%, ${b.color}44 0%, ${b.color}18 40%, transparent 70%)`,
+            filter: "blur(40px)",
+          }}
+          animate={
+            reduce
+              ? {}
+              : {
+                  x: [0, b.dx, 0],
+                  y: [0, b.dy, 0],
+                  scale: [1, 1.12, 1],
+                  opacity: [0.55, 0.85, 0.55],
+                }
+          }
+          transition={{
+            duration: b.dur,
+            delay: b.delay,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+// ---------------- Section divider — full-bleed technical data-stream ----------------
+// Full-width animated strip: scanning vertical bar, multiple traveling packets,
+// flickering code-rain column labels, pulsing baseline. Visually loud, tight vertical
+// footprint so it reads as a TRANSITION between sections rather than empty space.
+export function SectionDivider({
+  from,
+  to,
+  tag = "TRANSITION",
+  accent = TOKENS.emerald,
+}: {
+  from?: string;
+  to?: string;
+  tag?: string;
+  accent?: string;
+}) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const inView = useInView(ref, { once: true, margin: "-10% 0px" });
+  const reduce = useReducedMotion();
+
+  return (
+    <div
+      ref={ref}
+      aria-hidden
+      className="relative w-full"
+      style={{
+        height: "110px",
+        // Soft edge-masked strip — no hard borders, fades into surrounding space
+        maskImage:
+          "radial-gradient(ellipse 70% 80% at 50% 50%, black 30%, transparent 100%)",
+        WebkitMaskImage:
+          "radial-gradient(ellipse 70% 80% at 50% 50%, black 30%, transparent 100%)",
+      }}
+    >
+      {/* Floating orbs — slow, flowing bubble drift with organic sine-wave y
+          motion. Uses easeInOut so speed varies naturally across the traverse
+          instead of the constant-speed linear look. */}
+      {!reduce && inView &&
+        Array.from({ length: 28 }).map((_, i) => {
+          const size = 5 + ((i * 7) % 18); // 5–22 px
+          const baseY = 12 + ((i * 13) % 70); // 12–82 % vertical
+          const dur = 14 + ((i * 3) % 8) * 1.1; // 14–22s — much slower
+          const delay = (i * 0.6) % 14;
+          const amp = 18 + ((i * 5) % 22); // vertical wave amplitude
+          const peak = 0.5 + ((i % 5) * 0.08);
+          // Sine-wave y keyframes — a few oscillations across the traverse so
+          // orbs bob gently up/down as they drift across.
+          const y = [0, -amp * 0.7, amp * 0.5, -amp, amp * 0.6, 0];
+          return (
+            <motion.span
+              key={`orb-${i}`}
+              initial={{ left: "-8%", y: 0, opacity: 0, scale: 0.7 }}
+              animate={{
+                left: "108%",
+                y,
+                opacity: [0, peak * 0.6, peak, peak, peak * 0.7, 0],
+                scale: [0.7, 1, 1.08, 1.04, 0.95, 0.7],
+              }}
+              transition={{
+                duration: dur,
+                ease: [0.42, 0, 0.58, 1], // easeInOut cubic — speeds up mid, slows at edges
+                delay,
+                repeat: Infinity,
+                times: [0, 0.2, 0.4, 0.6, 0.8, 1],
+              }}
+              className="pointer-events-none absolute rounded-full"
+              style={{
+                top: `${baseY}%`,
+                width: size,
+                height: size,
+                background: `radial-gradient(circle at 35% 35%, #ffffff 0%, ${accent} 45%, ${accent}00 75%)`,
+                boxShadow: `0 0 ${size}px ${accent}, 0 0 ${size * 2}px ${accent}66, 0 0 ${size * 3}px ${accent}33`,
+                filter: "blur(0.4px)",
+              }}
+            />
+          );
+        })}
+
+      {/* Centered coordinate pill — bolder, more visible callout */}
+      <div className="pointer-events-none absolute inset-0 flex items-center justify-center px-4">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.92, y: 4 }}
+          animate={inView ? { opacity: 1, scale: 1, y: 0 } : {}}
+          transition={{ duration: 0.55, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          className="relative inline-flex items-center gap-3 rounded-full border px-5 py-2.5 backdrop-blur-xl"
+          style={{
+            borderColor: `${accent}80`,
+            background: `linear-gradient(180deg, ${accent}22 0%, ${accent}10 100%), rgba(10,10,10,0.75)`,
+            boxShadow: `0 0 0 1px ${accent}25, 0 0 32px ${accent}55, 0 0 64px ${accent}22, inset 0 1px 0 ${accent}44`,
+          }}
+        >
+          {/* Leading pulse dot */}
+          <span className="relative inline-flex h-2 w-2 items-center justify-center">
+            <span
+              className="absolute inset-0 rounded-full"
+              style={{ background: accent, boxShadow: `0 0 12px ${accent}` }}
+            />
+            {!reduce && (
+              <motion.span
+                className="absolute inset-0 rounded-full"
+                style={{ background: accent }}
+                animate={{ scale: [1, 2.6, 1], opacity: [0.7, 0, 0.7] }}
+                transition={{ duration: 1.8, repeat: Infinity, ease: "easeOut" }}
+              />
+            )}
+          </span>
+          {/* Text — uppercase, bold, clearly legible */}
+          <span
+            className="font-mono text-[12px] font-semibold uppercase tracking-[0.22em]"
+            style={{
+              color: "#ffffff",
+              textShadow: `0 0 12px ${accent}, 0 0 2px ${accent}`,
+            }}
+          >
+            {from ? <span style={{ color: `${accent}` }}>{from}</span> : null}
+            <span className="mx-2" style={{ color: accent }}>→</span>
+            {to ? <span style={{ color: "#ffffff" }}>{to}</span> : null}
+          </span>
+          {/* Trailing tag chip */}
+          <span
+            className="rounded-full px-2 py-0.5 font-mono text-[9.5px] font-semibold uppercase tracking-[0.22em]"
+            style={{
+              color: accent,
+              background: `${accent}1a`,
+              border: `1px solid ${accent}55`,
+            }}
+          >
+            {tag}
+          </span>
+        </motion.div>
+      </div>
+    </div>
   );
 }
 
