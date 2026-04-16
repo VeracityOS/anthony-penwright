@@ -75,7 +75,7 @@ function parseStat(value: string): {
 const heroStats = [
   { value: "$1.3BN+", label: "Programme value delivered" },
   { value: "7", label: "Active ventures" },
-  { value: "40+", label: "Programmes led" },
+  { value: "40+", label: "Major programmes led" },
   { value: "13", label: "Sectors delivered" },
 ];
 
@@ -174,14 +174,17 @@ function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-            className="mt-7 text-6xl font-semibold leading-[0.98] tracking-[-0.035em] md:text-7xl"
+            className="mt-7 pb-3 text-6xl font-semibold leading-[1.18] tracking-[-0.035em] md:text-7xl"
             style={{
               color: "transparent",
+              WebkitTextFillColor: "transparent",
               backgroundImage:
                 "linear-gradient(180deg, #ffffff 0%, #e9e6f3 55%, #b7b3cc 100%)",
               WebkitBackgroundClip: "text",
               backgroundClip: "text",
               textShadow: "0 0 60px rgba(167,139,250,0.14)",
+              paddingBottom: "0.15em",
+              overflow: "visible",
             }}
           >
             Anthony Penwright.
@@ -299,6 +302,84 @@ function Hero() {
   );
 }
 
+// ---------------- EXECUTIVE SUMMARY ----------------
+function ExecutiveSummary() {
+  const highlights = [
+    { value: "$1.3BN+", label: "delivered" },
+    { value: "40+", label: "major programmes" },
+    { value: "4", label: "proprietary frameworks" },
+    { value: "7", label: "active ventures" },
+    { value: "13", label: "sectors" },
+    { value: "20+", label: "years" },
+  ];
+  return (
+    <section id="summary" className="relative px-5 py-12 sm:px-8 md:py-16 lg:px-[5vw] xl:px-[6vw]">
+      <div className="mx-auto max-w-[1600px]">
+        <SectionKicker index="02" label="Executive Summary" keys={["⌘", "2"]} />
+        <div className="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <DisplayHeading gradient>The short version.</DisplayHeading>
+          <p className="max-w-md text-[15px] leading-relaxed text-white/65">
+            Twenty years. $1.3BN+ delivered. Four frameworks, seven ventures,
+            one operator — shipping outcomes, not decks.
+          </p>
+        </div>
+
+        <FadeUp>
+          <OrbitBorder accent={TOKENS.emerald} radius={16} duration={26}>
+            <SpotlightCard
+              className="p-7 md:p-10"
+              spotlightColor="rgba(52,211,153,0.16)"
+            >
+              <TilePattern kind="constellation" accent={TOKENS.emerald} opacity={0.12} />
+              <p className="relative max-w-4xl text-[15.5px] leading-[1.7] text-white/85 md:text-[16.5px]">
+                {profile.executiveSummary}
+              </p>
+              <div className="relative mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-6 md:gap-4">
+                {highlights.map((h, i) => {
+                  const accents = [
+                    TOKENS.emerald,
+                    TOKENS.violet,
+                    TOKENS.cyan,
+                    TOKENS.amber,
+                    TOKENS.emerald,
+                    TOKENS.violet,
+                  ];
+                  const accent = accents[i];
+                  return (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, y: 6 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-10% 0px" }}
+                      transition={{ duration: 0.4, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
+                      className="rounded-lg px-3 py-2.5"
+                      style={{
+                        background: `${accent}10`,
+                        border: `1px solid ${accent}44`,
+                        boxShadow: `inset 2px 0 0 0 ${accent}`,
+                      }}
+                    >
+                      <div
+                        className="font-[700] leading-none tracking-[-0.02em]"
+                        style={{ color: accent, fontSize: "clamp(18px, 1.8vw, 22px)" }}
+                      >
+                        {h.value}
+                      </div>
+                      <div className="mt-1.5 text-[10.5px] uppercase tracking-[0.14em] text-white/55">
+                        {h.label}
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </SpotlightCard>
+          </OrbitBorder>
+        </FadeUp>
+      </div>
+    </section>
+  );
+}
+
 // ---------------- SIGNATURE MOMENTS (bento) ----------------
 // signatureMoments order: 0 Verax, 1 NEOM-Innov, 2 NEOM-TD, 3 Quantela,
 // 4 Cisco, 5 FCO, 6 MoD
@@ -409,7 +490,7 @@ function SignatureMoments() {
   return (
     <section id="moments" className="relative px-5 py-12 sm:px-8 md:py-16 lg:px-[5vw] xl:px-[6vw]">
       <div className="mx-auto max-w-[1600px]">
-        <SectionKicker index="02" label="Signature Work" keys={["⌘", "2"]} />
+        <SectionKicker index="03" label="Signature Work" keys={["⌘", "3"]} />
         <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <DisplayHeading gradient>
             $1.3BN+
@@ -525,7 +606,7 @@ function Capabilities() {
   return (
     <section id="capabilities" className="relative px-5 py-12 sm:px-8 md:py-16 lg:px-[5vw] xl:px-[6vw]">
       <div className="mx-auto max-w-[1600px]">
-        <SectionKicker index="03" label="Capabilities" keys={["⌘", "3"]} />
+        <SectionKicker index="04" label="Capabilities" keys={["⌘", "4"]} />
         <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <DisplayHeading gradient>Full-stack operator.</DisplayHeading>
           <p className="max-w-md text-[15px] leading-relaxed text-white/65">
@@ -557,15 +638,22 @@ function Capabilities() {
               TOKENS.cyan,
               TOKENS.pink,
             ];
+            const cardAccent = capabilityAccents[i % capabilityAccents.length];
             return (
               <FadeUp key={i} delay={Math.min(i * 0.04, 0.2)} className={spans[i] ?? "md:col-span-4"}>
+                <OrbitBorder
+                  accent={cardAccent}
+                  radius={16}
+                  duration={18 + i * 2}
+                  className="h-full"
+                >
                 <SpotlightCard
                   className="flex h-full flex-col p-6 md:p-7"
                   spotlightColor={spotlights[i] ?? "rgba(52,211,153,0.18)"}
                 >
                   <TilePattern
                     kind={capabilityPatterns[i % capabilityPatterns.length]}
-                    accent={capabilityAccents[i % capabilityAccents.length]}
+                    accent={cardAccent}
                     opacity={0.13}
                   />
                   <div className="flex items-center justify-between">
@@ -586,18 +674,53 @@ function Capabilities() {
                   <h3 className="mt-5 text-[17px] font-[600] leading-tight tracking-[-0.01em] text-white md:text-[19px]">
                     {g.heading}
                   </h3>
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {g.tags.map((t, j) => (
-                      <span
-                        key={j}
-                        className="inline-flex items-center rounded-full bg-white/[0.035] px-2.5 py-1 text-[11.5px] leading-none text-white/75"
-                        style={{ border: "1px solid rgba(255,255,255,0.08)" }}
-                      >
-                        {t}
-                      </span>
-                    ))}
+                  <div className="mt-5 flex flex-wrap gap-1.5">
+                    {g.tags.map((t, j) => {
+                      const tagAccent =
+                        capabilityAccents[i % capabilityAccents.length];
+                      return (
+                        <motion.span
+                          key={j}
+                          initial={{ opacity: 0, y: 4 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true, margin: "-10% 0px" }}
+                          transition={{
+                            duration: 0.35,
+                            delay: Math.min(j * 0.025, 0.35),
+                            ease: [0.22, 1, 0.36, 1],
+                          }}
+                          whileHover={{ y: -1 }}
+                          className="group relative inline-flex items-center overflow-hidden rounded-[6px] px-2.5 py-[5px] text-[11.5px] font-[500] leading-[1.1]"
+                          style={{
+                            backgroundColor: `${tagAccent}1f`,
+                            border: `1px solid ${tagAccent}66`,
+                            boxShadow: `inset 2px 0 0 0 ${tagAccent}, 0 0 12px ${tagAccent}33`,
+                            color: "#ffffff",
+                          }}
+                        >
+                          {/* Shimmer sweep on entrance */}
+                          <motion.span
+                            aria-hidden
+                            initial={{ x: "-120%" }}
+                            whileInView={{ x: "140%" }}
+                            viewport={{ once: true, margin: "-10% 0px" }}
+                            transition={{
+                              duration: 0.9,
+                              delay: 0.35 + Math.min(j * 0.025, 0.35),
+                              ease: [0.22, 1, 0.36, 1],
+                            }}
+                            className="pointer-events-none absolute inset-y-0 left-0 w-1/2"
+                            style={{
+                              background: `linear-gradient(90deg, transparent 0%, ${tagAccent}44 50%, transparent 100%)`,
+                            }}
+                          />
+                          <span className="relative">{t}</span>
+                        </motion.span>
+                      );
+                    })}
                   </div>
                 </SpotlightCard>
+                </OrbitBorder>
               </FadeUp>
             );
           })}
@@ -619,7 +742,7 @@ function Frameworks() {
   return (
     <section id="frameworks" className="relative px-5 py-12 sm:px-8 md:py-16 lg:px-[5vw] xl:px-[6vw]">
       <div className="mx-auto max-w-[1600px]">
-        <SectionKicker index="04" label="Proprietary Frameworks" keys={["⌘", "4"]} />
+        <SectionKicker index="05" label="Proprietary Frameworks" keys={["⌘", "5"]} />
         <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <DisplayHeading gradient>Four frameworks.</DisplayHeading>
           <p className="max-w-md text-[15px] leading-relaxed text-white/65">
@@ -657,22 +780,6 @@ function Frameworks() {
                   >
                     {f.number}
                   </div>
-                  {f.stat && (
-                    <div
-                      className="rounded-xl border border-white/10 px-3 py-2 text-right backdrop-blur-sm"
-                      style={{ background: "rgba(255,255,255,0.03)" }}
-                    >
-                      <div
-                        className="text-[22px] font-[700] leading-none tracking-[-0.02em]"
-                        style={{ color: a.c }}
-                      >
-                        {f.stat.value}
-                      </div>
-                      <div className="mt-2 max-w-[140px] text-[10px] uppercase tracking-[0.14em] text-white/55">
-                        {f.stat.label}
-                      </div>
-                    </div>
-                  )}
                 </div>
                 <h3 className="mt-7 text-[22px] font-[600] leading-tight tracking-[-0.015em] text-white md:text-[26px]">
                   {f.title}
@@ -727,7 +834,7 @@ function Timeline() {
   return (
     <section id="timeline" className="relative px-5 py-12 sm:px-8 md:py-16 lg:px-[5vw] xl:px-[6vw]">
       <div className="mx-auto max-w-[1600px]">
-        <SectionKicker index="05" label="Career Timeline" keys={["⌘", "5"]} />
+        <SectionKicker index="06" label="Career Timeline" keys={["⌘", "6"]} />
         <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <DisplayHeading gradient>Twenty years.</DisplayHeading>
           <p className="max-w-md text-[15px] leading-relaxed text-white/65">
@@ -952,7 +1059,7 @@ function Credentials() {
   return (
     <section id="credentials" className="relative px-5 py-12 sm:px-8 md:py-16 lg:px-[5vw] xl:px-[6vw]">
       <div className="mx-auto max-w-[1600px]">
-        <SectionKicker index="06" label="Credentials" keys={["⌘", "6"]} />
+        <SectionKicker index="07" label="Credentials" keys={["⌘", "7"]} />
         <div className="mb-12">
           <DisplayHeading gradient>Credentials.</DisplayHeading>
         </div>
@@ -1020,7 +1127,7 @@ function Contact() {
   return (
     <section id="contact" className="relative px-5 py-12 sm:px-8 md:py-16 lg:px-[5vw] xl:px-[6vw]">
       <div className="mx-auto max-w-[1600px]">
-        <SectionKicker index="07" label="Contact" keys={["⌘", "7"]} />
+        <SectionKicker index="08" label="Contact" keys={["⌘", "8"]} />
         <FadeUp>
           <h2
             className="font-[700] leading-[0.88] tracking-[-0.045em]"
@@ -1150,17 +1257,19 @@ export default function V2Page() {
 
       <div className="relative z-10">
         <Hero />
-        <SectionDivider from="01 · INTRO" to="02 · SIGNATURE WORK" tag="TRANSITION" accent={TOKENS.emerald} />
+        <SectionDivider from="01 · INTRO" to="02 · SUMMARY" tag="TRANSITION" accent={TOKENS.emerald} />
+        <ExecutiveSummary />
+        <SectionDivider from="02 · SUMMARY" to="03 · SIGNATURE WORK" tag="TRANSITION" accent={TOKENS.violet} />
         <SignatureMoments />
-        <SectionDivider from="02 · SIGNATURE WORK" to="03 · CAPABILITIES" tag="TRANSITION" accent={TOKENS.violet} />
+        <SectionDivider from="03 · SIGNATURE WORK" to="04 · CAPABILITIES" tag="TRANSITION" accent={TOKENS.cyan} />
         <Capabilities />
-        <SectionDivider from="03 · CAPABILITIES" to="04 · FRAMEWORKS" tag="TRANSITION" accent={TOKENS.cyan} />
+        <SectionDivider from="04 · CAPABILITIES" to="05 · FRAMEWORKS" tag="TRANSITION" accent={TOKENS.amber} />
         <Frameworks />
-        <SectionDivider from="04 · FRAMEWORKS" to="05 · TIMELINE" tag="TRANSITION" accent={TOKENS.amber} />
+        <SectionDivider from="05 · FRAMEWORKS" to="06 · TIMELINE" tag="TRANSITION" accent={TOKENS.emerald} />
         <Timeline />
-        <SectionDivider from="05 · TIMELINE" to="06 · CREDENTIALS" tag="TRANSITION" accent={TOKENS.emerald} />
+        <SectionDivider from="06 · TIMELINE" to="07 · CREDENTIALS" tag="TRANSITION" accent={TOKENS.violet} />
         <Credentials />
-        <SectionDivider from="06 · CREDENTIALS" to="07 · CONTACT" tag="TRANSITION" accent={TOKENS.violet} />
+        <SectionDivider from="07 · CREDENTIALS" to="08 · CONTACT" tag="TRANSITION" accent={TOKENS.cyan} />
         <Contact />
 
         <footer className="relative border-t border-white/[0.06] px-5 py-10 sm:px-8 lg:px-[5vw] xl:px-[6vw]">

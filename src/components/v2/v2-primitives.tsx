@@ -638,22 +638,16 @@ export function OrbitBorder({
       className={`relative ${className}`}
       style={{ borderRadius: radius }}
     >
-      {/* Content sits on top */}
-      <div className="relative z-10" style={{ borderRadius: radius }}>
+      {/* Content sits on top. h-full so it fills the outer wrapper (which may
+          be stretched by a grid row) — otherwise the orbit rect is taller than
+          the visible card and the light floats below/beside it. */}
+      <div className="relative z-10 h-full" style={{ borderRadius: radius }}>
         {children}
       </div>
 
-      {/* Thin hairline frame at rest */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0"
-        style={{
-          borderRadius: radius,
-          border: `1px solid ${accent}1f`,
-        }}
-      />
-
-      {/* Two traveling light dots at 180° phase offset — perimeter orbit */}
+      {/* Two traveling light segments at 180° phase offset — perimeter orbit.
+          No static hairline frame — inner SpotlightCard already draws its own
+          border, so we'd otherwise get a double-ring effect. */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 overflow-visible"
@@ -662,26 +656,27 @@ export function OrbitBorder({
         <style>{`
           @keyframes ${id}-a { to { offset-distance: 100%; } }
           @keyframes ${id}-b { from { offset-distance: 50%; } to { offset-distance: 150%; } }
-          .${id}-dot {
+          .${id}-seg {
             position: absolute;
             inset: 0;
-            width: 6px;
-            height: 6px;
+            width: 28px;
+            height: 2px;
             border-radius: 9999px;
-            background: radial-gradient(circle at 35% 35%, #ffffff 0%, ${accent} 50%, transparent 75%);
-            box-shadow: 0 0 10px ${accent}, 0 0 24px ${accent}88, 0 0 40px ${accent}44;
+            background: linear-gradient(90deg, transparent 0%, ${accent} 30%, #ffffff 50%, ${accent} 70%, transparent 100%);
+            box-shadow: 0 0 8px ${accent}, 0 0 18px ${accent}aa, 0 0 32px ${accent}55;
             offset-path: inset(0 round ${radius}px);
-            offset-rotate: 0deg;
+            offset-rotate: auto;
             offset-anchor: center;
+            filter: blur(0.3px);
           }
           .${id}-a { animation: ${id}-a ${duration}s linear infinite; }
-          .${id}-b { animation: ${id}-b ${duration * 1.15}s linear infinite; opacity: 0.6; }
+          .${id}-b { animation: ${id}-b ${duration * 1.15}s linear infinite; opacity: 0.55; }
           @media (prefers-reduced-motion: reduce) {
             .${id}-a, .${id}-b { animation: none; display: none; }
           }
         `}</style>
-        <span className={`${id}-dot ${id}-a`} />
-        <span className={`${id}-dot ${id}-b`} />
+        <span className={`${id}-seg ${id}-a`} />
+        <span className={`${id}-seg ${id}-b`} />
       </div>
     </div>
   );

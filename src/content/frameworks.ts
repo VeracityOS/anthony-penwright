@@ -23,7 +23,7 @@ export const frameworks: Framework[] = [
       "21-measure Impact-vs-Feasibility scoring",
     ],
     deployment:
-      "DMCC Uptown Dubai — 40+ services scored. Applied at NEOM & Red Sea Global.",
+      "150+ smart services mapped and 40+ smart-city initiatives delivered end-to-end — DMCC Uptown Dubai, NEOM, Red Sea Global.",
     stat: { value: "40+", label: "services scored at DMCC" },
     image: "/images/fw-smart-services.jpg",
     imageAlt: "Smart Services Advisory framework topper",
@@ -40,7 +40,7 @@ export const frameworks: Framework[] = [
       "85% implementation · 14-mo payback",
     ],
     deployment:
-      "Strive Services Group KSA — smart-FM demand pipeline mirrors NEOM's board.",
+      "8 Living Labs delivered, 85+ pilots landed — Strive Services Group KSA demand pipeline mirrors NEOM's board.",
     stat: { value: "3–4%", label: "pipeline-to-procurement conversion" },
     image: "/images/fw-innovation-ecosystem.jpg",
     imageAlt: "Innovation Ecosystem Advisory framework topper",

@@ -141,7 +141,7 @@ def build():
 
     p = doc.add_paragraph()
     p.paragraph_format.space_after = Pt(4)
-    add_run(p, "Managing Director  ·  Smart Cities  ·  Digital Infrastructure  ·  Innovation Ecosystems",
+    add_run(p, "C-Suite Advisor  ·  Smart Cities  ·  Digital Infrastructure  ·  Innovation Ecosystems",
             size=11.5, color=SIENNA, italic=True, font="Georgia")
 
     p = doc.add_paragraph()
@@ -152,14 +152,20 @@ def build():
             size=9.5, color=MUTED)
     h_rule(doc)
 
-    section_label(doc, "Professional Profile")
+    section_label(doc, "Executive Summary")
     body(doc,
-         "Managing Director-level leader with 20+ years across smart city operations, digital infrastructure and "
-         "innovation ecosystem programmes — author of the Verax Smart Services Advisory, Innovation Ecosystem, "
-         "Operations Advisory and Value Realisation Office methodologies, with live deployments across UAE, KSA "
-         "and LATAM. Accountable for £1BN+ programme portfolios at NEOM, Cisco, Wipro and UK Government, "
-         "having led 40+ smart city and digital infrastructure projects from strategic vision through procurement, "
-         "delivery and operational handover.",
+         "C-Suite advisor codifying 20+ years of global smart-city and digital-infrastructure delivery into "
+         "frameworks that work. $1.3BN+ of programme value delivered across 40+ major initiatives and 13 sectors "
+         "— MoD DII(F) (150,000 workstations · 242 sites · 150+ countries), NEOM ($290M digital master plan · "
+         "$120M innovation portfolio), FCO (99.8% SLA across the diplomatic estate), Cisco's global Smart City "
+         "practice (built from zero to $315M), and Quantela ($18M → $90M in eighteen months).",
+         space_after=5)
+    body(doc,
+         "Author of four proprietary methodologies — Smart Services Advisory, Innovation Ecosystem Advisory, "
+         "Operations Advisory and the Value Realisation Office — live across DMCC Uptown Dubai, NEOM Sindalah, "
+         "Red Sea Global and Strive Services Group KSA. Founder & Principal of Verax Venture Studio: AI-native, "
+         "7 active portfolio ventures, 44+ agent skills with master-agent orchestration across CRM, KYC, brand "
+         "and operations.",
          space_after=5)
     body(doc,
          "Proven architect of high-performance cross-functional teams (450+ resources), C-suite adviser on "
@@ -177,11 +183,11 @@ def build():
     # Stats strip
     section_label(doc, "Portfolio at a Glance")
     stats = [
-        ("£1BN+", "Programme value delivered"),
-        ("40+", "Smart city projects led"),
-        ("20+", "Years executive leadership"),
-        ("450+", "Team resources directed"),
-        ("9", "Director-level roles held"),
+        ("$1.3BN+", "Programme value delivered"),
+        ("40+", "Major programmes led"),
+        ("13", "Sectors delivered"),
+        ("7", "Active ventures (Verax)"),
+        ("4", "Proprietary frameworks"),
     ]
     tbl = doc.add_table(rows=2, cols=5)
     tbl.autofit = True
@@ -266,15 +272,15 @@ def build():
          "with 4× Feasibility multiplier → Impact-vs-Feasibility quadrant · 8 delivered outputs per engagement "
          "(Service Catalogue, Architecture Blueprint, Living Lab Plan, Test Framework, TOM, Business Model, "
          "RFP Pack, Governance + KPIs).",
-         "Deployed: DMCC Uptown Dubai (40+ candidate services scored, full procurement-ready portfolio), "
-         "NEOM Sindalah, Red Sea Global."),
+         "Deployed: 150+ smart services mapped and 40+ smart-city initiatives delivered end-to-end — "
+         "DMCC Uptown Dubai, NEOM Sindalah, Red Sea Global."),
         ("2. Innovation Ecosystem Advisory", "the WHAT — the pipeline",
          "8-Pillar Ecosystem Model (Vision & Strategic Alignment, R&A, Investment & Funding, Demand Side, "
          "Supply Side, Government Programmes, Talent & Skills, Enablers) · 7-stage Innovation Funnel with "
          "3–4% conversion · dual scoring (Demand 5×26 measures, Supply 5 categories) with Fit ≥80% fast-track · "
          "benchmarks: ~85% implementation success, 100%+ ROI over 3 years, ~14-month payback.",
-         "Deployed: Strive Services Group (KSA) — smart-FM demand pipeline, vendor registry and governance "
-         "committee established."),
+         "Deployed: 8 Living Labs delivered, 85+ pilots landed — Strive Services Group (KSA) smart-FM demand "
+         "pipeline, vendor registry and governance committee established."),
         ("3. Smart City Operations Advisory", "the RUN — steady-state excellence",
          "TOM design, service transition, NOC/SOC architecture and 24/7 operations model (greenfield or "
          "brownfield) · 60+ SOP library (incident, change, escalation, service restoration) mapped to ITIL v3 · "
