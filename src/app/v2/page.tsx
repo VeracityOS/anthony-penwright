@@ -122,6 +122,12 @@ function TopBar() {
           Frameworks
         </a>
         <a
+          href="#veracity-os"
+          className="hidden rounded-full px-3 py-1.5 text-[12px] text-white/70 transition hover:bg-white/[0.06] hover:text-white md:inline-flex"
+        >
+          Veracity OS
+        </a>
+        <a
           href="#timeline"
           className="hidden rounded-full px-3 py-1.5 text-[12px] text-white/70 transition hover:bg-white/[0.06] hover:text-white md:inline-flex"
         >
@@ -844,12 +850,94 @@ function Frameworks() {
   );
 }
 
+// ---------------- VERACITY OS ----------------
+function VeracityOS() {
+  const accent = TOKENS.emerald;
+  const spotlight = "rgba(52,211,153,0.22)";
+
+  const pillars = [
+    {
+      tag: "AKB",
+      title: "Attested Knowledge Block",
+      body: "Every claim signed by IdP-verified identity, anchored to a per-tenant Hyperledger Fabric ledger, with optional Polygon PoS public overlay. FIPS 140-2 HSM key custody at Enterprise.",
+    },
+    {
+      tag: "Identity",
+      title: "BYO IdP — never custodial",
+      body: "Entra · Okta · Ping · WebAuthn. Veracity verifies against your directory; it never owns it. Auditor-ready chain-of-custody for every record, every edit, every signer.",
+    },
+    {
+      tag: "Verticals",
+      title: "Built for regulated knowledge",
+      body: "Healthcare · Pharma · Construction · Family Offices — the domains where mutable wikis fail compliance. Marketplace, Enterprise, and Enterprise Connect tiers.",
+    },
+  ];
+
+  return (
+    <section id="veracity-os" className="relative px-5 py-12 sm:px-8 md:py-16 lg:px-[5vw] xl:px-[6vw]">
+      <div className="mx-auto max-w-[1600px]">
+        <SectionKicker index="06" label="The New Architecture" keys={["⌘", "6"]} />
+        <div className="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div>
+            <DisplayHeading gradient>Veracity OS.</DisplayHeading>
+            <p className="mt-3 text-[14px] uppercase tracking-[0.18em] text-white/55">
+              Provenance for the AI era · Founder &amp; CEO
+            </p>
+          </div>
+          <p className="max-w-md text-[15px] leading-relaxed text-white/65">
+            The productisation of two decades of delivery methodology — a knowledge platform where every fact is <span className="text-white">signed by identity</span>, <span className="text-white">anchored to chain</span>, and verifiable end-to-end. Built inside Verax Venture Studio.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+          {pillars.map((p, i) => (
+            <FadeUp key={p.tag} delay={i * 0.06}>
+              <OrbitBorder accent={accent} radius={20} duration={16 + i * 2}>
+                <SpotlightCard className="h-full" spotlightColor={spotlight}>
+                  <div className="relative flex h-full flex-col overflow-hidden p-7 md:p-8">
+                    <TilePattern kind="network" accent={accent} opacity={0.14} />
+                    <Mono style={{ color: accent }}>{p.tag}</Mono>
+                    <h3 className="mt-4 text-[20px] font-[600] leading-tight tracking-[-0.015em] text-white md:text-[22px]">
+                      {p.title}
+                    </h3>
+                    <p className="mt-4 text-[13.5px] leading-[1.6] text-white/75">
+                      {p.body}
+                    </p>
+                  </div>
+                </SpotlightCard>
+              </OrbitBorder>
+            </FadeUp>
+          ))}
+        </div>
+
+        <FadeUp delay={0.25}>
+          <div
+            className="mt-6 grid grid-cols-2 gap-3 rounded-2xl border border-white/[0.08] bg-white/[0.02] px-5 py-4 backdrop-blur md:grid-cols-4 md:gap-6 md:px-7 md:py-5"
+          >
+            {[
+              { k: "Y5 ARR target", v: "$14.9M" },
+              { k: "Y5 customers", v: "2,651" },
+              { k: "Verticals", v: "Healthcare · Pharma · Construction · Family Offices" },
+              { k: "Stage", v: "Seed (live)" },
+            ].map((s) => (
+              <div key={s.k} className="flex flex-col gap-1">
+                <span className="text-[10px] uppercase tracking-[0.18em] text-white/45">{s.k}</span>
+                <span className="text-[14px] font-[600] leading-tight text-white md:text-[15px]">{s.v}</span>
+              </div>
+            ))}
+          </div>
+        </FadeUp>
+      </div>
+    </section>
+  );
+}
+
 // ---------------- TIMELINE ----------------
 function Timeline() {
   return (
     <section id="timeline" className="relative px-5 py-12 sm:px-8 md:py-16 lg:px-[5vw] xl:px-[6vw]">
       <div className="mx-auto max-w-[1600px]">
-        <SectionKicker index="06" label="Career Timeline" keys={["⌘", "6"]} />
+        <SectionKicker index="07" label="Career Timeline" keys={["⌘", "7"]} />
         <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <DisplayHeading gradient>Twenty years.</DisplayHeading>
           <p className="max-w-md text-[15px] leading-relaxed text-white/65">
@@ -1081,7 +1169,7 @@ function Credentials() {
   return (
     <section id="credentials" className="relative px-5 py-12 sm:px-8 md:py-16 lg:px-[5vw] xl:px-[6vw]">
       <div className="mx-auto max-w-[1600px]">
-        <SectionKicker index="07" label="Credentials" keys={["⌘", "7"]} />
+        <SectionKicker index="08" label="Credentials" keys={["⌘", "8"]} />
         <div className="mb-12">
           <DisplayHeading gradient>Credentials.</DisplayHeading>
         </div>
@@ -1149,7 +1237,7 @@ function Contact() {
   return (
     <section id="contact" className="relative px-5 py-12 sm:px-8 md:py-16 lg:px-[5vw] xl:px-[6vw]">
       <div className="mx-auto max-w-[1600px]">
-        <SectionKicker index="08" label="Contact" keys={["⌘", "8"]} />
+        <SectionKicker index="09" label="Contact" keys={["⌘", "9"]} />
         <FadeUp>
           <h2
             className="font-[700] leading-[0.88] tracking-[-0.045em]"
@@ -1287,11 +1375,13 @@ export default function V2Page() {
         <Capabilities />
         <SectionDivider from="04 · CAPABILITIES" to="05 · FRAMEWORKS" tag="TRANSITION" accent={TOKENS.amber} />
         <Frameworks />
-        <SectionDivider from="05 · FRAMEWORKS" to="06 · TIMELINE" tag="TRANSITION" accent={TOKENS.emerald} />
+        <SectionDivider from="05 · FRAMEWORKS" to="06 · VERACITY OS" tag="ARCHITECTURE" accent={TOKENS.emerald} />
+        <VeracityOS />
+        <SectionDivider from="06 · VERACITY OS" to="07 · TIMELINE" tag="TRANSITION" accent={TOKENS.emerald} />
         <Timeline />
-        <SectionDivider from="06 · TIMELINE" to="07 · CREDENTIALS" tag="TRANSITION" accent={TOKENS.violet} />
+        <SectionDivider from="07 · TIMELINE" to="08 · CREDENTIALS" tag="TRANSITION" accent={TOKENS.violet} />
         <Credentials />
-        <SectionDivider from="07 · CREDENTIALS" to="08 · CONTACT" tag="TRANSITION" accent={TOKENS.cyan} />
+        <SectionDivider from="08 · CREDENTIALS" to="09 · CONTACT" tag="TRANSITION" accent={TOKENS.cyan} />
         <Contact />
 
         <footer className="relative border-t border-white/[0.06] px-5 py-10 sm:px-8 lg:px-[5vw] xl:px-[6vw]">
