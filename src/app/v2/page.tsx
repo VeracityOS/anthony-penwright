@@ -857,19 +857,19 @@ function VeracityOS() {
 
   const pillars = [
     {
-      tag: "AKB",
-      title: "Attested Knowledge Block",
-      body: "Every claim signed by IdP-verified identity, anchored to a per-tenant Hyperledger Fabric ledger, with optional Polygon PoS public overlay. FIPS 140-2 HSM key custody at Enterprise.",
+      tag: "What it is",
+      title: "Knowledge you can prove.",
+      body: "Every fact, document, and decision is signed by a verified person and locked into a tamper-proof record. Think of it as a notary built into your knowledge base — provenance is baked in, not bolted on.",
     },
     {
-      tag: "Identity",
-      title: "BYO IdP — never custodial",
-      body: "Entra · Okta · Ping · WebAuthn. Veracity verifies against your directory; it never owns it. Auditor-ready chain-of-custody for every record, every edit, every signer.",
+      tag: "How it plugs in",
+      title: "Uses the logins you already have.",
+      body: "Veracity connects to your existing staff login system (Microsoft, Okta, Ping, or WebAuthn) and verifies who's writing — it never owns or holds your passwords or directory. Bank-grade key security at the enterprise tier.",
     },
     {
-      tag: "Verticals",
-      title: "Built for regulated knowledge",
-      body: "Healthcare · Pharma · Construction · Family Offices — the domains where mutable wikis fail compliance. Marketplace, Enterprise, and Enterprise Connect tiers.",
+      tag: "Where it lands",
+      title: "Built for industries where wikis fail audits.",
+      body: "Healthcare · Pharma · Construction · Family Offices — sectors where regulators, auditors, and lawyers must prove who knew what, when. Three pricing tiers from $45K/yr to enterprise-custom.",
     },
   ];
 
@@ -885,9 +885,35 @@ function VeracityOS() {
             </p>
           </div>
           <p className="max-w-md text-[15px] leading-relaxed text-white/65">
-            The productisation of two decades of delivery methodology — a knowledge platform where every fact is <span className="text-white">signed by identity</span>, <span className="text-white">anchored to chain</span>, and verifiable end-to-end. Built inside Verax Venture Studio.
+            A knowledge platform where every fact is <span className="text-white">signed by a real, verified person</span> and <span className="text-white">locked into a tamper-proof record</span> — so regulators, auditors, and AI systems can trust what they read. Built inside Verax Venture Studio.
           </p>
         </div>
+
+        <FadeUp delay={0.05}>
+          <div
+            className="mb-6 flex flex-col gap-2 rounded-2xl border px-5 py-4 backdrop-blur md:flex-row md:items-center md:justify-between md:gap-6 md:px-7 md:py-5"
+            style={{
+              borderColor: "rgba(52,211,153,0.28)",
+              background:
+                "linear-gradient(135deg, rgba(52,211,153,0.08) 0%, rgba(52,211,153,0.02) 60%)",
+            }}
+          >
+            <div className="flex items-center gap-3">
+              <span
+                className="inline-block h-2 w-2 rounded-full"
+                style={{ background: accent, boxShadow: `0 0 10px ${accent}` }}
+              />
+              <span className="text-[10px] uppercase tracking-[0.22em] text-white/55">
+                Projected commercial value
+              </span>
+            </div>
+            <p className="text-[14px] leading-snug text-white md:text-[15px]">
+              <span className="font-[600]">$33M+ cumulative revenue</span> over five years ·{" "}
+              <span className="font-[600]">$14.9M ARR</span> by Y5 ·{" "}
+              <span className="font-[600]">2,651 customers</span> — across the four regulated industries where today's wikis can't pass an audit.
+            </p>
+          </div>
+        </FadeUp>
 
         <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
           {pillars.map((p, i) => (
@@ -915,10 +941,10 @@ function VeracityOS() {
             className="mt-6 grid grid-cols-2 gap-3 rounded-2xl border border-white/[0.08] bg-white/[0.02] px-5 py-4 backdrop-blur md:grid-cols-4 md:gap-6 md:px-7 md:py-5"
           >
             {[
-              { k: "Y5 ARR target", v: "$14.9M" },
+              { k: "5-yr cumulative revenue", v: "$33.3M" },
+              { k: "Y5 annual run-rate", v: "$14.9M" },
               { k: "Y5 customers", v: "2,651" },
-              { k: "Verticals", v: "Healthcare · Pharma · Construction · Family Offices" },
-              { k: "Stage", v: "Seed (live)" },
+              { k: "Round", v: "$2.5M Seed · live" },
             ].map((s) => (
               <div key={s.k} className="flex flex-col gap-1">
                 <span className="text-[10px] uppercase tracking-[0.18em] text-white/45">{s.k}</span>
