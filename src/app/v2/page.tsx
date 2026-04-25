@@ -1050,6 +1050,13 @@ function Credentials() {
       spotlight: "rgba(52,211,153,0.18)",
     },
     {
+      heading: "Data, Security & Quality",
+      items: credentials.dataSecurity,
+      icon: Shield,
+      accent: TOKENS.emerald,
+      spotlight: "rgba(52,211,153,0.18)",
+    },
+    {
       heading: "Certifications",
       items: credentials.certifications,
       icon: Building2,

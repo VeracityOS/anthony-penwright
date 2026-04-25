@@ -38,10 +38,11 @@ export function Credentials() {
         transition={{ duration: 0.55 }}
         className="grid gap-10 rounded-2xl bg-white p-8 ring-1 ring-black/5 md:grid-cols-2 md:p-12"
       >
-        <List heading="Standards Applied" items={credentials.standards} />
+        <List heading="Smart City & Infrastructure Standards" items={credentials.standards} />
+        <List heading="Data, Security & Quality Standards" items={credentials.dataSecurity} />
         <List heading="Certifications" items={credentials.certifications} />
         <List heading="Education" items={credentials.education} />
-        <div>
+        <div className="md:col-span-2">
           <div className="label-caps">Security Clearance</div>
           <p className="font-display mt-4 text-xl text-ink">{credentials.clearance}</p>
         </div>
