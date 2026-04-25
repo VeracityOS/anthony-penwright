@@ -910,7 +910,7 @@ function VeracityOS() {
             <p className="text-[14px] leading-snug text-white md:text-[15px]">
               <span className="font-[600]">$33M+ cumulative revenue</span> over five years ·{" "}
               <span className="font-[600]">$14.9M ARR</span> by Y5 ·{" "}
-              <span className="font-[600]">2,651 customers</span> — across the four regulated industries where today's wikis can't pass an audit.
+              <span className="font-[600]">2,651 customers</span> — across the four regulated industries where today&apos;s wikis can&apos;t pass an audit.
             </p>
           </div>
         </FadeUp>
