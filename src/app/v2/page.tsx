@@ -953,6 +953,58 @@ function VeracityOS() {
             ))}
           </div>
         </FadeUp>
+
+        <FadeUp delay={0.3}>
+          <div className="mt-12">
+            <div className="mb-5 flex items-center gap-3">
+              <span
+                className="inline-block h-2 w-2 rounded-full"
+                style={{ background: accent, boxShadow: `0 0 10px ${accent}` }}
+              />
+              <span className="text-[10px] uppercase tracking-[0.22em] text-white/55">
+                The product · attestation control plane
+              </span>
+            </div>
+
+            <div className="overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.02]">
+              <Image
+                src="/veracity/dashboard.png"
+                alt="Veracity OS — Attestation Overview dashboard"
+                width={2960}
+                height={2480}
+                sizes="100vw"
+                className="h-auto w-full"
+              />
+            </div>
+            <p className="mt-2 text-center text-[11px] uppercase tracking-[0.16em] text-white/40">
+              Attestation Overview · the cryptographic control plane
+            </p>
+
+            <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-3">
+              {[
+                { src: "/veracity/workspace.png", cap: "Workspace Home" },
+                { src: "/veracity/akb-detail.png", cap: "AKB Detail · proof" },
+                { src: "/veracity/audit-chain.png", cap: "Audit Chain · Merkle" },
+              ].map((g) => (
+                <div key={g.src}>
+                  <div className="overflow-hidden rounded-xl border border-white/[0.08] bg-white/[0.02]">
+                    <Image
+                      src={g.src}
+                      alt={`Veracity OS — ${g.cap}`}
+                      width={2960}
+                      height={2480}
+                      sizes="(min-width: 640px) 33vw, 100vw"
+                      className="h-auto w-full"
+                    />
+                  </div>
+                  <p className="mt-2 text-center text-[10px] uppercase tracking-[0.16em] text-white/40">
+                    {g.cap}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </FadeUp>
       </div>
     </section>
   );
