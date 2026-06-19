@@ -24,7 +24,9 @@ import {
   Compass,
 } from "lucide-react";
 import Image from "next/image";
-import { motion, useScroll, useSpring } from "framer-motion";
+import { useState, useEffect, useMemo, useRef } from "react";
+import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
+import { Command, Search, CornerDownLeft } from "lucide-react";
 import {
   AuroraBackground,
   Counter,
@@ -170,6 +172,356 @@ function CredibilityMarquee() {
   );
 }
 
+// ---------------- Agent mesh (live 11-agent production system) ----------------
+function AgentMesh() {
+  const N = 11;
+  const cx = 200;
+  const cy = 120;
+  const rx = 168;
+  const ry = 92;
+  const nodes = Array.from({ length: N }, (_, i) => {
+    const a = (i / N) * Math.PI * 2 - Math.PI / 2;
+    return { x: cx + rx * Math.cos(a), y: cy + ry * Math.sin(a), i };
+  });
+  const accents = [TOKENS.emerald, TOKENS.violet, TOKENS.cyan, TOKENS.amber];
+  // A few peer-to-peer edges for "mesh" texture (indices into nodes).
+  const peers = [
+    [0, 3],
+    [3, 6],
+    [6, 9],
+    [9, 1],
+    [2, 7],
+  ];
+
+  return (
+    <div
+      className="relative overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.02] p-4 backdrop-blur md:p-5"
+      style={{ boxShadow: "inset 0 1px 0 rgba(255,255,255,0.05)" }}
+    >
+      <div className="mb-2 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <StatusDot />
+          <Mono style={{ color: TOKENS.inkFaint }}>Live · production</Mono>
+        </div>
+        <Mono style={{ color: TOKENS.inkFaint }}>11-agent system</Mono>
+      </div>
+      <svg viewBox="0 0 400 240" className="h-auto w-full overflow-visible">
+        {/* hub → node edges */}
+        {nodes.map((n, i) => (
+          <motion.line
+            key={`e${i}`}
+            x1={cx}
+            y1={cy}
+            x2={n.x}
+            y2={n.y}
+            stroke={accents[i % accents.length]}
+            strokeOpacity={0.28}
+            strokeWidth={1}
+            initial={{ pathLength: 0, opacity: 0 }}
+            whileInView={{ pathLength: 1, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9, delay: 0.2 + i * 0.06 }}
+          />
+        ))}
+        {/* peer mesh edges */}
+        {peers.map(([a, b], i) => (
+          <line
+            key={`p${i}`}
+            x1={nodes[a].x}
+            y1={nodes[a].y}
+            x2={nodes[b].x}
+            y2={nodes[b].y}
+            stroke="#ffffff"
+            strokeOpacity={0.07}
+            strokeWidth={1}
+          />
+        ))}
+        {/* traveling pulses along a couple of edges */}
+        {[0, 4, 8].map((idx, k) => (
+          <motion.circle
+            key={`pulse${k}`}
+            r={2.4}
+            fill="#ffffff"
+            initial={{ cx, cy, opacity: 0 }}
+            animate={{
+              cx: [cx, nodes[idx].x],
+              cy: [cy, nodes[idx].y],
+              opacity: [0, 1, 0],
+            }}
+            transition={{
+              duration: 2.2,
+              delay: k * 0.7,
+              repeat: Infinity,
+              repeatDelay: 1.6,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
+        {/* satellite agent nodes */}
+        {nodes.map((n, i) => {
+          const c = accents[i % accents.length];
+          return (
+            <g key={`n${i}`}>
+              <motion.circle
+                cx={n.x}
+                cy={n.y}
+                r={6}
+                fill={c}
+                fillOpacity={0.18}
+                stroke={c}
+                strokeOpacity={0.6}
+                strokeWidth={1}
+                initial={{ scale: 0, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.5 + i * 0.05 }}
+                style={{ transformOrigin: `${n.x}px ${n.y}px` }}
+              />
+              <motion.circle
+                cx={n.x}
+                cy={n.y}
+                r={2.6}
+                fill={c}
+                animate={{ opacity: [0.5, 1, 0.5] }}
+                transition={{
+                  duration: 2.4,
+                  delay: i * 0.18,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+            </g>
+          );
+        })}
+        {/* central orchestrator / harness */}
+        <motion.circle
+          cx={cx}
+          cy={cy}
+          r={16}
+          fill="none"
+          stroke={TOKENS.emerald}
+          strokeOpacity={0.35}
+          strokeWidth={1}
+          animate={{ r: [16, 22, 16], opacity: [0.5, 0, 0.5] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <circle
+          cx={cx}
+          cy={cy}
+          r={11}
+          fill={TOKENS.emerald}
+          fillOpacity={0.16}
+          stroke={TOKENS.emerald}
+          strokeOpacity={0.7}
+          strokeWidth={1.4}
+        />
+        <circle cx={cx} cy={cy} r={4} fill={TOKENS.emerald} />
+      </svg>
+      <p className="mt-1 text-[11.5px] leading-snug text-white/45">
+        Master agent orchestrating 11 specialist agents on Claude · Azure · M365
+      </p>
+    </div>
+  );
+}
+
+// ---------------- ⌘K Command palette ----------------
+type CmdItem = {
+  label: string;
+  hint: string;
+  href: string;
+  external?: boolean;
+};
+function CommandPalette() {
+  const [open, setOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const [active, setActive] = useState(0);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  const items: CmdItem[] = useMemo(
+    () => [
+      { label: "Executive Summary", hint: "Section 02", href: "#summary" },
+      { label: "Signature Work", hint: "Section 03", href: "#moments" },
+      { label: "Capabilities", hint: "Section 04", href: "#capabilities" },
+      { label: "Proprietary Frameworks", hint: "Section 05", href: "#frameworks" },
+      { label: "Agent Identity Framework", hint: "Open standard · 06", href: "#agent-identity" },
+      { label: "Veracity OS", hint: "Section 07", href: "#veracity-os" },
+      { label: "Career Timeline", hint: "Section 08", href: "#timeline" },
+      { label: "Credentials", hint: "Section 09", href: "#credentials" },
+      { label: "Contact", hint: "Section 10", href: "#contact" },
+      { label: "Email Anthony", hint: profile.email, href: `mailto:${profile.email}`, external: true },
+      { label: "Download CV", hint: "PDF · DOCX", href: profile.cvUrl, external: true },
+      {
+        label: "Read the whitepaper",
+        hint: "Agent Identity Framework",
+        href: "/agent-identity-framework-whitepaper.docx",
+        external: true,
+      },
+      { label: "LinkedIn", hint: "Connect", href: profile.linkedin, external: true },
+    ],
+    []
+  );
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return items;
+    return items.filter(
+      (i) =>
+        i.label.toLowerCase().includes(q) || i.hint.toLowerCase().includes(q)
+    );
+  }, [items, query]);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setOpen((o) => !o);
+      } else if (e.key === "Escape") {
+        setOpen(false);
+      }
+    };
+    const onOpen = () => setOpen(true);
+    window.addEventListener("keydown", onKey);
+    window.addEventListener("open-cmdk", onOpen as EventListener);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("open-cmdk", onOpen as EventListener);
+    };
+  }, []);
+
+  useEffect(() => {
+    setActive(0);
+  }, [query, open]);
+
+  useEffect(() => {
+    if (open) {
+      const t = setTimeout(() => inputRef.current?.focus(), 30);
+      return () => clearTimeout(t);
+    }
+  }, [open]);
+
+  const go = (item: CmdItem | undefined) => {
+    if (!item) return;
+    setOpen(false);
+    setQuery("");
+    if (item.external) {
+      window.open(item.href, item.href.startsWith("mailto:") ? "_self" : "_blank");
+    } else {
+      const el = document.querySelector(item.href);
+      el?.scrollIntoView({ behavior: "smooth" });
+      history.replaceState(null, "", item.href);
+    }
+  };
+
+  const onListKey = (e: React.KeyboardEvent) => {
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setActive((a) => Math.min(a + 1, filtered.length - 1));
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setActive((a) => Math.max(a - 1, 0));
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+      go(filtered[active]);
+    }
+  };
+
+  return (
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          className="fixed inset-0 z-[80] flex items-start justify-center px-4 pt-[14vh]"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.18 }}
+          onMouseDown={() => setOpen(false)}
+        >
+          <div
+            aria-hidden
+            className="absolute inset-0"
+            style={{ background: "rgba(6,8,10,0.66)", backdropFilter: "blur(6px)" }}
+          />
+          <motion.div
+            role="dialog"
+            aria-modal="true"
+            className="relative w-full max-w-[560px] overflow-hidden rounded-2xl border border-white/12 bg-[#0d1014]/95"
+            style={{
+              boxShadow:
+                "0 30px 80px -24px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.06)",
+            }}
+            initial={{ opacity: 0, y: 12, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 8, scale: 0.98 }}
+            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            onMouseDown={(e) => e.stopPropagation()}
+            onKeyDown={onListKey}
+          >
+            <div className="flex items-center gap-3 border-b border-white/[0.08] px-4 py-3">
+              <Search className="h-4 w-4 text-white/40" />
+              <input
+                ref={inputRef}
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Jump to a section or action…"
+                className="w-full bg-transparent text-[15px] text-white placeholder:text-white/35 focus:outline-none"
+              />
+              <span className="hidden items-center gap-1 sm:flex">
+                <Kbd>esc</Kbd>
+              </span>
+            </div>
+            <div className="max-h-[52vh] overflow-y-auto py-2">
+              {filtered.length === 0 && (
+                <div className="px-4 py-6 text-center text-[13px] text-white/45">
+                  No matches.
+                </div>
+              )}
+              {filtered.map((item, i) => {
+                const isActive = i === active;
+                return (
+                  <button
+                    key={item.label}
+                    onMouseEnter={() => setActive(i)}
+                    onClick={() => go(item)}
+                    className="flex w-full items-center justify-between gap-4 px-3 py-2.5 text-left"
+                    style={{
+                      background: isActive
+                        ? "linear-gradient(90deg, rgba(52,211,153,0.14), rgba(167,139,250,0.08))"
+                        : "transparent",
+                      boxShadow: isActive
+                        ? `inset 2px 0 0 0 ${TOKENS.emerald}`
+                        : "none",
+                    }}
+                  >
+                    <span className="mx-1 flex flex-col">
+                      <span className="text-[14px] font-[500] text-white">
+                        {item.label}
+                      </span>
+                      <span className="text-[11.5px] text-white/45">{item.hint}</span>
+                    </span>
+                    {isActive && (
+                      <CornerDownLeft className="h-3.5 w-3.5 shrink-0 text-white/50" />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+            <div className="flex items-center justify-between border-t border-white/[0.08] px-4 py-2.5">
+              <div className="flex items-center gap-2 text-[11px] text-white/40">
+                <Kbd>↑</Kbd>
+                <Kbd>↓</Kbd>
+                <span>navigate</span>
+                <Kbd>↵</Kbd>
+                <span>open</span>
+              </div>
+              <Mono style={{ color: TOKENS.inkFaint }}>AP · v2</Mono>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
 // ---------------- Top nav (sticky, floating pill) ----------------
 function TopBar() {
   return (
@@ -188,6 +540,14 @@ function TopBar() {
           <StatusDot />
           <Mono style={{ color: TOKENS.ink }}>AP · v2</Mono>
         </span>
+        <button
+          onClick={() => window.dispatchEvent(new CustomEvent("open-cmdk"))}
+          aria-label="Open command palette"
+          className="flex items-center gap-1.5 rounded-full bg-white/[0.04] px-2.5 py-1.5 text-white/55 transition hover:bg-white/[0.08] hover:text-white"
+        >
+          <Command className="h-3 w-3" />
+          <span className="text-[11px]">K</span>
+        </button>
         <a
           href="#moments"
           className="hidden rounded-full px-3 py-1.5 text-[12px] text-white/70 transition hover:bg-white/[0.06] hover:text-white md:inline-flex"
@@ -294,6 +654,11 @@ function Hero() {
                 <Download className="h-4 w-4" />
                 Download CV
               </MagneticButton>
+            </div>
+          </FadeUp>
+          <FadeUp delay={0.45}>
+            <div className="mt-8 max-w-md">
+              <AgentMesh />
             </div>
           </FadeUp>
         </div>
@@ -1638,6 +2003,7 @@ export default function V2Page() {
       />
 
       <ScrollProgress />
+      <CommandPalette />
       <TopBar />
 
       <div className="relative z-10">

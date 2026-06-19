@@ -245,7 +245,7 @@ export const profileSkills: {
       "MCP (Model Context Protocol)",
       "ReasoningBank Learning",
       "Swarm Coordination (Hierarchical / Mesh)",
-      "Agent Skill Authoring (44+ agents)",
+      "Agent Skill Authoring (11 agents)",
       "Hooks & Automation",
       "Neural Pattern Training",
       "Prompt Engineering",
