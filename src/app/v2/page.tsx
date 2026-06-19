@@ -24,7 +24,7 @@ import {
   Compass,
 } from "lucide-react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useScroll, useSpring } from "framer-motion";
 import {
   AuroraBackground,
   Counter,
@@ -90,6 +90,85 @@ const capabilityIcons = [
   Boxes,
   Gauge,
 ];
+
+// ---------------- Scroll progress bar (top, gradient) ----------------
+function ScrollProgress() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 30,
+    mass: 0.3,
+  });
+  return (
+    <motion.div
+      aria-hidden
+      className="fixed inset-x-0 top-0 z-[60] h-[2px] origin-left"
+      style={{
+        scaleX,
+        background:
+          "linear-gradient(90deg, #34d399 0%, #a78bfa 50%, #22d3ee 100%)",
+        boxShadow: "0 0 12px rgba(167,139,250,0.55)",
+      }}
+    />
+  );
+}
+
+// ---------------- Credibility marquee (organisations served) ----------------
+const TRUST_NAMES = [
+  "UK Ministry of Defence",
+  "Foreign & Commonwealth Office",
+  "Cabinet Office",
+  "Cisco",
+  "Wipro",
+  "Quantela",
+  "NEOM",
+  "Red Sea Global",
+  "Environment Agency",
+];
+function CredibilityMarquee() {
+  const items = [...TRUST_NAMES, ...TRUST_NAMES];
+  const dot = (
+    <span
+      aria-hidden
+      className="inline-block h-1 w-1 shrink-0 rounded-full"
+      style={{ background: TOKENS.emerald, boxShadow: `0 0 8px ${TOKENS.emerald}` }}
+    />
+  );
+  return (
+    <div className="relative px-5 pb-6 pt-2 sm:px-8 md:pb-8 lg:px-[5vw] xl:px-[6vw]">
+      <div className="mx-auto max-w-[1600px]">
+        <div className="mb-3 flex items-center gap-3">
+          <Mono style={{ color: TOKENS.inkFaint }}>Trusted across</Mono>
+          <div className="h-px flex-1 bg-white/[0.07]" />
+        </div>
+        <div
+          className="relative overflow-hidden"
+          style={{
+            maskImage:
+              "linear-gradient(90deg, transparent 0%, black 7%, black 93%, transparent 100%)",
+            WebkitMaskImage:
+              "linear-gradient(90deg, transparent 0%, black 7%, black 93%, transparent 100%)",
+          }}
+        >
+          <motion.div
+            className="flex w-max items-center gap-9 whitespace-nowrap py-1"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ duration: 38, ease: "linear", repeat: Infinity }}
+          >
+            {items.map((name, i) => (
+              <span key={i} className="flex items-center gap-9">
+                <span className="text-[14px] font-[500] tracking-[-0.01em] text-white/45 transition-colors hover:text-white/80 md:text-[15px]">
+                  {name}
+                </span>
+                {dot}
+              </span>
+            ))}
+          </motion.div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 // ---------------- Top nav (sticky, floating pill) ----------------
 function TopBar() {
@@ -1558,10 +1637,12 @@ export default function V2Page() {
         }}
       />
 
+      <ScrollProgress />
       <TopBar />
 
       <div className="relative z-10">
         <Hero />
+        <CredibilityMarquee />
         <SectionDivider from="01 · INTRO" to="02 · SUMMARY" tag="TRANSITION" accent={TOKENS.emerald} />
         <ExecutiveSummary />
         <SectionDivider from="02 · SUMMARY" to="03 · SIGNATURE WORK" tag="TRANSITION" accent={TOKENS.violet} />
