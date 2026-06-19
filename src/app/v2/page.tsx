@@ -172,120 +172,147 @@ function CredibilityMarquee() {
   );
 }
 
-// ---------------- Agent mesh (live 11-agent production system) ----------------
+// ---------------- Agent swarm (live 111-agent production system) ----------------
+// 111 literal nodes would be illegible, so this renders a layered swarm that
+// reads as scale; the true count lives in the label + caption.
 function AgentMesh() {
-  const N = 11;
-  const cx = 200;
-  const cy = 120;
-  const rx = 168;
-  const ry = 92;
-  const nodes = Array.from({ length: N }, (_, i) => {
-    const a = (i / N) * Math.PI * 2 - Math.PI / 2;
-    return { x: cx + rx * Math.cos(a), y: cy + ry * Math.sin(a), i };
-  });
+  const cx = 180;
+  const cy = 106;
   const accents = [TOKENS.emerald, TOKENS.violet, TOKENS.cyan, TOKENS.amber];
-  // A few peer-to-peer edges for "mesh" texture (indices into nodes).
-  const peers = [
-    [0, 3],
-    [3, 6],
-    [6, 9],
-    [9, 1],
-    [2, 7],
-  ];
+  const ring = (count: number, rx: number, ry: number, r: number, offset = 0) =>
+    Array.from({ length: count }, (_, i) => {
+      const a = (i / count) * Math.PI * 2 - Math.PI / 2 + offset;
+      return { x: cx + rx * Math.cos(a), y: cy + ry * Math.sin(a), r, i };
+    });
+  const ringA = ring(12, 56, 38, 4.4);
+  const ringB = ring(22, 106, 68, 2.7, 0.14);
+  const ringC = ring(34, 152, 92, 1.7, 0.27);
 
   return (
     <div
-      className="relative overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.02] p-4 backdrop-blur md:p-5"
+      className="relative overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.02] p-4 backdrop-blur"
       style={{ boxShadow: "inset 0 1px 0 rgba(255,255,255,0.05)" }}
     >
-      <div className="mb-2 flex items-center justify-between">
+      <div className="mb-1 flex items-center justify-between gap-2">
         <div className="flex items-center gap-2">
           <StatusDot />
           <Mono style={{ color: TOKENS.inkFaint }}>Live · production</Mono>
         </div>
-        <Mono style={{ color: TOKENS.inkFaint }}>11-agent system</Mono>
+        <Mono style={{ color: TOKENS.inkFaint }}>111-agent system</Mono>
       </div>
-      <svg viewBox="0 0 400 240" className="h-auto w-full overflow-visible">
-        {/* hub → node edges */}
-        {nodes.map((n, i) => (
+      <svg viewBox="0 0 360 212" className="h-auto w-full overflow-visible">
+        {/* hub → ring A edges */}
+        {ringA.map((n, i) => (
           <motion.line
-            key={`e${i}`}
+            key={`a${i}`}
             x1={cx}
             y1={cy}
             x2={n.x}
             y2={n.y}
             stroke={accents[i % accents.length]}
-            strokeOpacity={0.28}
-            strokeWidth={1}
+            strokeOpacity={0.3}
+            strokeWidth={0.9}
             initial={{ pathLength: 0, opacity: 0 }}
             whileInView={{ pathLength: 1, opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.9, delay: 0.2 + i * 0.06 }}
+            transition={{ duration: 0.8, delay: 0.2 + i * 0.04 }}
           />
         ))}
-        {/* peer mesh edges */}
-        {peers.map(([a, b], i) => (
-          <line
-            key={`p${i}`}
-            x1={nodes[a].x}
-            y1={nodes[a].y}
-            x2={nodes[b].x}
-            y2={nodes[b].y}
-            stroke="#ffffff"
-            strokeOpacity={0.07}
-            strokeWidth={1}
-          />
-        ))}
-        {/* traveling pulses along a couple of edges */}
+        {/* ring B → nearest ring A faint edges */}
+        {ringB.map((n, i) => {
+          const a = ringA[Math.floor((i / ringB.length) * ringA.length)];
+          return (
+            <line
+              key={`be${i}`}
+              x1={n.x}
+              y1={n.y}
+              x2={a.x}
+              y2={a.y}
+              stroke="#ffffff"
+              strokeOpacity={0.05}
+              strokeWidth={0.8}
+            />
+          );
+        })}
+        {/* traveling pulses */}
         {[0, 4, 8].map((idx, k) => (
           <motion.circle
             key={`pulse${k}`}
-            r={2.4}
+            r={2}
             fill="#ffffff"
             initial={{ cx, cy, opacity: 0 }}
             animate={{
-              cx: [cx, nodes[idx].x],
-              cy: [cy, nodes[idx].y],
+              cx: [cx, ringA[idx].x],
+              cy: [cy, ringA[idx].y],
               opacity: [0, 1, 0],
             }}
             transition={{
               duration: 2.2,
               delay: k * 0.7,
               repeat: Infinity,
-              repeatDelay: 1.6,
+              repeatDelay: 1.4,
               ease: "easeInOut",
             }}
           />
         ))}
-        {/* satellite agent nodes */}
-        {nodes.map((n, i) => {
+        {/* ring C swarm dots (twinkle a subset) */}
+        {ringC.map((n, i) => (
+          <motion.circle
+            key={`c${i}`}
+            cx={n.x}
+            cy={n.y}
+            r={n.r}
+            fill={accents[i % accents.length]}
+            fillOpacity={0.5}
+            animate={i % 3 === 0 ? { opacity: [0.25, 0.7, 0.25] } : undefined}
+            transition={
+              i % 3 === 0
+                ? { duration: 3, delay: (i % 9) * 0.2, repeat: Infinity, ease: "easeInOut" }
+                : undefined
+            }
+          />
+        ))}
+        {/* ring B dots */}
+        {ringB.map((n, i) => {
           const c = accents[i % accents.length];
           return (
-            <g key={`n${i}`}>
-              <motion.circle
+            <circle
+              key={`bd${i}`}
+              cx={n.x}
+              cy={n.y}
+              r={n.r}
+              fill={c}
+              fillOpacity={0.55}
+              stroke={c}
+              strokeOpacity={0.4}
+              strokeWidth={0.6}
+            />
+          );
+        })}
+        {/* ring A nodes */}
+        {ringA.map((n, i) => {
+          const c = accents[i % accents.length];
+          return (
+            <g key={`ad${i}`}>
+              <circle
                 cx={n.x}
                 cy={n.y}
-                r={6}
+                r={n.r}
                 fill={c}
-                fillOpacity={0.18}
+                fillOpacity={0.2}
                 stroke={c}
-                strokeOpacity={0.6}
+                strokeOpacity={0.65}
                 strokeWidth={1}
-                initial={{ scale: 0, opacity: 0 }}
-                whileInView={{ scale: 1, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.5 + i * 0.05 }}
-                style={{ transformOrigin: `${n.x}px ${n.y}px` }}
               />
               <motion.circle
                 cx={n.x}
                 cy={n.y}
-                r={2.6}
+                r={1.9}
                 fill={c}
                 animate={{ opacity: [0.5, 1, 0.5] }}
                 transition={{
                   duration: 2.4,
-                  delay: i * 0.18,
+                  delay: i * 0.16,
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
@@ -293,33 +320,104 @@ function AgentMesh() {
             </g>
           );
         })}
-        {/* central orchestrator / harness */}
+        {/* central orchestrator / master agent */}
         <motion.circle
           cx={cx}
           cy={cy}
-          r={16}
+          r={15}
           fill="none"
           stroke={TOKENS.emerald}
           strokeOpacity={0.35}
           strokeWidth={1}
-          animate={{ r: [16, 22, 16], opacity: [0.5, 0, 0.5] }}
+          animate={{ r: [15, 21, 15], opacity: [0.5, 0, 0.5] }}
           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
         />
         <circle
           cx={cx}
           cy={cy}
-          r={11}
+          r={10}
           fill={TOKENS.emerald}
           fillOpacity={0.16}
           stroke={TOKENS.emerald}
           strokeOpacity={0.7}
-          strokeWidth={1.4}
+          strokeWidth={1.3}
         />
-        <circle cx={cx} cy={cy} r={4} fill={TOKENS.emerald} />
+        <circle cx={cx} cy={cy} r={3.6} fill={TOKENS.emerald} />
       </svg>
-      <p className="mt-1 text-[11.5px] leading-snug text-white/45">
-        Master agent orchestrating 11 specialist agents on Claude · Azure · M365
+      <p className="mt-1 text-[11px] leading-snug text-white/45">
+        Master agent orchestrating 111 specialist agents on Claude · Azure · M365
       </p>
+    </div>
+  );
+}
+
+// ---------------- AI stack cards (hero) ----------------
+function AiStackCards() {
+  const cards = [
+    { v: "111", k: "Specialist agents", s: "master-orchestrated", a: TOKENS.emerald, sp: "rgba(52,211,153,0.18)", Icon: Boxes },
+    { v: "80+", k: "Agent skills", s: "versioned workflows", a: TOKENS.violet, sp: "rgba(167,139,250,0.18)", Icon: Layers },
+    { v: "10+", k: "MCP integrations", s: "Graph · Azure · GitHub · n8n", a: TOKENS.cyan, sp: "rgba(34,211,238,0.18)", Icon: Cpu },
+    { v: "RAG", k: "Localised retrieval", s: "vector search · HNSW", a: TOKENS.amber, sp: "rgba(251,191,36,0.16)", Icon: Sparkles },
+    { v: "4-tier", k: "LLM routing", s: "Haiku → Opus", a: TOKENS.emerald, sp: "rgba(52,211,153,0.18)", Icon: Gauge },
+    { v: "Hooks", k: "Harness & CI", s: "session · post-tool · stop", a: TOKENS.violet, sp: "rgba(167,139,250,0.18)", Icon: Shield },
+  ];
+  const archs = [
+    "Domain-Driven Design",
+    "Event sourcing",
+    "Hierarchical-mesh swarm",
+    "Zero-trust agent identity",
+    "Tamper-proof provenance",
+  ];
+  return (
+    <div>
+      <div className="mb-3 flex items-center gap-3">
+        <Mono style={{ color: TOKENS.inkFaint }}>Production AI stack</Mono>
+        <div className="h-px flex-1 bg-white/[0.07]" />
+      </div>
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+        {cards.map((c, i) => {
+          const Icon = c.Icon;
+          return (
+            <FadeUp key={i} delay={Math.min(i * 0.05, 0.3)}>
+              <SpotlightCard className="h-full p-4" spotlightColor={c.sp}>
+                <div
+                  className="flex h-8 w-8 items-center justify-center rounded-lg"
+                  style={{ background: `${c.a}1f`, border: `1px solid ${c.a}40` }}
+                >
+                  <Icon className="h-3.5 w-3.5" style={{ color: c.a }} />
+                </div>
+                <div
+                  className="mt-3 font-[700] leading-none tracking-[-0.02em]"
+                  style={{ color: c.a, fontSize: "clamp(20px, 2vw, 26px)" }}
+                >
+                  {c.v}
+                </div>
+                <div className="mt-1.5 text-[12.5px] font-[500] leading-tight text-white">
+                  {c.k}
+                </div>
+                <div className="mt-0.5 text-[10.5px] leading-tight text-white/45">
+                  {c.s}
+                </div>
+              </SpotlightCard>
+            </FadeUp>
+          );
+        })}
+      </div>
+      <div className="mt-3 flex flex-wrap items-center gap-2">
+        <Mono style={{ color: TOKENS.inkFaint }}>Architectures</Mono>
+        {archs.map((a) => (
+          <span
+            key={a}
+            className="rounded-[6px] px-2 py-[3px] text-[11px] text-white/65"
+            style={{
+              background: "rgba(255,255,255,0.04)",
+              border: "1px solid rgba(255,255,255,0.08)",
+            }}
+          >
+            {a}
+          </span>
+        ))}
+      </div>
     </div>
   );
 }
@@ -657,13 +755,13 @@ function Hero() {
             </div>
           </FadeUp>
           <FadeUp delay={0.45}>
-            <div className="mt-8 max-w-md">
-              <AgentMesh />
+            <div className="mt-9">
+              <AiStackCards />
             </div>
           </FadeUp>
         </div>
 
-        {/* Right: headshot with aurora halo */}
+        {/* Right: headshot with aurora halo + live agent swarm */}
         <div className="col-span-12 md:col-span-4">
           <FadeUp delay={0.25}>
             <div className="relative mx-auto flex w-full items-center justify-center md:mx-0 md:ml-auto">
@@ -704,6 +802,11 @@ function Hero() {
                   }}
                 />
               </div>
+            </div>
+          </FadeUp>
+          <FadeUp delay={0.4}>
+            <div className="mt-4 md:ml-auto md:max-w-full">
+              <AgentMesh />
             </div>
           </FadeUp>
         </div>
