@@ -122,6 +122,12 @@ function TopBar() {
           Frameworks
         </a>
         <a
+          href="#agent-identity"
+          className="hidden rounded-full px-3 py-1.5 text-[12px] text-white/70 transition hover:bg-white/[0.06] hover:text-white md:inline-flex"
+        >
+          Identity Framework
+        </a>
+        <a
           href="#veracity-os"
           className="hidden rounded-full px-3 py-1.5 text-[12px] text-white/70 transition hover:bg-white/[0.06] hover:text-white md:inline-flex"
         >
@@ -850,6 +856,169 @@ function Frameworks() {
   );
 }
 
+// ---------------- AGENT IDENTITY FRAMEWORK ----------------
+// Anthony's open-standard IP: a published specification for identity, access,
+// audit, compliance and behavioural defence of agentic AI. CC-BY-SA 4.0 spec,
+// Apache-2.0 reference impls, SHA-256 + Bitcoin-timestamped for prior art.
+function AgentIdentityFramework() {
+  const accent = TOKENS.violet;
+  const spotlight = "rgba(167,139,250,0.22)";
+
+  const layers = [
+    {
+      no: "L1",
+      name: "Identity",
+      body: "Every agent gets a verifiable, attestable, revocable identity — issued and scoped, never assumed. An Agent IdP plus the Agent Bill of Materials (ABOM) record what an agent is, what it is built from, and who stands behind it.",
+    },
+    {
+      no: "L2",
+      name: "Policy",
+      body: "Agents hold no standing power. Rights are granted as scoped, capability-based authorisations with just-in-time elevation — expressed in human-auditable Rulebooks rather than buried in code.",
+    },
+    {
+      no: "L3",
+      name: "Enforcement",
+      body: "A policy enforcement plane sits in the request path. Every tool call, model hop and data access is checked against policy before it executes — prevention, not post-hoc detection.",
+    },
+    {
+      no: "L4",
+      name: "Evidence",
+      body: "Hash-chained, tamper-evident audit with deterministic replay: reconstruct exactly what an agent did, in what order, and why — to the standard an auditor or regulator will accept.",
+    },
+    {
+      no: "L5",
+      name: "Trust Surface",
+      body: "Federation and agent-to-agent operation across organisational boundaries — so agents from different parties transact on verifiable trust, not blind trust.",
+    },
+  ];
+
+  const constructs = [
+    "Agent IdP",
+    "Agent Bill of Materials (ABOM)",
+    "Capability-based authz",
+    "Just-in-time elevation",
+    "Policy enforcement plane",
+    "Hash-chained audit",
+    "Deterministic replay",
+    "Rulebooks",
+    "Federation / A2A",
+  ];
+
+  return (
+    <section id="agent-identity" className="relative px-5 py-12 sm:px-8 md:py-16 lg:px-[5vw] xl:px-[6vw]">
+      <div className="mx-auto max-w-[1600px]">
+        <SectionKicker index="06" label="Open Standard" keys={["⌘", "6"]} />
+        <div className="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div>
+            <DisplayHeading gradient>The Agent Identity Framework.</DisplayHeading>
+            <p className="mt-3 text-[14px] uppercase tracking-[0.18em] text-white/55">
+              An open specification · Authored by Anthony Penwright · Stewarded by Verax Venture Studio
+            </p>
+          </div>
+          <p className="max-w-md text-[15px] leading-relaxed text-white/65">
+            Every other actor in software has identity — users have credentials,
+            services have certificates, machines have workload identity.{" "}
+            <span className="text-white">Autonomous AI agents have nothing of the kind.</span>{" "}
+            This is the open standard that gives them one.
+          </p>
+        </div>
+
+        {/* Provenance / licence banner */}
+        <FadeUp delay={0.05}>
+          <div
+            className="mb-6 flex flex-col gap-2 rounded-2xl border px-5 py-4 backdrop-blur md:flex-row md:items-center md:justify-between md:gap-6 md:px-7 md:py-5"
+            style={{
+              borderColor: "rgba(167,139,250,0.28)",
+              background:
+                "linear-gradient(135deg, rgba(167,139,250,0.08) 0%, rgba(167,139,250,0.02) 60%)",
+            }}
+          >
+            <div className="flex items-center gap-3">
+              <span
+                className="inline-block h-2 w-2 rounded-full"
+                style={{ background: accent, boxShadow: `0 0 10px ${accent}` }}
+              />
+              <span className="text-[10px] uppercase tracking-[0.22em] text-white/55">
+                Published · v0.1
+              </span>
+            </div>
+            <p className="text-[13px] leading-snug text-white/85 md:text-[14px]">
+              <span className="font-[600] text-white">Spec under CC-BY-SA 4.0</span> · reference
+              implementations under Apache 2.0 · SHA-256 + Bitcoin-timestamped for prior art —
+              a defensive publication, free for anyone to adopt.
+            </p>
+          </div>
+        </FadeUp>
+
+        {/* Five sequentially adoptable layers — vertical stack */}
+        <div className="grid grid-cols-1 gap-4">
+          {layers.map((l, i) => (
+            <FadeUp key={l.no} delay={i * 0.05}>
+              <SpotlightCard spotlightColor={spotlight}>
+                <div className="relative flex flex-col gap-3 overflow-hidden p-5 md:flex-row md:items-center md:gap-7 md:p-6">
+                  <TilePattern kind="circuit" accent={accent} opacity={0.1} />
+                  <div className="flex shrink-0 items-center gap-4 md:w-[230px]">
+                    <span
+                      className="font-[700] leading-none tracking-[-0.03em]"
+                      style={{
+                        fontSize: "clamp(26px, 2.4vw, 36px)",
+                        color: "transparent",
+                        backgroundImage: `linear-gradient(135deg, ${accent} 0%, #ffffff 100%)`,
+                        WebkitBackgroundClip: "text",
+                        backgroundClip: "text",
+                      }}
+                    >
+                      {l.no}
+                    </span>
+                    <h3 className="text-[19px] font-[600] leading-tight tracking-[-0.015em] text-white md:text-[21px]">
+                      {l.name}
+                    </h3>
+                  </div>
+                  <p className="relative text-[13.5px] leading-[1.6] text-white/75 md:text-[14.5px]">
+                    {l.body}
+                  </p>
+                </div>
+              </SpotlightCard>
+            </FadeUp>
+          ))}
+        </div>
+
+        {/* Constructs + CTA */}
+        <FadeUp delay={0.2}>
+          <div className="mt-6 rounded-2xl border border-white/[0.08] bg-white/[0.02] px-5 py-5 backdrop-blur md:px-7 md:py-6">
+            <Mono style={{ color: accent }}>Core constructs · 14 sections</Mono>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {constructs.map((c) => (
+                <span
+                  key={c}
+                  className="inline-flex items-center rounded-[6px] px-2.5 py-[5px] text-[11.5px] font-[500] leading-[1.1]"
+                  style={{
+                    backgroundColor: `${accent}1f`,
+                    border: `1px solid ${accent}66`,
+                    boxShadow: `inset 2px 0 0 0 ${accent}`,
+                    color: "#ffffff",
+                  }}
+                >
+                  {c}
+                </span>
+              ))}
+            </div>
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <MagneticButton href="/agent-identity-framework-whitepaper.docx" variant="primary">
+                <Download className="h-4 w-4" />
+                Read the whitepaper
+              </MagneticButton>
+              <span className="font-mono text-[10.5px] leading-tight text-white/40">
+                SHA-256 b2f19e41…0e4a699a
+              </span>
+            </div>
+          </div>
+        </FadeUp>
+      </div>
+    </section>
+  );
+}
+
 // ---------------- VERACITY OS ----------------
 function VeracityOS() {
   const accent = TOKENS.emerald;
@@ -876,7 +1045,7 @@ function VeracityOS() {
   return (
     <section id="veracity-os" className="relative px-5 py-12 sm:px-8 md:py-16 lg:px-[5vw] xl:px-[6vw]">
       <div className="mx-auto max-w-[1600px]">
-        <SectionKicker index="06" label="The New Architecture" keys={["⌘", "6"]} />
+        <SectionKicker index="07" label="The New Architecture" keys={["⌘", "7"]} />
         <div className="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
             <DisplayHeading gradient>Veracity OS.</DisplayHeading>
@@ -963,7 +1132,7 @@ function Timeline() {
   return (
     <section id="timeline" className="relative px-5 py-12 sm:px-8 md:py-16 lg:px-[5vw] xl:px-[6vw]">
       <div className="mx-auto max-w-[1600px]">
-        <SectionKicker index="07" label="Career Timeline" keys={["⌘", "7"]} />
+        <SectionKicker index="08" label="Career Timeline" keys={["⌘", "8"]} />
         <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <DisplayHeading gradient>Twenty years.</DisplayHeading>
           <p className="max-w-md text-[15px] leading-relaxed text-white/65">
@@ -1195,7 +1364,7 @@ function Credentials() {
   return (
     <section id="credentials" className="relative px-5 py-12 sm:px-8 md:py-16 lg:px-[5vw] xl:px-[6vw]">
       <div className="mx-auto max-w-[1600px]">
-        <SectionKicker index="08" label="Credentials" keys={["⌘", "8"]} />
+        <SectionKicker index="09" label="Credentials" keys={["⌘", "9"]} />
         <div className="mb-12">
           <DisplayHeading gradient>Credentials.</DisplayHeading>
         </div>
@@ -1263,7 +1432,7 @@ function Contact() {
   return (
     <section id="contact" className="relative px-5 py-12 sm:px-8 md:py-16 lg:px-[5vw] xl:px-[6vw]">
       <div className="mx-auto max-w-[1600px]">
-        <SectionKicker index="09" label="Contact" keys={["⌘", "9"]} />
+        <SectionKicker index="10" label="Contact" keys={["⌘", "0"]} />
         <FadeUp>
           <h2
             className="font-[700] leading-[0.88] tracking-[-0.045em]"
@@ -1401,13 +1570,15 @@ export default function V2Page() {
         <Capabilities />
         <SectionDivider from="04 · CAPABILITIES" to="05 · FRAMEWORKS" tag="TRANSITION" accent={TOKENS.amber} />
         <Frameworks />
-        <SectionDivider from="05 · FRAMEWORKS" to="06 · VERACITY OS" tag="ARCHITECTURE" accent={TOKENS.emerald} />
+        <SectionDivider from="05 · FRAMEWORKS" to="06 · AGENT IDENTITY" tag="OPEN STANDARD" accent={TOKENS.violet} />
+        <AgentIdentityFramework />
+        <SectionDivider from="06 · AGENT IDENTITY" to="07 · VERACITY OS" tag="ARCHITECTURE" accent={TOKENS.emerald} />
         <VeracityOS />
-        <SectionDivider from="06 · VERACITY OS" to="07 · TIMELINE" tag="TRANSITION" accent={TOKENS.emerald} />
+        <SectionDivider from="07 · VERACITY OS" to="08 · TIMELINE" tag="TRANSITION" accent={TOKENS.emerald} />
         <Timeline />
-        <SectionDivider from="07 · TIMELINE" to="08 · CREDENTIALS" tag="TRANSITION" accent={TOKENS.violet} />
+        <SectionDivider from="08 · TIMELINE" to="09 · CREDENTIALS" tag="TRANSITION" accent={TOKENS.violet} />
         <Credentials />
-        <SectionDivider from="08 · CREDENTIALS" to="09 · CONTACT" tag="TRANSITION" accent={TOKENS.cyan} />
+        <SectionDivider from="09 · CREDENTIALS" to="10 · CONTACT" tag="TRANSITION" accent={TOKENS.cyan} />
         <Contact />
 
         <footer className="relative border-t border-white/[0.06] px-5 py-10 sm:px-8 lg:px-[5vw] xl:px-[6vw]">
