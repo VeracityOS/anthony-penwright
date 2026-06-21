@@ -172,185 +172,6 @@ function CredibilityMarquee() {
   );
 }
 
-// ---------------- Agent swarm (live 111-agent production system) ----------------
-// 111 literal nodes would be illegible, so this renders a layered swarm that
-// reads as scale; the true count lives in the label + caption.
-function AgentMesh() {
-  const cx = 180;
-  const cy = 106;
-  const accents = [TOKENS.emerald, TOKENS.violet, TOKENS.cyan, TOKENS.amber];
-  const ring = (count: number, rx: number, ry: number, r: number, offset = 0) =>
-    Array.from({ length: count }, (_, i) => {
-      const a = (i / count) * Math.PI * 2 - Math.PI / 2 + offset;
-      return { x: cx + rx * Math.cos(a), y: cy + ry * Math.sin(a), r, i };
-    });
-  const ringA = ring(12, 56, 38, 4.4);
-  const ringB = ring(22, 106, 68, 2.7, 0.14);
-  const ringC = ring(34, 152, 92, 1.7, 0.27);
-
-  return (
-    <div
-      className="relative overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.02] p-4 backdrop-blur"
-      style={{ boxShadow: "inset 0 1px 0 rgba(255,255,255,0.05)" }}
-    >
-      <div className="mb-1 flex items-center justify-between gap-2">
-        <div className="flex items-center gap-2">
-          <StatusDot />
-          <Mono style={{ color: TOKENS.inkFaint }}>Live · production</Mono>
-        </div>
-        <Mono style={{ color: TOKENS.inkFaint }}>111-agent system</Mono>
-      </div>
-      <svg viewBox="0 0 360 212" className="h-auto w-full overflow-visible">
-        {/* hub → ring A edges */}
-        {ringA.map((n, i) => (
-          <motion.line
-            key={`a${i}`}
-            x1={cx}
-            y1={cy}
-            x2={n.x}
-            y2={n.y}
-            stroke={accents[i % accents.length]}
-            strokeOpacity={0.3}
-            strokeWidth={0.9}
-            initial={{ pathLength: 0, opacity: 0 }}
-            whileInView={{ pathLength: 1, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 + i * 0.04 }}
-          />
-        ))}
-        {/* ring B → nearest ring A faint edges */}
-        {ringB.map((n, i) => {
-          const a = ringA[Math.floor((i / ringB.length) * ringA.length)];
-          return (
-            <line
-              key={`be${i}`}
-              x1={n.x}
-              y1={n.y}
-              x2={a.x}
-              y2={a.y}
-              stroke="#ffffff"
-              strokeOpacity={0.05}
-              strokeWidth={0.8}
-            />
-          );
-        })}
-        {/* traveling pulses */}
-        {[0, 4, 8].map((idx, k) => (
-          <motion.circle
-            key={`pulse${k}`}
-            r={2}
-            fill="#ffffff"
-            initial={{ cx, cy, opacity: 0 }}
-            animate={{
-              cx: [cx, ringA[idx].x],
-              cy: [cy, ringA[idx].y],
-              opacity: [0, 1, 0],
-            }}
-            transition={{
-              duration: 2.2,
-              delay: k * 0.7,
-              repeat: Infinity,
-              repeatDelay: 1.4,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
-        {/* ring C swarm dots (twinkle a subset) */}
-        {ringC.map((n, i) => (
-          <motion.circle
-            key={`c${i}`}
-            cx={n.x}
-            cy={n.y}
-            r={n.r}
-            fill={accents[i % accents.length]}
-            fillOpacity={0.5}
-            animate={i % 3 === 0 ? { opacity: [0.25, 0.7, 0.25] } : undefined}
-            transition={
-              i % 3 === 0
-                ? { duration: 3, delay: (i % 9) * 0.2, repeat: Infinity, ease: "easeInOut" }
-                : undefined
-            }
-          />
-        ))}
-        {/* ring B dots */}
-        {ringB.map((n, i) => {
-          const c = accents[i % accents.length];
-          return (
-            <circle
-              key={`bd${i}`}
-              cx={n.x}
-              cy={n.y}
-              r={n.r}
-              fill={c}
-              fillOpacity={0.55}
-              stroke={c}
-              strokeOpacity={0.4}
-              strokeWidth={0.6}
-            />
-          );
-        })}
-        {/* ring A nodes */}
-        {ringA.map((n, i) => {
-          const c = accents[i % accents.length];
-          return (
-            <g key={`ad${i}`}>
-              <circle
-                cx={n.x}
-                cy={n.y}
-                r={n.r}
-                fill={c}
-                fillOpacity={0.2}
-                stroke={c}
-                strokeOpacity={0.65}
-                strokeWidth={1}
-              />
-              <motion.circle
-                cx={n.x}
-                cy={n.y}
-                r={1.9}
-                fill={c}
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{
-                  duration: 2.4,
-                  delay: i * 0.16,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
-            </g>
-          );
-        })}
-        {/* central orchestrator / master agent */}
-        <motion.circle
-          cx={cx}
-          cy={cy}
-          r={15}
-          fill="none"
-          stroke={TOKENS.emerald}
-          strokeOpacity={0.35}
-          strokeWidth={1}
-          animate={{ r: [15, 21, 15], opacity: [0.5, 0, 0.5] }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <circle
-          cx={cx}
-          cy={cy}
-          r={10}
-          fill={TOKENS.emerald}
-          fillOpacity={0.16}
-          stroke={TOKENS.emerald}
-          strokeOpacity={0.7}
-          strokeWidth={1.3}
-        />
-        <circle cx={cx} cy={cy} r={3.6} fill={TOKENS.emerald} />
-      </svg>
-      <p className="mt-1 text-[11px] leading-snug text-white/45">
-        Master agent orchestrating 111 specialist agents on Claude · Azure · M365
-      </p>
-    </div>
-  );
-}
-
 // ---------------- AI stack cards (hero) ----------------
 function AiStackCards() {
   const cards = [
@@ -374,7 +195,7 @@ function AiStackCards() {
         <Mono style={{ color: TOKENS.inkFaint }}>Production AI stack</Mono>
         <div className="h-px flex-1 bg-white/[0.07]" />
       </div>
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6 lg:gap-4">
         {cards.map((c, i) => {
           const Icon = c.Icon;
           return (
@@ -754,14 +575,9 @@ function Hero() {
               </MagneticButton>
             </div>
           </FadeUp>
-          <FadeUp delay={0.45}>
-            <div className="mt-9">
-              <AiStackCards />
-            </div>
-          </FadeUp>
         </div>
 
-        {/* Right: headshot with aurora halo + live agent swarm */}
+        {/* Right: headshot with aurora halo */}
         <div className="col-span-12 md:col-span-4">
           <FadeUp delay={0.25}>
             <div className="relative mx-auto flex w-full items-center justify-center md:mx-0 md:ml-auto">
@@ -804,10 +620,12 @@ function Hero() {
               </div>
             </div>
           </FadeUp>
+        </div>
+
+        {/* Production AI stack — full-width band, aligned with the grid */}
+        <div className="col-span-12 mt-8 md:mt-10">
           <FadeUp delay={0.4}>
-            <div className="mt-4 md:ml-auto md:max-w-full">
-              <AgentMesh />
-            </div>
+            <AiStackCards />
           </FadeUp>
         </div>
 
