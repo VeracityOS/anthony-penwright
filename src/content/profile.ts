@@ -2,7 +2,7 @@ export const profile = {
   name: "Anthony Penwright",
   tagline: "People · Business · Technology · Innovation · Leadership",
   pitch:
-    "C-Suite advisor codifying 20+ years of global smart-city and digital-infrastructure delivery into frameworks that work.",
+    "Smart-city and digital-infrastructure leader — now Group Director of Technology, Infrastructure & Operations at Albawani Holding Group — codifying 20+ years across NEOM, Cisco and government giga-projects into frameworks that work.",
   location: "Riyadh, KSA · Premium Resident",
   email: "ap@credible.uk.com",
   phone: "+966 533 15 8265",
@@ -74,10 +74,17 @@ export const signatureMoments: {
     note: "AI-native studio: 44+ agent skills, master-agent orchestration, shared CRM / KYC / brand / ops stack across the portfolio.",
   },
   {
+    org: "Albawani Holding Group",
+    role: "Group Director of Technology, Infrastructure & Operations",
+    value: "10 subsidiaries",
+    period: "Nov 2026 – Present",
+    note: "Group-wide technology strategy across 10 subsidiaries — bringing smart-city and digital-infrastructure leadership to the built environment: network, data centres, security, and the operating platform behind it.",
+  },
+  {
     org: "NEOM",
     role: "Director of Innovation",
     value: "$120M",
-    period: "Nov 2024 – Present",
+    period: "Nov 2024 – Oct 2026",
     note: "Best Performing Employee, across a 600+ sector.",
   },
   {

@@ -6,7 +6,8 @@ export type TimelineEntry = {
 };
 
 export const timeline: TimelineEntry[] = [
-  { org: "NEOM", role: "Director — Innovation", period: "Nov 24 – Present", value: "$100M" },
+  { org: "Albawani Holding Group", role: "Group Director — Technology, Infrastructure & Operations", period: "Nov 26 – Present", value: "10 subsidiaries" },
+  { org: "NEOM", role: "Director — Innovation", period: "Nov 24 – Oct 26", value: "$100M" },
   { org: "NEOM", role: "Director — Tech & Digital", period: "Apr 23 – Nov 24", value: "$290M" },
   { org: "Wipro", role: "Director — Smart Cities & IoT", period: "Apr 22 – Apr 23", value: "$100M" },
   { org: "Quantela", role: "Growth & Delivery Consultant", period: "Sept 21 – Apr 22", value: "$125M" },
