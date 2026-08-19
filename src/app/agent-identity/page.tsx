@@ -21,7 +21,7 @@ const VERIFY_COMMANDS = [
 ].join("\n");
 
 const VERSIONS = [
-  { hash: "9f816beb…80ea", label: "v0.1 signed PDF — published", block: "pending", time: "signed 2026-07-20", note: "current" },
+  { hash: "9f816beb…80ea", label: "v0.1 signed PDF — published", block: "963164", time: "2026-08-19 11:17:06 UTC", note: "current" },
   { hash: "ef989e51…2e6cf", label: "April working .docx", block: "pending", time: "—", note: "working copy" },
   { hash: "b8264de5…b8488", label: "April working .docx", block: "946875", time: "2026-04-27 12:26:35 UTC", note: "superseded" },
   { hash: "b2f19e41…a699a", label: "April working .docx", block: "946875", time: "2026-04-27 12:26:35 UTC", note: "superseded" },
@@ -172,10 +172,9 @@ export default function AgentIdentityPage() {
             </table>
           </div>
           <p className="mt-5 text-[14px] leading-[1.65]" style={{ color: TOKENS.inkFaint }}>
-            The current version&apos;s Bitcoin attestation is pending. OpenTimestamps calendars
-            aggregate and commit periodically; run <code>ots upgrade</code> and the block
-            appears. Until it does the proof rests on the calendars&apos; word rather than the
-            blockchain — which is worth saying rather than glossing.
+            The current version is anchored in Bitcoin block 963164. That attestation
+            is verifiable against any public Bitcoin node, with no contact with the
+            OpenTimestamps calendars, this site, or the author.
           </p>
         </section>
       </div>

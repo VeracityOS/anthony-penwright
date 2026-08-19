@@ -15,7 +15,7 @@ copy or a superseded proof.
 | SHA-256 | `9f816beb141f12c3c369fbd39a93d605a9ba5d153a7e118f837f71e3eff280ea` |
 | Proof | `agent-identity-framework-v0.1-signed.pdf.ots` |
 | Stamped | 2026-08-19 |
-| Bitcoin attestation | **Pending.** Calendars commit within a few hours; run `ots upgrade`, then this row gets a block height. |
+| Bitcoin attestation | **Block 963164**, 2026-08-19 11:17:06 UTC. Verifiable against any public Bitcoin node. |
 
 ## Check it
 
@@ -69,7 +69,7 @@ remains independent evidence of what existed when.
 
 | SHA-256 | What it is | Proof | Earliest Bitcoin block | Block time (UTC) |
 |---|---|---|---|---|
-| `9f816beb…80ea` | **v0.1 signed PDF — published** | `agent-identity-framework-v0.1-signed.pdf.ots` | pending | — |
+| `9f816beb…80ea` | **v0.1 signed PDF — published** | `agent-identity-framework-v0.1-signed.pdf.ots` | 963164 | 2026-08-19 11:17:06 |
 | `ef989e51…2e6cf` | April `.docx` working copy | `agent-identity-framework-whitepaper.docx.ots` | pending | — |
 | `b8264de5…b8488` | April `.docx` working copy | `archive/whitepaper-b8264de5.docx.ots` | 946875 | 2026-04-27 12:26:35 |
 | `b2f19e41…a699a` | April `.docx` working copy | `archive/whitepaper-b2f19e41.docx.ots` | 946875 | 2026-04-27 12:26:35 |
