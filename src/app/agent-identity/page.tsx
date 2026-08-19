@@ -8,22 +8,23 @@ export const metadata: Metadata = {
     "An open specification for agent identity, with a published hash and an OpenTimestamps proof anchored in Bitcoin. Verify it yourself, without trusting the author.",
 };
 
-const HASH = "ef989e513dcd25d15d19b0f7a735049d86c249122e677e0e2a4b3d448272e6cf";
-const DOC = "/agent-identity/agent-identity-framework-whitepaper.docx";
-const OTS = "/agent-identity/agent-identity-framework-whitepaper.docx.ots";
+const HASH = "9f816beb141f12c3c369fbd39a93d605a9ba5d153a7e118f837f71e3eff280ea";
+const DOC = "/agent-identity/agent-identity-framework-v0.1-signed.pdf";
+const OTS = "/agent-identity/agent-identity-framework-v0.1-signed.pdf.ots";
 
 const VERIFY_COMMANDS = [
-  "sha256sum agent-identity-framework-whitepaper.docx",
+  "sha256sum agent-identity-framework-v0.1-signed.pdf",
   "",
   "npm i javascript-opentimestamps",
-  "node node_modules/javascript-opentimestamps/ots-cli.js upgrade whitepaper.docx.ots",
-  "node node_modules/javascript-opentimestamps/ots-cli.js verify whitepaper.docx.ots",
+  "node node_modules/javascript-opentimestamps/ots-cli.js upgrade whitepaper.pdf.ots",
+  "node node_modules/javascript-opentimestamps/ots-cli.js verify whitepaper.pdf.ots",
 ].join("\n");
 
 const VERSIONS = [
-  { hash: "b2f19e41…a699a", block: "946875", time: "2026-04-27 12:26:35 UTC", note: "superseded" },
-  { hash: "b8264de5…b8488", block: "946875", time: "2026-04-27 12:26:35 UTC", note: "superseded" },
-  { hash: "ef989e51…2e6cf", block: "pending", time: "—", note: "current" },
+  { hash: "9f816beb…80ea", label: "v0.1 signed PDF — published", block: "pending", time: "signed 2026-07-20", note: "current" },
+  { hash: "ef989e51…2e6cf", label: "April working .docx", block: "pending", time: "—", note: "working copy" },
+  { hash: "b8264de5…b8488", label: "April working .docx", block: "946875", time: "2026-04-27 12:26:35 UTC", note: "superseded" },
+  { hash: "b2f19e41…a699a", label: "April working .docx", block: "946875", time: "2026-04-27 12:26:35 UTC", note: "superseded" },
 ];
 
 export default function AgentIdentityPage() {
@@ -144,6 +145,7 @@ export default function AgentIdentityPage() {
               <thead>
                 <tr style={{ color: TOKENS.inkFaint }}>
                   <th className="pb-3 pr-6 font-normal">SHA-256</th>
+                  <th className="pb-3 pr-6 font-normal">What</th>
                   <th className="pb-3 pr-6 font-normal">Bitcoin block</th>
                   <th className="pb-3 pr-6 font-normal">Block time</th>
                   <th className="pb-3 font-normal">Status</th>
@@ -153,6 +155,7 @@ export default function AgentIdentityPage() {
                 {VERSIONS.map((v) => (
                   <tr key={v.hash} style={{ borderTop: `1px solid ${TOKENS.line}` }}>
                     <td className="py-3 pr-6">{v.hash}</td>
+                    <td className="py-3 pr-6 font-sans" style={{ color: TOKENS.inkDim }}>{v.label}</td>
                     <td className="py-3 pr-6">{v.block}</td>
                     <td className="py-3 pr-6" style={{ color: TOKENS.inkDim }}>
                       {v.time}

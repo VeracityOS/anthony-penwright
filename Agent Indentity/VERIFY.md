@@ -4,27 +4,28 @@ The claim: this document existed, in exactly these bytes, no later than the
 Bitcoin block its timestamp commits to. You can check that yourself, offline
 from us, using only a public Bitcoin node or block explorer.
 
-## Current version
+## The published document
+
+**`agent-identity-framework-v0.1-signed.pdf`** — v0.1, 57 pages, signed
+2026-07-20. This is the artifact. Everything else in this folder is a working
+copy or a superseded proof.
 
 | | |
 |---|---|
-| File | `agent-identity-framework-whitepaper.docx` |
-| SHA-256 | `ef989e513dcd25d15d19b0f7a735049d86c249122e677e0e2a4b3d448272e6cf` |
-| Proof | `agent-identity-framework-whitepaper.docx.ots` |
+| SHA-256 | `9f816beb141f12c3c369fbd39a93d605a9ba5d153a7e118f837f71e3eff280ea` |
+| Proof | `agent-identity-framework-v0.1-signed.pdf.ots` |
 | Stamped | 2026-08-19 |
-| Bitcoin attestation | **Pending.** Calendars commit within a few hours; run `ots upgrade` below, then this row gets a block height. |
+| Bitcoin attestation | **Pending.** Calendars commit within a few hours; run `ots upgrade`, then this row gets a block height. |
 
 ## Check it
 
 ```bash
-# 1. Does the file match the published hash?
-sha256sum agent-identity-framework-whitepaper.docx
+sha256sum agent-identity-framework-v0.1-signed.pdf
 #    -> must equal the SHA-256 above, byte for byte
 
-# 2. Does the timestamp proof cover that hash, and is it in a Bitcoin block?
 npm i javascript-opentimestamps
-node node_modules/javascript-opentimestamps/ots-cli.js upgrade agent-identity-framework-whitepaper.docx.ots
-node node_modules/javascript-opentimestamps/ots-cli.js verify agent-identity-framework-whitepaper.docx.ots
+node node_modules/javascript-opentimestamps/ots-cli.js upgrade agent-identity-framework-v0.1-signed.pdf.ots
+node node_modules/javascript-opentimestamps/ots-cli.js verify agent-identity-framework-v0.1-signed.pdf.ots
 ```
 
 `upgrade` replaces the calendar's promise with a Bitcoin block header
@@ -41,23 +42,44 @@ changing and the proof failing.
 they are. OpenTimestamps commits to content and time, not identity. It supports
 a prior-art claim; it is not a signature.
 
-## Version history
+Note on the filename: the "signed" in `-signed.pdf` refers to the handwritten
+signature block on page 2. That is a signature in the ordinary sense, not a
+cryptographic one. The cryptographic evidence is the hash and the `.ots` proof,
+and they are separate things. Do not let the filename imply otherwise.
 
-Earlier versions of this document were timestamped and are preserved in
-`archive/`. They are kept, not deleted: each is independent evidence that its
-version existed by its attested block.
+## Known defect in the published text
 
-| Version SHA-256 | Proof | Earliest Bitcoin block | Block time (UTC) |
-|---|---|---|---|
-| `b2f19e41…a699a` | `archive/whitepaper-b2f19e41.docx.ots` | 946875 | 2026-04-27 12:26:35 |
-| `b8264de5…b8488` | `archive/whitepaper-b8264de5.docx.ots` | 946875 | 2026-04-27 12:26:35 |
-| `ef989e51…2e6cf` | `agent-identity-framework-whitepaper.docx.ots` | pending | — |
+Page 3 of the PDF, under *First publication and prior art*, states:
 
-The archived `.ots` files are renamed by hash because the document versions they
-cover are no longer distributed. `ots info <file>.ots` shows the hash each one
-commits to; `ots verify` needs the original bytes and so cannot be run on them.
+> This document was first published on 27 April 2026. A SHA-256 cryptographic
+> hash of the published file has been generated and timestamped via
+> OpenTimestamps.
 
-Note on the April versions: the document was edited after `whitepaper.sha256`
-was written, which is why the recorded hash and the shipped file diverged. The
-fix is this file — one hash, one proof, regenerated whenever the document
-changes, with the superseded proofs kept rather than overwritten.
+Until 2026-08-19 that sentence was true only of an **April `.docx` working
+copy**, not of this PDF. A reader who hashed the PDF and looked for a matching
+proof would have found none. It is true now — the PDF is stamped — but the next
+revision should say plainly which file the proof covers, because a provenance
+claim that does not name its artifact is exactly the failure this framework
+exists to prevent.
+
+## Working copies and superseded proofs
+
+`archive/` holds earlier material. It is kept rather than deleted: each proof
+remains independent evidence of what existed when.
+
+| SHA-256 | What it is | Proof | Earliest Bitcoin block | Block time (UTC) |
+|---|---|---|---|---|
+| `9f816beb…80ea` | **v0.1 signed PDF — published** | `agent-identity-framework-v0.1-signed.pdf.ots` | pending | — |
+| `ef989e51…2e6cf` | April `.docx` working copy | `agent-identity-framework-whitepaper.docx.ots` | pending | — |
+| `b8264de5…b8488` | April `.docx` working copy | `archive/whitepaper-b8264de5.docx.ots` | 946875 | 2026-04-27 12:26:35 |
+| `b2f19e41…a699a` | April `.docx` working copy | `archive/whitepaper-b2f19e41.docx.ots` | 946875 | 2026-04-27 12:26:35 |
+| `2d9ed959…8fe4` | earlier draft, never stamped | — | — | — |
+
+Two further copies exist outside this repo, under
+`OneDrive/Backup/D/CV Anthony/Whitepapers/` (`f9d17edd…` .docx and `a7d51c26…`
+unsigned .pdf). They are not the published artifact and carry no proof.
+
+**Six copies of one document is the actual problem.** The hash mismatch was a
+symptom. The rule going forward: one published artifact, stamped at the moment
+it is published, with every working copy kept somewhere that cannot be mistaken
+for it.
