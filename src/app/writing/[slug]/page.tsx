@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { TOKENS } from "@/components/v2/v2-primitives";
+import { TOKENS } from "@/lib/tokens";
 import { posts } from "@/content/posts";
 
 export function generateStaticParams() {

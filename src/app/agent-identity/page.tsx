@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { TOKENS } from "@/components/v2/v2-primitives";
+import { TOKENS } from "@/lib/tokens";
 
 export const metadata: Metadata = {
   title: "Agent Identity Framework — verify the whitepaper",
