@@ -422,7 +422,9 @@ export function Counter({
 }) {
   const ref = useRef<HTMLSpanElement | null>(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
-  const [val, setVal] = useState(0);
+  // Seed with the real figure so SSR / pre-hydration / JS-off never renders "0".
+  // The count-up is an enhancement, not the source of the number.
+  const [val, setVal] = useState(to);
   const reduce = useReducedMotion();
 
   useEffect(() => {
