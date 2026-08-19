@@ -696,7 +696,7 @@ function ExecutiveSummary() {
         <div className="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <DisplayHeading gradient>The short version.</DisplayHeading>
           <p className="max-w-md text-[15px] leading-relaxed text-white/65">
-            Twenty years. $1.3BN+ delivered. Four frameworks, seven ventures,
+            Twenty-three years. $1.3BN+ delivered. Four frameworks, seven ventures,
             one operator — shipping outcomes, not decks.
           </p>
         </div>
@@ -1499,7 +1499,7 @@ function Timeline() {
       <div className="mx-auto max-w-[1600px]">
         <SectionKicker index="08" label="Career Timeline" keys={["⌘", "8"]} />
         <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <DisplayHeading gradient>Twenty years.</DisplayHeading>
+          <DisplayHeading gradient>Twenty-three years.</DisplayHeading>
           <p className="max-w-md text-[15px] leading-relaxed text-white/65">
             Ministries, giga-projects, platforms. Each row a programme; each
             column a proof point.

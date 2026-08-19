@@ -2,7 +2,7 @@ export const profile = {
   name: "Anthony Penwright",
   tagline: "People · Business · Technology · Innovation · Leadership",
   pitch:
-    "Smart-city and digital-infrastructure leader — now Group Director of Technology, Infrastructure & Operations at Albawani Holding Group — codifying 20+ years across NEOM, Cisco and government giga-projects into frameworks that work.",
+    "Smart-city and digital-infrastructure leader — now Group Director of Technology, Infrastructure & Operations at Albawani Holding Group — codifying 23 years across NEOM, Cisco and government giga-projects into frameworks that work.",
   location: "Riyadh, KSA · Premium Resident",
   email: "ap@credible.uk.com",
   phone: "+966 533 15 8265",

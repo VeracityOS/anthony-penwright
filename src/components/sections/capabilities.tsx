@@ -35,7 +35,7 @@ const lightTreatments: LightTreatment[] = [
     gradient: "linear-gradient(135deg, #FDF6F1 0%, #FAE8DC 55%, #F6D9C4 100%)",
     accent: "#C8532C",
     pillText: "#5C3824",
-    headline: "Board-room fluency, earned over twenty years.",
+    headline: "Board-room fluency, earned over twenty-three years.",
   },
   {
     // Technology & Architecture — cool pearl

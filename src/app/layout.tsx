@@ -12,7 +12,7 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "Anthony Penwright — People · Business · Technology · Innovation · Leadership",
   description:
-    "Managing Director–level leader codifying 20+ years of global smart-city and digital-infrastructure delivery into frameworks that work. $1.3BN+ programmes delivered.",
+    "Managing Director–level leader codifying 23 years of global smart-city and digital-infrastructure delivery into frameworks that work. $1.3BN+ programmes delivered.",
   metadataBase: new URL("https://anthony-penwright.vercel.app"),
   openGraph: {
     title: "Anthony Penwright",

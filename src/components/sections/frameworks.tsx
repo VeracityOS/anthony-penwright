@@ -19,7 +19,7 @@ export function Frameworks() {
               Codified methodology, not consulting theatre.
             </>
           }
-          lede="Twenty years of smart-city and digital-infrastructure delivery, distilled into four closed-loop advisory frameworks — each with constructs, scoring models and standing outputs. Each one is live, in production, on a real programme."
+          lede="Twenty-three years of smart-city and digital-infrastructure delivery, distilled into four closed-loop advisory frameworks — each with constructs, scoring models and standing outputs. Each one is live, in production, on a real programme."
         />
 
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
