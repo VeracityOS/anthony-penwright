@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { TOKENS } from "@/lib/tokens";
+import { DownloadButton } from "@/components/download-button";
 
 export const metadata: Metadata = {
   title: "Agent Identity Framework — verify the whitepaper",
@@ -69,13 +70,13 @@ export default function AgentIdentityPage() {
         </p>
 
         <div className="mt-10 flex flex-wrap gap-3">
-          <a
+          <DownloadButton
             href={DOC}
             className="rounded-md px-5 py-3 text-[14px] font-[600]"
             style={{ background: TOKENS.ink, color: TOKENS.canvas }}
           >
             Download the whitepaper
-          </a>
+          </DownloadButton>
           <a
             href={OTS}
             className="rounded-md px-5 py-3 text-[14px]"

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import { InsightTag } from "@/components/insight-tag";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
   title: "Anthony Penwright — People · Business · Technology · Innovation · Leadership",
   description:
     "Managing Director–level leader codifying 23 years of global smart-city and digital-infrastructure delivery into frameworks that work. $1.3BN+ programmes delivered.",
-  metadataBase: new URL("https://anthony-penwright.vercel.app"),
+  metadataBase: new URL("https://anthonypenwright.com"),
   openGraph: {
     title: "Anthony Penwright",
     description:
@@ -35,7 +36,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={poppins.variable}>
-      <body>{children}</body>
+      <body>{children}        <InsightTag />
+      </body>
     </html>
   );
 }

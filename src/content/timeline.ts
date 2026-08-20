@@ -14,7 +14,7 @@ export const timeline: TimelineEntry[] = [
   { org: "Cisco", role: "Smart City Global Consultant", period: "Nov 15 – Apr 21", value: "$315M" },
   { org: "Cabinet Office", role: "Program Director", period: "Mar 13 – Nov 15", value: "$23M pa" },
   { org: "Environment Agency", role: "Program Director", period: "Dec 11 – Mar 13", value: "$48M" },
-  { org: "FCO", role: "Director — Strategic Operations", period: "Aug 08 – Dec 11", value: "$910M" },
+  { org: "FCO", role: "Director — Strategic Operations", period: "Aug 08 – Dec 11", value: "£768M" },
   { org: "Ministry of Justice (YJB)", role: "Program Director", period: "Feb 08 – Aug 08", value: "$9M" },
   { org: "Ministry of Defence", role: "Overseas Delivery Director", period: "Nov 05 – Feb 08", value: "$5BN" },
   { org: "Corus Steel", role: "Transformation Lead", period: "Aug 04 – Nov 05", value: "$24M" },

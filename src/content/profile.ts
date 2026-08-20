@@ -111,7 +111,7 @@ export const signatureMoments: {
   {
     org: "FCO",
     role: "Director — Strategic Operations",
-    value: "$975M",
+    value: "£768M",
     period: "242 sites · 150+ countries",
     note: "450+ reports. 99.8% SLA across global estate.",
   },
