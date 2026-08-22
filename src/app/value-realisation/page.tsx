@@ -9,12 +9,12 @@ export const metadata: Metadata = {
     "An open methodology for governing whether a programme was worth delivering, not merely whether it was delivered. Published with a hash and an OpenTimestamps proof — verify it yourself.",
 };
 
-const HASH = "7980f395e225bb68ef72df6c9bd9fb8a8b569593ba551423aa79441f4fd3caac";
-const DOC = "/value-realisation/value-realisation-office-v1.1.pdf";
-const OTS = "/value-realisation/value-realisation-office-v1.1.pdf.ots";
+const HASH = "0e60063ae2f9250afc025a7bab6fa778d427088439dfb11858f5e22625ad66dd";
+const DOC = "/value-realisation/value-realisation-office-v1.2.pdf";
+const OTS = "/value-realisation/value-realisation-office-v1.2.pdf.ots";
 
 const VERIFY_COMMANDS = [
-  "sha256sum value-realisation-office-v1.1.pdf",
+  "sha256sum value-realisation-office-v1.2.pdf",
   "",
   "npm i javascript-opentimestamps",
   "node node_modules/javascript-opentimestamps/ots-cli.js upgrade whitepaper.pdf.ots",
@@ -78,9 +78,9 @@ export default function ValueRealisationPage() {
         </p>
 
         <p className="mt-5 text-[17px] leading-[1.7]" style={{ color: TOKENS.inkDim }}>
-          Distilled from VRO design at DMCC Uptown Dubai and governance frameworks at NEOM
-          Sindalah. Offered openly, and timestamped — you do not have to take my word for when
-          it was written.
+          Built on twenty-three years of delivery in government and large-scale technology
+          transformation. Offered openly, and timestamped — you do not have to take my word
+          for when it was written.
         </p>
 
         <div className="mt-10 flex flex-wrap gap-3">
@@ -211,12 +211,22 @@ export default function ValueRealisationPage() {
               </thead>
               <tbody className="font-mono">
                 <tr style={{ borderTop: `1px solid ${TOKENS.line}` }}>
-                  <td className="py-3 pr-6">1.1</td>
+                  <td className="py-3 pr-6">1.2</td>
+                  <td className="py-3 pr-6">0e60063a…66dd</td>
+                  <td className="py-3 pr-6 font-sans" style={{ color: TOKENS.inkDim }}>
+                    Basis stated as experience rather than named engagements
+                  </td>
+                  <td className="py-3" style={{ color: TOKENS.emerald }}>current</td>
+                </tr>
+                <tr style={{ borderTop: `1px solid ${TOKENS.line}` }}>
+                  <td className="py-3 pr-6">
+                    <a href="/value-realisation/value-realisation-office-v1.1.pdf" style={{ color: TOKENS.inkDim }}>1.1</a>
+                  </td>
                   <td className="py-3 pr-6">7980f395…caac</td>
                   <td className="py-3 pr-6 font-sans" style={{ color: TOKENS.inkDim }}>
                     Drawn diagram, card layout, narrative scenes, running mark
                   </td>
-                  <td className="py-3" style={{ color: TOKENS.emerald }}>current</td>
+                  <td className="py-3" style={{ color: TOKENS.inkFaint }}>superseded</td>
                 </tr>
                 <tr style={{ borderTop: `1px solid ${TOKENS.line}` }}>
                   <td className="py-3 pr-6">
