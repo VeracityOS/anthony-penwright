@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>The Value Realisation Office — Verax Venture Studio</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm; }
+  :root {
+    --ink: #14181d;
+    --dim: #4a5560;
+    --faint: #7d8894;
+    --rule: #d9dee4;
+    --accent: #8B5A3C;
+    --wash: #f6f7f9;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", -apple-system, "Helvetica Neue", Arial, sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.62;
+    color: var(--ink);
+    background: #fff;
+  }
+  .page { page-break-after: always; }
+  .page:last-child { page-break-after: auto; }
+
+  /* ── Cover ───────────────────────────────────────────────── */
+  .cover { display: flex; flex-direction: column; min-height: 245mm; }
+  .cover img { width: 100%; height: 92mm; object-fit: cover; display: block; }
+  .eyebrow {
+    font-size: 8pt; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--faint); margin: 14mm 0 5mm;
+  }
+  h1.title {
+    font-size: 30pt; line-height: 1.1; font-weight: 700;
+    letter-spacing: -0.02em; margin: 0 0 6mm;
+  }
+  .strap { font-size: 13pt; color: var(--dim); line-height: 1.45; max-width: 135mm; margin: 0 0 auto; }
+  .meta { border-top: 1px solid var(--rule); padding-top: 5mm; margin-top: 10mm; }
+  .meta dl { display: grid; grid-template-columns: 34mm 1fr; gap: 2.4mm 0; margin: 0; font-size: 9.5pt; }
+  .meta dt { color: var(--faint); }
+  .meta dd { margin: 0; }
+
+  /* ── Typography ──────────────────────────────────────────── */
+  h2 {
+    font-size: 16pt; font-weight: 700; letter-spacing: -0.01em;
+    margin: 0 0 4mm; padding-top: 2mm;
+  }
+  h2 .num { color: var(--accent); font-variant-numeric: tabular-nums; margin-right: 3mm; }
+  h3 { font-size: 11.5pt; font-weight: 700; margin: 7mm 0 2.5mm; }
+  h4 { font-size: 10pt; font-weight: 700; margin: 5mm 0 1.5mm; color: var(--dim); }
+  p { margin: 0 0 3.6mm; }
+  .lede { font-size: 11.5pt; color: var(--dim); line-height: 1.55; margin-bottom: 6mm; }
+  ul, ol { margin: 0 0 4mm; padding-left: 5mm; }
+  li { margin-bottom: 1.6mm; }
+  strong { font-weight: 700; }
+  code { font-family: "Consolas", monospace; font-size: 9pt; background: var(--wash); padding: 0.4mm 1.2mm; }
+
+  blockquote {
+    margin: 5mm 0; padding: 4mm 6mm; background: var(--wash);
+    border-left: 2.5pt solid var(--accent); font-size: 10.5pt; color: var(--dim);
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  table { width: 100%; border-collapse: collapse; margin: 4mm 0 6mm; font-size: 9pt; }
+  th {
+    text-align: left; font-weight: 700; padding: 2.4mm 3mm;
+    border-bottom: 1.2pt solid var(--ink); vertical-align: bottom;
+  }
+  td { padding: 2.4mm 3mm; border-bottom: 0.5pt solid var(--rule); vertical-align: top; }
+  tr { page-break-inside: avoid; }
+
+  .callout {
+    border: 0.8pt solid var(--rule); border-top: 2.5pt solid var(--accent);
+    padding: 5mm 6mm; margin: 6mm 0; page-break-inside: avoid;
+  }
+  .callout .label {
+    font-size: 8pt; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 2.5mm;
+  }
+  .callout p:last-child { margin-bottom: 0; }
+
+  .chassis {
+    font-family: "Consolas", monospace; font-size: 7.6pt; line-height: 1.42;
+    background: var(--wash); padding: 5mm; margin: 4mm 0 6mm; white-space: pre;
+    border: 0.5pt solid var(--rule);
+  }
+  figure { margin: 0 0 6mm; }
+  figure img { width: 100%; display: block; }
+  figcaption { font-size: 8.5pt; color: var(--faint); margin-top: 2mm; }
+
+  .toc { font-size: 10pt; }
+  .toc div { display: flex; gap: 4mm; padding: 1.9mm 0; border-bottom: 0.5pt solid var(--rule); }
+  .toc .n { color: var(--accent); width: 8mm; font-variant-numeric: tabular-nums; }
+
+  footer.doc {
+    border-top: 0.5pt solid var(--rule); margin-top: 8mm; padding-top: 3mm;
+    font-size: 8pt; color: var(--faint); display: flex; justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ COVER ══ -->
+<section class="page cover">
+  <img src="cover.png" alt="A continuous band of brushed steel twisted into a Möbius loop" />
+  <div class="eyebrow">Verax Venture Studio · Open methodology · v1.0</div>
+  <h1 class="title">The Value<br />Realisation Office</h1>
+  <p class="strap">Governing whether a programme was worth delivering — not merely whether it was delivered.</p>
+  <div class="meta">
+    <dl>
+      <dt>Author</dt><dd>Anthony Penwright</dd>
+      <dt>Version</dt><dd>1.0 · Public release</dd>
+      <dt>Date</dt><dd>August 2026</dd>
+      <dt>Licence</dt><dd>CC BY-SA 4.0</dd>
+      <dt>Heritage</dt><dd>Distilled from VRO design at DMCC Uptown Dubai and governance frameworks at NEOM Sindalah</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- ══ NOTICE ══ -->
+<section class="page">
+  <h2><span class="num">—</span>Notice, licence and attribution</h2>
+
+  <h3>Copyright and licence</h3>
+  <p>This document, including its text, tables and the framework it describes, is © 2026 Anthony Penwright and Verax Venture Studio. The methodology — the prose, diagrams and conceptual framework set out here — is published under the Creative Commons Attribution-ShareAlike 4.0 International Licence (CC BY-SA 4.0).</p>
+  <p>You are free to share, adapt and build upon this work for any purpose, including commercially, provided you give appropriate credit, link to the licence, indicate if changes were made, and distribute derivative works of the methodology under the same terms.</p>
+
+  <h3>On the name</h3>
+  <div class="callout">
+    <div class="label">Stated plainly</div>
+    <p><strong>The term “Value Realisation Office” is not claimed as original to this author.</strong> It is in active use across the consulting industry, and several firms publish their own treatments of it. No source establishes who used it first, and this paper makes no priority claim.</p>
+    <p>What is specific to this document is the <strong>construct</strong>: three operating modes running on three cadences to three audiences, a Continual Value Model chassis of seven elements, three workstreams that never close, and the insistence that the PMO sits <em>alongside</em> the VRO rather than inside it. Those are the parts worth arguing about, and the parts this paper defends.</p>
+  </div>
+
+  <h3>Attribution for derivative works</h3>
+  <p>Where this work is quoted, summarised or built upon, attribution should take a form substantially as follows: “Based on <em>The Value Realisation Office</em> v1.0, by Anthony Penwright (August 2026), licensed under CC BY-SA 4.0.”</p>
+
+  <h3>Provenance</h3>
+  <p>A SHA-256 hash of this published file has been generated and timestamped via OpenTimestamps, which anchors the hash to the Bitcoin blockchain as a tamper-evident record of the document’s existence on that date. The hash, the timestamp proof and instructions for verifying both — offline, without contacting the author — are published alongside this document. <strong>The proof covers this exact PDF and no other file.</strong></p>
+  <p>That statement is checkable, and it is meant to be. A methodology about evidence should carry its own.</p>
+</section>
+
+<!-- ══ CONTENTS ══ -->
+<section class="page">
+  <h2><span class="num">—</span>Contents</h2>
+  <div class="toc">
+    <div><span class="n">1</span><span>The gap nobody owns</span></div>
+    <div><span class="n">2</span><span>VRO and PMO are different instruments</span></div>
+    <div><span class="n">3</span><span>The Continual Value Model</span></div>
+    <div><span class="n">4</span><span>The seven elements</span></div>
+    <div><span class="n">5</span><span>Three operating modes</span></div>
+    <div><span class="n">6</span><span>Three workstreams that never close</span></div>
+    <div><span class="n">7</span><span>Execution planning</span></div>
+    <div><span class="n">8</span><span>Standing one up</span></div>
+    <div><span class="n">9</span><span>Steady-state cadence</span></div>
+    <div><span class="n">10</span><span>The Value Realisation Scorecard</span></div>
+    <div><span class="n">11</span><span>Where it sits among adjacent methods</span></div>
+    <div><span class="n">12</span><span>Failure modes, and one test</span></div>
+  </div>
+</section>
+
+<!-- ══ 1 ══ -->
+<section class="page">
+  <h2><span class="num">1</span>The gap nobody owns</h2>
+  <p class="lede">A large programme is one of the most heavily governed things an organisation does. It is also, routinely, one of the least examined.</p>
+
+  <p>The governance that exists is delivery governance. A programme management office tracks scope, schedule, cost, risk and dependency, and does so with real precision. It will tell you that go-live is eleven weeks away and the forecast is four per cent over budget, and it will be right.</p>
+
+  <p>What it does not track is whether the case for doing any of it still holds.</p>
+
+  <p>The benefits case is typically written once, to release funding. It is approved, filed, and rarely opened again. From that moment the organisation measures delivery against a plan and stops measuring the plan against reality. Two years later the programme ships — on time, close to budget, to specification — and nobody in the building can evidence what it returned.</p>
+
+  <h3>The Phase-2 gap</h3>
+  <p>This has a characteristic shape. Phase one completes and is celebrated. Phase two is not funded, because when the finance committee asks what phase one delivered, the honest answer is that nobody measured. The programme was governed to completion by people whose remit ended at completion.</p>
+
+  <p>The organisations most exposed to this are not the careless ones. They are the disciplined ones — the ones with mature delivery governance, which is precisely what allows a programme to arrive intact and unexamined.</p>
+
+  <blockquote>
+    <p>A programme office asks whether we are on schedule. Almost nobody asks whether we are still right.</p>
+  </blockquote>
+
+  <h3>What is actually missing</h3>
+  <p>Three questions have no permanent owner in most organisations:</p>
+  <ul>
+    <li><strong>Is the business case still true?</strong> Conditions move. The case does not.</li>
+    <li><strong>Is what we built being used, and is it working?</strong> Adoption and service quality after go-live belong to no one in particular.</li>
+    <li><strong>What should we now stop?</strong> Retirement is nobody’s job, so nothing is ever retired.</li>
+  </ul>
+
+  <p>Those three questions are what the Value Realisation Office exists to own. Not as a project with an end date, but as a permanent function — because the questions are permanent.</p>
+</section>
+
+<!-- ══ 2 ══ -->
+<section class="page">
+  <h2><span class="num">2</span>VRO and PMO are different instruments</h2>
+  <p class="lede">The most common failure in adopting this is to merge the two. A PMO with a value dashboard bolted to it is still a PMO.</p>
+
+  <table>
+    <thead><tr><th style="width:32mm">Dimension</th><th>PMO</th><th>VRO</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Governs</strong></td><td>Delivery — timeline, milestone, budget</td><td>Value — outcome, return, evolution</td></tr>
+      <tr><td><strong>Horizon</strong></td><td>The project. It has an end date</td><td>Permanent. It never closes</td></tr>
+      <tr><td><strong>Success</strong></td><td>On time, on budget, on scope</td><td>Return realised, services adopted, satisfaction improved</td></tr>
+      <tr><td><strong>Cadence</strong></td><td>Weekly status, milestone gates</td><td>Daily, weekly, monthly and quarterly — three modes</td></tr>
+      <tr><td><strong>Staffed by</strong></td><td>Project managers</td><td>Cross-functional: operations, strategy, technology, finance</td></tr>
+      <tr><td><strong>Failure mode</strong></td><td>The project closes and the learning is lost</td><td>The VRO <em>is</em> the learning-retention mechanism</td></tr>
+      <tr><td><strong>Reports to</strong></td><td>Programme sponsor</td><td>Chief executive or board</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <div class="label">The structural rule</div>
+    <p>The PMO does not report into the VRO, and the VRO does not report into the PMO. <strong>They sit alongside one another and are permitted to disagree in public</strong> — one reporting a programme green on delivery while the other reports the value case has drifted.</p>
+    <p>That tension is the mechanism, not a defect in it. Collapse the two into a single function and the delivery view will win every time, because delivery data is timely, precise and comfortable, and value data is none of those things.</p>
+  </div>
+
+  <h3>When not to use this</h3>
+  <p>The VRO is the wrong instrument when a programme is still in discovery and there is nothing yet to govern; when the buyer genuinely wants project management, in which case they want a PMO and should be given one; and when the engagement is a single deliverable with no continuing life.</p>
+</section>
+
+<!-- ══ 3 ══ -->
+<section class="page">
+  <h2><span class="num">3</span>The Continual Value Model</h2>
+  <p class="lede">The chassis. Everything in this paper hangs on it, and its defining property is that nothing in it terminates.</p>
+
+  <div class="chassis">┌─ TRUE PARTNERSHIPS ─────────────────────────────────────────┐
+│                                                             │
+│  ┌─ VALUE REALISATION OFFICE ──────────────┐   ┌─────────┐  │
+│  │  Value Realisation │ Op Ex │ Adaptive   │   │   PMO   │  │
+│  └─────────────────────────────────────────┘   └─────────┘  │
+│                                                             │
+│  ┌─ STRATEGIC IMPERATIVES ─────────────────────────────┐    │
+│  │  Stakeholder Reqs │ Alignment │ Goals & Ambition    │    │
+│  └─────────────────────────────────────────────────────┘    │
+│                                                             │
+│  ┌─ Market ──┐  ┌─ Service Portfolio &amp; Business Model ─┐    │
+│  │ Analysis  │  │  Technology Blueprint                 │    │
+│  │ &amp; Drivers │  │  Operating Model                      │    │
+│  └───────────┘  └───────────────────────────────────────┘    │
+│                                            ┌─ Execution ─┐   │
+│                                            │  Planning   │   │
+│                                            └─────────────┘   │
+└─────────────────────────────────────────────────────────────┘</div>
+
+  <p>Read it from the outside in. <strong>True Partnerships</strong> is the wrapper — the commercial and relational basis on which any of this is possible. Inside it sit the <strong>VRO</strong> and the <strong>PMO</strong>, adjacent and independent.</p>
+
+  <p>Beneath them, <strong>Strategic Imperatives</strong> act as the standing north star, refreshed on a slow cadence. <strong>Market Analysis and Drivers</strong> feed in from outside. The three <strong>continuous workstreams</strong> hold the substance of what is being governed. <strong>Execution Planning</strong> is the output stream — what will actually happen next.</p>
+
+  <blockquote>
+    <p>The VRO is not a project. It is the permanent operating system for a transformation. Projects end; the VRO keeps extracting value.</p>
+  </blockquote>
+</section>
+
+<!-- ══ 4 ══ -->
+<section class="page">
+  <h2><span class="num">4</span>The seven elements</h2>
+
+  <table>
+    <thead><tr><th style="width:10mm">#</th><th style="width:48mm">Element</th><th>What it is for</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><strong>True Partnerships</strong></td><td>The outer wrapper. Governance of this kind cannot be bought as a deliverable; it requires a relationship with continuing obligations on both sides.</td></tr>
+      <tr><td>2</td><td><strong>Value Realisation Office</strong></td><td>The body itself, running three operating modes. See §5.</td></tr>
+      <tr><td>3</td><td><strong>PMO</strong></td><td>Adjacent, not subordinate. Retains delivery governance in full.</td></tr>
+      <tr><td>4</td><td><strong>Strategic Imperatives</strong></td><td>The standing north star: stakeholder requirements and alignment quarterly, goals and ambition annually.</td></tr>
+      <tr><td>5</td><td><strong>Market Analysis &amp; Drivers</strong></td><td>Four input feeds: market and technology trends, benchmarks and best practice, customer analysis, and policy and regulation.</td></tr>
+      <tr><td>6</td><td><strong>Three Continuous Workstreams</strong></td><td>Service portfolio and business model, technology blueprint, operating model. See §6.</td></tr>
+      <tr><td>7</td><td><strong>Execution Planning</strong></td><td>The output stream. See §7.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>The input feeds, and their cadence</h3>
+  <table>
+    <thead><tr><th style="width:52mm">Feed</th><th style="width:60mm">Source</th><th>Cadence</th></tr></thead>
+    <tbody>
+      <tr><td>Market &amp; technology trends</td><td>Analysts, vendor roadmaps, peer benchmarks</td><td>Continuous</td></tr>
+      <tr><td>Best practice &amp; global benchmarks</td><td>Sister assets, comparable estates, standards bodies</td><td>Quarterly</td></tr>
+      <tr><td>Customer analysis</td><td>Occupant surveys, sentiment data, net promoter score</td><td>Continuous</td></tr>
+      <tr><td>Policies &amp; regulations</td><td>Legal and compliance, government rules, regulatory change</td><td>Continuous</td></tr>
+    </tbody>
+  </table>
+
+  <p>The feeds matter because without them the Adaptive mode has nothing to work with. A VRO with no external input degrades into an internal reporting function inside a year.</p>
+</section>
+
+<!-- ══ 5 ══ -->
+<section class="page">
+  <h2><span class="num">5</span>Three operating modes</h2>
+  <p class="lede">One body, three distinct jobs, on three cadences, to three audiences. Attempting all three in a single monthly meeting is the second most common failure.</p>
+
+  <table>
+    <thead><tr><th style="width:36mm">Mode</th><th>What it does</th><th style="width:30mm">Cadence</th><th style="width:36mm">Audience</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Value Realisation</strong></td>
+        <td>Tracks return, cost savings and operational outcomes against the original business case</td>
+        <td>Continuous, reviewed monthly</td>
+        <td>Chief financial officer, chief executive, board</td>
+      </tr>
+      <tr>
+        <td><strong>Operational Excellence</strong></td>
+        <td>Drives day-to-day quality, service-level adherence and KPI monitoring</td>
+        <td>Daily and weekly</td>
+        <td>Operations director, facilities management</td>
+      </tr>
+      <tr>
+        <td><strong>Adaptive / Evolving</strong></td>
+        <td>Spots new opportunity, retires obsolete services, refreshes the priority matrix</td>
+        <td>Quarterly</td>
+        <td>Chief technology officer, innovation, strategy</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Why the separation is load-bearing</h3>
+  <p>The three modes answer questions that operate on incompatible timescales. Service-level adherence is a daily concern and a monthly irrelevance. Return against business case cannot be assessed weekly and is meaningless quarterly if nobody has been collecting. Retirement decisions require distance and cannot be taken in an operational meeting where the people present built the thing.</p>
+
+  <p>They also have different audiences, and audience determines what can be said. An operations review with the board present becomes a status report. A value review with the operations team present becomes a defence.</p>
+
+  <div class="callout">
+    <div class="label">The mode that gets dropped</div>
+    <p>Adaptive is the mode organisations quietly stop running. It is the only one with no immediate consumer — nobody chases a quarterly retirement review — and it is the only one that can recommend stopping something.</p>
+    <p>A VRO running two modes is a reporting function. The third is what makes it governance.</p>
+  </div>
+</section>
+
+<!-- ══ 6 ══ -->
+<section class="page">
+  <h2><span class="num">6</span>Three workstreams that never close</h2>
+  <p class="lede">These hold the substance being governed. Each is refreshed on a cadence rather than completed.</p>
+
+  <h3>6a · Service portfolio and business model</h3>
+  <table>
+    <thead><tr><th style="width:52mm">Component</th><th>What it is</th><th style="width:30mm">Refresh</th></tr></thead>
+    <tbody>
+      <tr><td>Business requirement</td><td>What each service must deliver</td><td>Per service change</td></tr>
+      <tr><td>Service catalogue</td><td>The live, ranked list</td><td>Quarterly</td></tr>
+      <tr><td>Commercialisation strategy</td><td>How each service makes or saves money</td><td>Annually</td></tr>
+      <tr><td>Go-to-market strategy</td><td>How each service reaches its users</td><td>Annually</td></tr>
+      <tr><td>Business case</td><td>The rolled-up return story</td><td>Quarterly</td></tr>
+    </tbody>
+  </table>
+
+  <h3>6b · Technology blueprint</h3>
+  <p>A layered service reference architecture — access and presentation, application, data, service platform, infrastructure — with cyber-security as a cross-cutting concern owning its own column rather than a row. The blueprint is governed, not merely drawn: each layer has an owner and a refresh trigger.</p>
+
+  <h3>6c · Operating model</h3>
+  <table>
+    <thead><tr><th style="width:64mm">Component</th><th>What it governs</th></tr></thead>
+    <tbody>
+      <tr><td>Capabilities &amp; skill requirements</td><td>What the operations team must learn</td></tr>
+      <tr><td>Sourcing strategy</td><td>Make, buy or partner, per service</td></tr>
+      <tr><td>Partnership strategy</td><td>Who the organisation is tied to, and why</td></tr>
+      <tr><td>Partner selection framework</td><td>How new vendors are chosen</td></tr>
+      <tr><td>Partner management</td><td>How existing vendors are governed</td></tr>
+      <tr><td>Governance model</td><td>The VRO’s own rules of engagement</td></tr>
+      <tr><td>Service lifecycle management</td><td>Birth, live and retirement for every service</td></tr>
+    </tbody>
+  </table>
+
+  <p>Service lifecycle management is the component most often absent. Without an explicit retirement path, a service catalogue only grows, and a catalogue that only grows eventually consumes the operating budget that was supposed to fund the next thing.</p>
+</section>
+
+<!-- ══ 7 ══ -->
+<section class="page">
+  <h2><span class="num">7</span>Execution planning</h2>
+  <p class="lede">The output stream. What the VRO actually produces, and how often.</p>
+
+  <table>
+    <thead><tr><th style="width:56mm">Output</th><th>What it is</th><th style="width:26mm">Refresh</th></tr></thead>
+    <tbody>
+      <tr><td>Innovation stimulus — the model office</td><td>A protected space for experimentation; a living lab</td><td>Always on</td></tr>
+      <tr><td>Implementation roadmap</td><td>Twelve-month rolling plan</td><td>Monthly</td></tr>
+      <tr><td>Risk management plan</td><td>Live risk register</td><td>Monthly</td></tr>
+      <tr><td>Investments forecast</td><td>Three-year capital and operating forecast</td><td>Quarterly</td></tr>
+      <tr><td>Proofs of concept</td><td>Pilot pipeline — what is coming, what is being decommissioned</td><td>Quarterly</td></tr>
+    </tbody>
+  </table>
+
+  <p>Note that the pilot pipeline explicitly tracks decommissioning alongside arrival. A pipeline that only records what is starting will produce a portfolio nobody can afford to run.</p>
+
+  <div class="callout">
+    <div class="label">The model office</div>
+    <p>A protected experimentation space matters because the alternative is experimenting in production, which operations teams correctly resist, or not experimenting, which is how an estate ages. Giving innovation somewhere legitimate to happen is cheaper than either.</p>
+  </div>
+</section>
+
+<!-- ══ 8 ══ -->
+<section class="page">
+  <h2><span class="num">8</span>Standing one up</h2>
+
+  <h3>Phase 1 — Design · two to three weeks</h3>
+  <table>
+    <thead><tr><th style="width:8mm">#</th><th>Activity</th><th style="width:50mm">Output</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Map existing governance — establish who already does what</td><td>Governance landscape map</td></tr>
+      <tr><td>2</td><td>Identify which modes are already performed, usually informally</td><td>Gap assessment</td></tr>
+      <tr><td>3</td><td>Draft the charter: purpose, membership, cadence, decision rights</td><td>Charter</td></tr>
+      <tr><td>4</td><td>Map the three workstreams onto real services and systems</td><td>Workstream mapping</td></tr>
+      <tr><td>5</td><td>Define input feeds — what exists, what must be built</td><td>Data source register</td></tr>
+      <tr><td>6</td><td>Define the output stream and its consumers</td><td>Reporting framework</td></tr>
+      <tr><td>7</td><td>Identify the VRO’s physical home</td><td>Space brief</td></tr>
+      <tr><td>8</td><td>Produce the setup proposal</td><td>Setup proposal</td></tr>
+    </tbody>
+  </table>
+
+  <p>Step two is the one that determines whether this succeeds. Most organisations already perform Operational Excellence informally and perform no other mode at all. Naming what already exists converts the VRO from an imposition into a completion.</p>
+
+  <h3>Phase 2 — Stand-up · four to eight weeks</h3>
+  <p>Membership is assigned by the buyer, never by the adviser. Dashboards are built per mode. The first monthly value review, the first weekly operational review and the first quarterly adaptive review are all run inside this window — deliberately, because a cadence that has not run once will not survive contact with a busy quarter. Input feed schedules are agreed with the data owners by name, and the first rolling roadmap and investment forecast are published.</p>
+
+  <h3>Phase 3 — Steady state</h3>
+  <p>Ongoing, and covered in §9.</p>
+</section>
+
+<!-- ══ 9 ══ -->
+<section class="page">
+  <h2><span class="num">9</span>Steady-state cadence</h2>
+
+  <table>
+    <thead><tr><th style="width:26mm">Cadence</th><th>What happens</th><th style="width:50mm">Who attends</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Daily</strong></td><td>Operational stand-up: service-level adherence, incident review</td><td>Operations team</td></tr>
+      <tr><td><strong>Weekly</strong></td><td>Operational review: KPI trends, escalation, actions</td><td>Operations and facilities director</td></tr>
+      <tr><td><strong>Monthly</strong></td><td>Value realisation: return tracking, business case actuals, executive brief</td><td>Full VRO membership</td></tr>
+      <tr><td><strong>Quarterly</strong></td><td>Adaptive: priority matrix refresh, technology assessment, input feed review</td><td>VRO, strategy, C-suite</td></tr>
+      <tr><td><strong>Annually</strong></td><td>Strategic imperatives refresh: goals, ambition, stakeholder requirements</td><td>Board and chief executive</td></tr>
+    </tbody>
+  </table>
+
+  <p>The cadence is the framework. An organisation that adopts the language and not the rhythm has adopted nothing — the whole apparatus exists to force a particular question in front of a particular audience at a particular interval, and removing the interval removes the mechanism.</p>
+</section>
+
+<!-- ══ 10 ══ -->
+<section class="page">
+  <h2><span class="num">10</span>The Value Realisation Scorecard</h2>
+  <p class="lede">The monthly artefact. It is deliberately short, and it is deliberately uncomfortable.</p>
+
+  <h4>Programme overview</h4>
+  <table>
+    <thead><tr><th>Metric</th><th style="width:22mm">Target</th><th style="width:22mm">Actual</th><th style="width:20mm">Trend</th><th style="width:20mm">Status</th></tr></thead>
+    <tbody>
+      <tr><td>Cumulative return realised</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr><td>Services live</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr><td>Services in pilot</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr><td>Occupant satisfaction</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr><td>Energy reduction</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Service-level detail</h4>
+  <p>Per service: business case return, realised return, the gap, and either an action or an explicit statement that it is on track.</p>
+
+  <h4>The two lists that make it work</h4>
+  <ul>
+    <li><strong>Underperforming services</strong>, each routed to Adaptive mode with a proposed action.</li>
+    <li><strong>Overperforming services</strong>, each routed to Execution Planning for expansion.</li>
+  </ul>
+  <p>Both lists are mandatory and neither may be empty by convention. A scorecard with no underperformers is not a good month; it is an unexamined one.</p>
+
+  <h4>Closing sections</h4>
+  <p>A one-line summary from each of the four input feeds, and a numbered list of decisions required, each with a named owner and a date. The scorecard is not a report if it ends without asking for something.</p>
+</section>
+
+<!-- ══ 11 ══ -->
+<section class="page">
+  <h2><span class="num">11</span>Where it sits among adjacent methods</h2>
+  <p class="lede">The VRO is a meta-governance layer. Other methods produce the work; this one ensures the work keeps returning value.</p>
+
+  <table>
+    <thead><tr><th style="width:56mm">Method</th><th>The VRO’s role</th></tr></thead>
+    <tbody>
+      <tr><td>Smart Services Advisory <em>(the HOW)</em></td><td>Governs the scored service catalogue, architecture and operating model that the advisory phases produce</td></tr>
+      <tr><td>Smart City Operations <em>(the RUN)</em></td><td>Governs the domain scorecard and cross-agency interoperability outcomes</td></tr>
+      <tr><td>Innovation Ecosystem <em>(the WHAT)</em></td><td>Adaptive mode consumes the innovation pipeline; the model office is the living lab</td></tr>
+    </tbody>
+  </table>
+
+  <p>The four close on each other. Innovation Ecosystem determines what should be built; Smart Services determines how; Operations runs it; and the VRO governs whether it continues to be worth running, feeding what it learns back into ideation.</p>
+
+  <p>None of the first three requires this one to function. But each of them, delivered without it, produces an artefact that degrades from the day the advisers leave — which is the condition this paper was written to address.</p>
+</section>
+
+<!-- ══ 12 ══ -->
+<section class="page">
+  <h2><span class="num">12</span>Failure modes, and one test</h2>
+
+  <h3>The four ways this goes wrong</h3>
+  <ol>
+    <li><strong>Merging it with the PMO.</strong> Delivery data is timely and precise; value data is neither. In a single body, delivery wins every meeting.</li>
+    <li><strong>Running two modes.</strong> Adaptive is dropped first because nobody chases it. It is also the only mode that can recommend stopping something.</li>
+    <li><strong>Adopting the language without the cadence.</strong> The interval is the mechanism. A quarterly review held annually is not a slower version of the same thing; it is a different thing.</li>
+    <li><strong>No external input.</strong> Without the four feeds, the VRO becomes an internal reporting function within a year, and reports on itself.</li>
+  </ol>
+
+  <h3>The test</h3>
+  <div class="callout">
+    <div class="label">One question</div>
+    <p><strong>When did someone in your organisation last formally recommend stopping a programme that was delivering to plan?</strong></p>
+    <p>If the answer is never, there is no outcomes governance in the building. There is a programme office, and there is hope.</p>
+  </div>
+
+  <p>The question works because stopping a healthy programme is the single hardest recommendation in corporate life, and the only body structurally capable of making it is one whose remit is value rather than delivery, whose horizon does not end at go-live, and which reports somewhere other than to the programme’s own sponsor.</p>
+
+  <p>Build that, run all three modes, hold the cadence, and the question stops being rhetorical.</p>
+
+  <footer class="doc">
+    <span>The Value Realisation Office · v1.0</span>
+    <span>© 2026 Anthony Penwright / Verax Venture Studio · CC BY-SA 4.0</span>
+  </footer>
+</section>
+
+</body>
+</html>
