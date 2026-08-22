@@ -169,9 +169,9 @@ export default function ValueRealisationPage() {
             {VERIFY_COMMANDS}
           </pre>
           <p className="mt-5 text-[13px] leading-[1.6]" style={{ color: TOKENS.inkFaint }}>
-            Bitcoin attestation pending — OpenTimestamps calendars commit periodically. Until they
-            do, the proof rests on the calendars rather than the blockchain, which is worth saying
-            rather than glossing.
+            Anchored in Bitcoin block 963564, 2026-08-22 08:40:10 UTC. That attestation verifies
+            against any public Bitcoin node, with no contact with the OpenTimestamps calendars,
+            this site, or the author.
           </p>
         </section>
 
