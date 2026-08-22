@@ -9,12 +9,12 @@ export const metadata: Metadata = {
     "An open methodology for governing whether a programme was worth delivering, not merely whether it was delivered. Published with a hash and an OpenTimestamps proof — verify it yourself.",
 };
 
-const HASH = "42852ea05db68fed1a5fd62c7c995cdbce5d7f0217408e454ae5a96fbb1e059f";
-const DOC = "/value-realisation/value-realisation-office-v1.0.pdf";
-const OTS = "/value-realisation/value-realisation-office-v1.0.pdf.ots";
+const HASH = "7980f395e225bb68ef72df6c9bd9fb8a8b569593ba551423aa79441f4fd3caac";
+const DOC = "/value-realisation/value-realisation-office-v1.1.pdf";
+const OTS = "/value-realisation/value-realisation-office-v1.1.pdf.ots";
 
 const VERIFY_COMMANDS = [
-  "sha256sum value-realisation-office-v1.0.pdf",
+  "sha256sum value-realisation-office-v1.1.pdf",
   "",
   "npm i javascript-opentimestamps",
   "node node_modules/javascript-opentimestamps/ots-cli.js upgrade whitepaper.pdf.ots",
@@ -191,6 +191,46 @@ export default function ValueRealisationPage() {
             sitting alongside rather than inside. Those are the parts worth arguing about, and the
             parts the paper defends.
           </p>
+        </section>
+
+        <section className="mt-14">
+          <h2 className="text-[20px] font-[600] tracking-[-0.01em]">Version history</h2>
+          <p className="mt-3 text-[15px] leading-[1.65]" style={{ color: TOKENS.inkDim }}>
+            Superseded versions stay published. A superseded document is still evidence of what
+            was said and when, and deleting it would defeat the purpose of stamping it.
+          </p>
+          <div className="mt-6 overflow-x-auto">
+            <table className="w-full text-left text-[13px]">
+              <thead>
+                <tr style={{ color: TOKENS.inkFaint }}>
+                  <th className="pb-3 pr-6 font-normal">Version</th>
+                  <th className="pb-3 pr-6 font-normal">SHA-256</th>
+                  <th className="pb-3 pr-6 font-normal">Changed</th>
+                  <th className="pb-3 font-normal">Status</th>
+                </tr>
+              </thead>
+              <tbody className="font-mono">
+                <tr style={{ borderTop: `1px solid ${TOKENS.line}` }}>
+                  <td className="py-3 pr-6">1.1</td>
+                  <td className="py-3 pr-6">7980f395…caac</td>
+                  <td className="py-3 pr-6 font-sans" style={{ color: TOKENS.inkDim }}>
+                    Drawn diagram, card layout, narrative scenes, running mark
+                  </td>
+                  <td className="py-3" style={{ color: TOKENS.emerald }}>current</td>
+                </tr>
+                <tr style={{ borderTop: `1px solid ${TOKENS.line}` }}>
+                  <td className="py-3 pr-6">
+                    <a href="/value-realisation/value-realisation-office-v1.0.pdf" style={{ color: TOKENS.inkDim }}>1.0</a>
+                  </td>
+                  <td className="py-3 pr-6">42852ea0…e059f</td>
+                  <td className="py-3 pr-6 font-sans" style={{ color: TOKENS.inkDim }}>
+                    First release
+                  </td>
+                  <td className="py-3" style={{ color: TOKENS.inkFaint }}>superseded</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </section>
 
         <section className="mt-14">

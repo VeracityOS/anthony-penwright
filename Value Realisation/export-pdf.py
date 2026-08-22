@@ -9,7 +9,7 @@ from playwright.sync_api import sync_playwright
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(HERE, "vro-whitepaper.html")
-OUT = os.path.join(HERE, "value-realisation-office-v1.0.pdf")
+OUT = os.path.join(HERE, "value-realisation-office-v1.1.pdf")
 
 with sync_playwright() as p:
     b = p.chromium.launch()
