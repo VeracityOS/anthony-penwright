@@ -147,7 +147,7 @@ def build():
     p = doc.add_paragraph()
     p.paragraph_format.space_after = Pt(6)
     add_run(p,
-            "ap@credible.uk.com   ·   +966 533 15 8265   ·   Riyadh, KSA (Premium Resident)   ·   "
+            "ap@credible.uk.com   ·   +966 53 682 7311   ·   Riyadh, KSA (Premium Resident)   ·   "
             "LinkedIn: Anthony Penwright",
             size=9.5, color=MUTED)
     h_rule(doc)

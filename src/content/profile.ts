@@ -2,10 +2,10 @@ export const profile = {
   name: "Anthony Penwright",
   tagline: "People · Business · Technology · Innovation · Leadership",
   pitch:
-    "Smart-city and digital-infrastructure leader — now Group Director of Technology, Infrastructure & Operations at Albawani Holding Group — codifying 23 years across NEOM, Cisco and government giga-projects into frameworks that work.",
+    "Smart-city and digital-infrastructure leader — now Senior IT Director at MDLBEAST — codifying 23 years across NEOM, Cisco and government giga-projects into frameworks that work.",
   location: "Riyadh, KSA · Premium Resident",
   email: "ap@credible.uk.com",
-  phone: "+966 533 15 8265",
+  phone: "+966 53 682 7311",
   // TODO: update with real LinkedIn handle
   linkedin: "https://www.linkedin.com/in/anthonypenwright/",
   cvUrl: "/anthony-penwright-cv.pdf",
@@ -74,17 +74,24 @@ export const signatureMoments: {
     note: "AI-native studio: 44+ agent skills, master-agent orchestration, shared CRM / KYC / brand / ops stack across the portfolio.",
   },
   {
+    org: "MDLBEAST",
+    role: "Senior IT Director",
+    value: "3 business units",
+    period: "Sep 2026 – Present",
+    note: "Technology & Digital Enablement across Live Events, Hospitality and Music — the platforms and operating model behind Saudi Arabia's entertainment sector.",
+  },
+  {
     org: "Albawani Holding Group",
     role: "Group Director of Technology, Infrastructure & Operations",
     value: "10 subsidiaries",
-    period: "Nov 2026 – Present",
+    period: "Nov 2025 – Sep 2026",
     note: "Group-wide technology strategy across 10 subsidiaries — bringing smart-city and digital-infrastructure leadership to the built environment: network, data centres, security, and the operating platform behind it.",
   },
   {
     org: "NEOM",
     role: "Director of Innovation",
     value: "$120M",
-    period: "Nov 2024 – Oct 2026",
+    period: "Nov 2024 – Nov 2025",
     note: "Best Performing Employee, across a 600+ sector.",
   },
   {
