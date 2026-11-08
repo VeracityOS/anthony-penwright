@@ -5,7 +5,7 @@ export const profile = {
     "Smart-city and digital-infrastructure leader — now Senior IT Director at MDLBEAST — codifying 23 years across NEOM, Cisco and government giga-projects into frameworks that work.",
   location: "Riyadh, KSA · Premium Resident",
   email: "ap@credible.uk.com",
-  phone: "+966 533 15 8265",
+  phone: "+966 53 682 7311",
   // TODO: update with real LinkedIn handle
   linkedin: "https://www.linkedin.com/in/anthonypenwright/",
   cvUrl: "/anthony-penwright-cv.pdf",
